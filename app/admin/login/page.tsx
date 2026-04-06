@@ -1,0 +1,167 @@
+'use client'
+
+import { useState } from 'react'
+import { useRouter } from 'next/navigation'
+import { Zap, Eye, EyeOff, AlertCircle } from 'lucide-react'
+
+const CORRECT_PASSWORD = 'volt2024admin'
+const STORAGE_KEY = 'volt_admin'
+
+export default function AdminLoginPage() {
+  const router = useRouter()
+  const [password, setPassword] = useState('')
+  const [showPwd, setShowPwd] = useState(false)
+  const [error, setError] = useState('')
+
+  function handleConnect() {
+    if (password === CORRECT_PASSWORD) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({ authenticated: true }))
+      router.push('/admin')
+    } else {
+      setError('Mot de passe incorrect.')
+    }
+  }
+
+  return (
+    <div
+      style={{
+        minHeight: '100vh',
+        background: '#0a0a0a',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: '24px',
+      }}
+    >
+      <div style={{ width: '100%', maxWidth: 340 }}>
+        {/* Logo */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 48 }}>
+          <div
+            style={{
+              width: 32,
+              height: 32,
+              background: '#C8FF00',
+              borderRadius: 8,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
+            <Zap size={17} strokeWidth={2} color="#0a0a0a" />
+          </div>
+          <span style={{ fontSize: 18, fontWeight: 500, color: '#ffffff', letterSpacing: '-0.03em' }}>
+            volt.{' '}
+            <span style={{ color: '#757575', fontSize: 13, fontWeight: 400 }}>admin</span>
+          </span>
+        </div>
+
+        <h1
+          style={{
+            fontSize: 22,
+            fontWeight: 500,
+            color: '#ffffff',
+            letterSpacing: '-0.03em',
+            marginBottom: 6,
+          }}
+        >
+          Connexion
+        </h1>
+        <p style={{ fontSize: 14, color: '#757575', marginBottom: 28 }}>
+          Accès réservé à l'équipe Volt.
+        </p>
+
+        {/* Password input */}
+        <div style={{ position: 'relative', marginBottom: 12 }}>
+          <input
+            type={showPwd ? 'text' : 'password'}
+            placeholder="Mot de passe"
+            value={password}
+            onChange={(e) => {
+              setPassword(e.target.value)
+              setError('')
+            }}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') handleConnect()
+            }}
+            autoFocus
+            style={{
+              display: 'block',
+              width: '100%',
+              padding: '13px 44px 13px 16px',
+              borderRadius: 8,
+              background: 'rgba(255,255,255,0.07)',
+              border: error
+                ? '0.5px solid rgba(255,80,80,0.6)'
+                : '0.5px solid rgba(255,255,255,0.12)',
+              color: '#ffffff',
+              fontSize: 14,
+              outline: 'none',
+              boxSizing: 'border-box',
+            }}
+          />
+          <button
+            type="button"
+            onClick={() => setShowPwd((v) => !v)}
+            tabIndex={-1}
+            style={{
+              position: 'absolute',
+              right: 12,
+              top: '50%',
+              transform: 'translateY(-50%)',
+              background: 'none',
+              border: 'none',
+              cursor: 'pointer',
+              color: '#757575',
+              padding: 4,
+              display: 'flex',
+            }}
+          >
+            {showPwd
+              ? <EyeOff size={16} strokeWidth={1.5} />
+              : <Eye size={16} strokeWidth={1.5} />
+            }
+          </button>
+        </div>
+
+        {/* Error */}
+        {error && (
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: 8,
+              padding: '10px 14px',
+              borderRadius: 8,
+              background: 'rgba(220,0,0,0.12)',
+              border: '0.5px solid rgba(220,0,0,0.3)',
+              marginBottom: 12,
+            }}
+          >
+            <AlertCircle size={14} strokeWidth={1.5} color="#ff6b6b" />
+            <span style={{ fontSize: 13, color: '#ff6b6b' }}>{error}</span>
+          </div>
+        )}
+
+        {/* Button — always clickable, type button, no form, no disabled */}
+        <button
+          type="button"
+          onClick={handleConnect}
+          style={{
+            display: 'block',
+            width: '100%',
+            padding: '13px',
+            borderRadius: 8,
+            border: 'none',
+            background: '#C8FF00',
+            color: '#0a0a0a',
+            fontSize: 14,
+            fontWeight: 500,
+            cursor: 'pointer',
+          }}
+        >
+          Se connecter
+        </button>
+      </div>
+    </div>
+  )
+}

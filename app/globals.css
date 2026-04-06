@@ -1,0 +1,125 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --accent: #C8FF00;
+  --ink: #0a0a0a;
+  --white: #ffffff;
+  --gray-50: #F5F5F5;
+  --gray-200: #E0E0E0;
+  --gray-500: #757575;
+  --border: rgba(0, 0, 0, 0.1);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: #ffffff;
+  color: #0a0a0a;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", sans-serif;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 1.5;
+  letter-spacing: 0;
+}
+
+/* Typography scale */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--gray-200);
+  border-radius: 2px;
+}
+
+/* Focus visible */
+:focus-visible {
+  outline: 1.5px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Selection */
+::selection {
+  background: var(--accent);
+  color: var(--ink);
+}
+
+@layer components {
+  .btn-accent {
+    @apply inline-flex items-center gap-2 px-5 py-2.5 rounded text-sm font-medium bg-[#C8FF00] text-[#0a0a0a] transition-all duration-150;
+  }
+  .btn-accent:hover {
+    @apply opacity-90;
+  }
+
+  .btn-outline {
+    @apply inline-flex items-center gap-2 px-5 py-2.5 rounded text-sm font-medium border text-[#0a0a0a] transition-all duration-150;
+    border-color: var(--border);
+    border-width: 0.5px;
+  }
+  .btn-outline:hover {
+    background-color: var(--gray-50);
+  }
+
+  .card {
+    @apply rounded-xl border bg-white;
+    border-color: rgba(0, 0, 0, 0.08);
+    border-width: 0.5px;
+  }
+
+  .input-field {
+    @apply w-full rounded-lg px-4 py-3 text-sm bg-[#F5F5F5] border transition-all duration-150;
+    border: 0.5px solid rgba(0, 0, 0, 0.1);
+    color: #0a0a0a;
+  }
+  .input-field:focus {
+    outline: none;
+    background: white;
+    border-color: #0a0a0a;
+  }
+  .input-field::placeholder {
+    color: #757575;
+  }
+
+  .badge {
+    @apply inline-flex items-center gap-1 px-2 py-0.5 rounded text-xs font-medium;
+  }
+
+  .badge-available {
+    background-color: rgba(200, 255, 0, 0.15);
+    color: #3a5a00;
+  }
+
+  .badge-rented {
+    background-color: rgba(220, 0, 0, 0.08);
+    color: #8a0000;
+  }
+}
+
+/* Responsive about grid */
+@media (max-width: 768px) {
+  .about-grid {
+    grid-template-columns: 1fr !important;
+    gap: 32px !important;
+  }
+}

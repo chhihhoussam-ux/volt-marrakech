@@ -12,10 +12,26 @@
   --border: rgba(0, 0, 0, 0.1);
 }
 
-* {
+*, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+
+/* Prevent iOS input zoom (font-size must be >= 16px on focus) */
+input, select, textarea {
+  font-size: 16px;
+}
+@media (min-width: 768px) {
+  input, select, textarea {
+    font-size: 14px;
+  }
+}
+
+/* iOS button reset */
+button {
+  -webkit-appearance: none;
+  appearance: none;
 }
 
 html {
@@ -116,10 +132,106 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
-/* Responsive about grid */
-@media (max-width: 768px) {
+/* ─────────────────────────────────────────────
+   RESPONSIVE — Mobile (< 768px)
+   ───────────────────────────────────────────── */
+
+/* No horizontal scroll, ever */
+html, body {
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
+@media (max-width: 767px) {
+
+  /* ── Hero ── */
+  .hero-title {
+    font-size: 40px !important;
+  }
+  .hero-content {
+    padding-top: 100px !important;
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+    padding-bottom: 180px !important;
+  }
+  .hero-cta-btns {
+    flex-direction: column !important;
+    width: 100%;
+  }
+  .hero-cta-btns > a,
+  .hero-cta-btns > a > button {
+    width: 100% !important;
+    box-sizing: border-box !important;
+    justify-content: center !important;
+  }
+  .hero-stats-bar {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+  /* In 2x2 layout: remove right border from 2nd and 4th cells */
+  .hero-stats-bar > div:nth-child(2),
+  .hero-stats-bar > div:nth-child(4) {
+    border-right: none !important;
+  }
+  /* Add bottom border between rows */
+  .hero-stats-bar > div:nth-child(1),
+  .hero-stats-bar > div:nth-child(2) {
+    border-bottom: 0.5px solid rgba(255,255,255,0.1);
+  }
+
+  /* ── About grid ── */
   .about-grid {
     grid-template-columns: 1fr !important;
     gap: 32px !important;
+  }
+
+  /* ── Scooters / Tarifs grids ── */
+  .scooters-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .tarifs-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* ── Footer ── */
+  .footer-grid {
+    grid-template-columns: 1fr !important;
+    gap: 32px !important;
+  }
+  .footer-bottom {
+    flex-direction: column-reverse !important;
+    align-items: center !important;
+    text-align: center !important;
+  }
+
+  /* ── /scooters filter bar ── */
+  .filters-row {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 12px !important;
+  }
+  .filters-row .search-wrapper {
+    width: 100%;
+  }
+  .filters-row .search-wrapper input {
+    width: 100% !important;
+  }
+
+  /* ── /reserver & /admin 2-col form grids ── */
+  .form-grid-2 {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* ── Guide page ── */
+  .guide-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .guide-why-grid {
+    grid-template-columns: 1fr 1fr !important;
+  }
+
+  /* ── Touch targets ── */
+  .touch-target {
+    min-height: 44px !important;
+    min-width: 44px !important;
   }
 }

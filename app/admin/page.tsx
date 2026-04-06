@@ -102,7 +102,7 @@ export default function AdminDashboardPage() {
       )}
 
       {/* KPI cards */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: 12, marginBottom: 32 }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(200px, 100%), 1fr))', gap: 12, marginBottom: 32 }}>
         {loading
           ? [1,2,3,4].map(i => <Skeleton key={i} h={96} />)
           : kpis.map((k, i) => (

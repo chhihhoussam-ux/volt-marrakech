@@ -10,9 +10,9 @@ export default function Footer() {
       padding: '48px 24px 32px',
     }}>
       <div style={{ maxWidth: 1120, margin: '0 auto' }}>
-        <div style={{
+        <div className="footer-grid" style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(min(200px, 100%), 1fr))',
           gap: 40,
           marginBottom: 48,
         }}>
@@ -95,7 +95,7 @@ export default function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div style={{
+        <div className="footer-bottom" style={{
           paddingTop: 24,
           borderTop: '0.5px solid rgba(255,255,255,0.08)',
           display: 'flex',

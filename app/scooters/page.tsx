@@ -68,7 +68,7 @@ export default function ScootersPage() {
         </div>
 
         {/* Filters */}
-        <div style={{
+        <div className="filters-row" style={{
           padding: '24px 24px',
           maxWidth: 1120,
           margin: '0 auto',
@@ -107,7 +107,7 @@ export default function ScootersPage() {
           </div>
 
           {/* Search */}
-          <div style={{ position: 'relative' }}>
+          <div className="search-wrapper" style={{ position: 'relative' }}>
             <Search size={14} strokeWidth={1.5} color="#757575" style={{
               position: 'absolute',
               left: 12,
@@ -140,9 +140,9 @@ export default function ScootersPage() {
           margin: '0 auto',
         }}>
           {loading ? (
-            <div style={{
+            <div className="scooters-grid" style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
+              gridTemplateColumns: 'repeat(auto-fill, minmax(min(300px, 100%), 1fr))',
               gap: 16,
             }}>
               {[1, 2, 3, 4].map((i) => (
@@ -175,9 +175,9 @@ export default function ScootersPage() {
               </p>
             </div>
           ) : (
-            <div style={{
+            <div className="scooters-grid" style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
+              gridTemplateColumns: 'repeat(auto-fill, minmax(min(300px, 100%), 1fr))',
               gap: 16,
             }}>
               {filtered.map((scooter) => (

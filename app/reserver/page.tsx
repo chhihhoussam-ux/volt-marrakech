@@ -372,7 +372,7 @@ function ReserverContent() {
 
               {/* ── Duration inputs ── */}
               {rentalType === 'hourly' && (
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
+                <div className="form-grid-2" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
                   <div>
                     <label style={{ display: 'block', fontSize: 13, fontWeight: 500, marginBottom: 8 }}>Date</label>
                     <div style={{ position: 'relative' }}>
@@ -396,7 +396,7 @@ function ReserverContent() {
               )}
 
               {rentalType === 'daily' && (
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
+                <div className="form-grid-2" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
                   <div>
                     <label style={{ display: 'block', fontSize: 13, fontWeight: 500, marginBottom: 8 }}>Date de début</label>
                     <div style={{ position: 'relative' }}>
@@ -415,7 +415,7 @@ function ReserverContent() {
               )}
 
               {rentalType === 'weekly' && (
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
+                <div className="form-grid-2" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
                   <div>
                     <label style={{ display: 'block', fontSize: 13, fontWeight: 500, marginBottom: 8 }}>Date de début</label>
                     <div style={{ position: 'relative' }}>
@@ -479,11 +479,11 @@ function ReserverContent() {
                 onClick={() => setStep('confirm')}
                 disabled={!canContinue}
                 style={{
-                  display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 8,
+                  width: '100%', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 8,
                   padding: '14px 24px', borderRadius: 10, border: 'none',
                   background: canContinue ? '#C8FF00' : '#E0E0E0',
                   color: canContinue ? '#0a0a0a' : '#757575',
-                  fontSize: 14, fontWeight: 500,
+                  fontSize: 14, fontWeight: 500, minHeight: 48,
                   cursor: canContinue ? 'pointer' : 'not-allowed',
                 }}
               >

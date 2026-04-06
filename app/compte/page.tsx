@@ -175,7 +175,7 @@ function CompteContent() {
 
               {/* Tab switcher */}
               <div style={{
-                display: 'inline-flex',
+                display: 'flex',
                 background: '#F5F5F5',
                 borderRadius: 10,
                 padding: 4,
@@ -186,14 +186,12 @@ function CompteContent() {
                     key={t}
                     onClick={() => { setTab(t); setAuthError(''); setAuthSuccess('') }}
                     style={{
-                      padding: '8px 20px',
-                      borderRadius: 7,
-                      border: 'none',
+                      flex: 1, padding: '10px 20px',
+                      borderRadius: 7, border: 'none',
                       background: tab === t ? '#ffffff' : 'transparent',
-                      color: '#0a0a0a',
-                      fontSize: 13,
+                      color: '#0a0a0a', fontSize: 13,
                       fontWeight: tab === t ? 500 : 400,
-                      cursor: 'pointer',
+                      cursor: 'pointer', minHeight: 44,
                       boxShadow: tab === t ? '0 0 0 0.5px rgba(0,0,0,0.08)' : 'none',
                       transition: 'all 0.15s',
                     }}
@@ -427,15 +425,16 @@ function CompteContent() {
                                 {start}{!sameDay ? ` → ${end}` : ''}
                               </p>
                             </div>
-                            <div style={{ display: 'flex', alignItems: 'center', gap: 12, flexShrink: 0 }}>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginLeft: 'auto' }}>
                               <span style={{
                                 display: 'inline-flex', alignItems: 'center', gap: 4,
-                                padding: '4px 10px', borderRadius: 6,
+                                padding: '5px 10px', borderRadius: 6,
                                 background: cfg.bg, color: cfg.color, fontSize: 12,
+                                minHeight: 28, whiteSpace: 'nowrap',
                               }}>
                                 {cfg.icon}{cfg.label}
                               </span>
-                              <span style={{ fontSize: 14, fontWeight: 500 }}>
+                              <span style={{ fontSize: 14, fontWeight: 500, whiteSpace: 'nowrap' }}>
                                 {res.total_price.toFixed(0)} <span style={{ fontSize: 12, fontWeight: 400, color: '#757575' }}>MAD</span>
                               </span>
                             </div>

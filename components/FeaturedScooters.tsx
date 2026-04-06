@@ -53,7 +53,7 @@ export default function FeaturedScooters() {
         </div>
 
         {loading ? (
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: 16 }}>
+          <div className="scooters-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(300px, 100%), 1fr))', gap: 16 }}>
             {[1, 2, 3].map(i => (
               <div key={i} style={{ borderRadius: 12, border: '0.5px solid rgba(0,0,0,0.08)', background: '#ffffff', overflow: 'hidden' }}>
                 <div style={{ height: 200, background: '#EBEBEB' }} />
@@ -74,7 +74,7 @@ export default function FeaturedScooters() {
             <p style={{ color: '#aaa', fontSize: 12, marginTop: 8 }}>Configurez .env.local avec vos clés Supabase</p>
           </div>
         ) : (
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: 16 }}>
+          <div className="scooters-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(300px, 100%), 1fr))', gap: 16 }}>
             {scooters.map(scooter => (
               <ScooterCard key={scooter.id} scooter={scooter} />
             ))}

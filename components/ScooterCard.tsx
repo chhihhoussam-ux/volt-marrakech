@@ -93,8 +93,8 @@ export default function ScooterCard({ scooter, showReserveButton = true }: Scoot
                 disabled={!isAvailable}
                 style={{
                   display: 'inline-flex', alignItems: 'center', gap: 6,
-                  padding: '8px 14px', borderRadius: 8, border: 'none',
-                  fontSize: 13, fontWeight: 500,
+                  padding: '10px 14px', borderRadius: 8, border: 'none',
+                  fontSize: 13, fontWeight: 500, minHeight: 44,
                   cursor: isAvailable ? 'pointer' : 'not-allowed',
                   background: isAvailable ? '#C8FF00' : '#E0E0E0',
                   color: isAvailable ? '#0a0a0a' : '#757575',

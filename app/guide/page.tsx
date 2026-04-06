@@ -235,7 +235,7 @@ export default function GuidePage() {
               </h2>
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(340px, 1fr))', gap: 16 }}>
+            <div className="guide-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(340px, 100%), 1fr))', gap: 16 }}>
               {places.map((place, i) => (
                 <div key={i} style={{
                   borderRadius: 12,
@@ -310,7 +310,7 @@ export default function GuidePage() {
               </h2>
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 16 }}>
+            <div className="guide-why-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(240px, 100%), 1fr))', gap: 16 }}>
               {whyScooter.map((item, i) => (
                 <div key={i} style={{
                   padding: '28px',

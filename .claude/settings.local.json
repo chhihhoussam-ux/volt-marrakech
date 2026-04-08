@@ -9,7 +9,10 @@
       "Bash(npx next:*)",
       "Bash(pkill -f \"next dev\")",
       "Bash(npm run:*)",
-      "Read(//tmp/**)"
+      "Read(//tmp/**)",
+      "Bash(node:*)",
+      "Bash(npx tsc:*)",
+      "Bash(ls /Users/houssamchhih/volt-marrakech/.env*)"
     ]
   }
 }

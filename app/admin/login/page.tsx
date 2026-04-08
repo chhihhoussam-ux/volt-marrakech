@@ -4,7 +4,6 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { Zap, Eye, EyeOff, AlertCircle } from 'lucide-react'
 
-const CORRECT_PASSWORD = 'volt2024admin'
 const STORAGE_KEY = 'volt_admin'
 
 export default function AdminLoginPage() {
@@ -12,13 +11,28 @@ export default function AdminLoginPage() {
   const [password, setPassword] = useState('')
   const [showPwd, setShowPwd] = useState(false)
   const [error, setError] = useState('')
+  const [loading, setLoading] = useState(false)
 
-  function handleConnect() {
-    if (password === CORRECT_PASSWORD) {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify({ authenticated: true }))
-      router.push('/admin')
-    } else {
-      setError('Mot de passe incorrect.')
+  async function handleConnect() {
+    if (!password) return
+    setLoading(true)
+    setError('')
+    try {
+      const res = await fetch('/api/admin/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password }),
+      })
+      if (res.ok) {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify({ authenticated: true }))
+        router.push('/admin')
+      } else {
+        setError('Mot de passe incorrect.')
+      }
+    } catch {
+      setError('Erreur réseau. Réessayez.')
+    } finally {
+      setLoading(false)
     }
   }
 
@@ -142,10 +156,10 @@ export default function AdminLoginPage() {
           </div>
         )}
 
-        {/* Button — always clickable, type button, no form, no disabled */}
         <button
           type="button"
           onClick={handleConnect}
+          disabled={loading}
           style={{
             display: 'block',
             width: '100%',
@@ -156,10 +170,11 @@ export default function AdminLoginPage() {
             color: '#0a0a0a',
             fontSize: 14,
             fontWeight: 500,
-            cursor: 'pointer',
+            cursor: loading ? 'not-allowed' : 'pointer',
+            opacity: loading ? 0.7 : 1,
           }}
         >
-          Se connecter
+          {loading ? 'Vérification...' : 'Se connecter'}
         </button>
       </div>
     </div>

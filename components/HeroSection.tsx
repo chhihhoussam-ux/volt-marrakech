@@ -39,7 +39,7 @@ export default function HeroSection() {
         }}
       >
         <div style={{ maxWidth: 680 }}>
-          {/* Tag */}
+          {/* Eyebrow */}
           <div style={{
             display: 'inline-flex', alignItems: 'center', gap: 6,
             padding: '4px 12px', borderRadius: 20,
@@ -48,7 +48,7 @@ export default function HeroSection() {
           }}>
             <Zap size={12} strokeWidth={2} color="#C8FF00" />
             <span style={{ fontSize: 12, fontWeight: 500, color: '#C8FF00' }}>
-              100% électrique · Zéro émission
+              100% électrique · Zéro émission · Marrakech
             </span>
           </div>
 
@@ -60,16 +60,15 @@ export default function HeroSection() {
               letterSpacing: '-0.03em', color: '#ffffff', marginBottom: 24,
             }}
           >
-            Explorez Marrakech<br />
-            <span style={{ color: '#C8FF00' }}>autrement.</span>
+            Yallah,{' '}
+            <span style={{ color: '#C8FF00' }}>Rouli !</span>
           </h1>
 
           <p style={{
             fontSize: 18, color: 'rgba(255,255,255,0.72)',
-            lineHeight: 1.6, marginBottom: 40, maxWidth: 480,
+            lineHeight: 1.6, marginBottom: 40, maxWidth: 520,
           }}>
-            Location de scooters électriques au cœur de la ville rouge.
-            Silencieux, propres, et parfaits pour naviguer dans les ruelles de Marrakech.
+            La médina à votre rythme. La ville rouge sous un nouvel angle. Louez un scooter électrique et explorez Marrakech librement — silencieux, propre, sans effort.
           </p>
 
           <div className="hero-cta-btns" style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
@@ -92,7 +91,7 @@ export default function HeroSection() {
                 borderRadius: 10, fontSize: 15, fontWeight: 400, color: '#ffffff', cursor: 'pointer',
                 minHeight: 48,
               }}>
-                Voir les scooters
+                Voir nos scooters
               </button>
             </Link>
           </div>

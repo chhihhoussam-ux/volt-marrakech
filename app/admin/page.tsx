@@ -88,7 +88,7 @@ export default function AdminDashboardPage() {
         <h1 style={{ fontSize: 22, fontWeight: 500, letterSpacing: '-0.02em', marginBottom: 4 }}>
           Dashboard
         </h1>
-        <p style={{ fontSize: 13, color: '#757575' }}>Vue d'ensemble de l'activité Volt Marrakech</p>
+        <p style={{ fontSize: 13, color: '#757575' }}>Vue d&apos;ensemble de l&apos;activité Rouli</p>
       </div>
 
       {error && (

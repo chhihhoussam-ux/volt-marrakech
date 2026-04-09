@@ -30,14 +30,14 @@ export default function FeaturedScooters() {
       <div style={{ maxWidth: 1120, margin: '0 auto' }}>
         <div style={{
           display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between',
-          marginBottom: 40, flexWrap: 'wrap', gap: 16,
+          marginBottom: 16, flexWrap: 'wrap', gap: 16,
         }}>
           <div>
             <p style={{ fontSize: 12, fontWeight: 500, color: '#757575', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 8 }}>
               Notre flotte
             </p>
             <h2 style={{ fontSize: 32, fontWeight: 500, letterSpacing: '-0.03em', color: '#0a0a0a' }}>
-              Nos scooters
+              Des scooters taillés pour Marrakech.
             </h2>
           </div>
           <Link href="/scooters" style={{ textDecoration: 'none' }}>
@@ -51,6 +51,10 @@ export default function FeaturedScooters() {
             </button>
           </Link>
         </div>
+
+        <p style={{ fontSize: 15, color: '#757575', lineHeight: 1.7, marginBottom: 40, maxWidth: 640 }}>
+          Chaque modèle de notre flotte a été sélectionné pour affronter les ruelles de la médina, les grands axes de Guéliz et les chemins de la Palmeraie. Silencieux, maniables et rechargés chaque nuit — vos aventures commencent ici.
+        </p>
 
         {loading ? (
           <div className="scooters-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(300px, 100%), 1fr))', gap: 16 }}>

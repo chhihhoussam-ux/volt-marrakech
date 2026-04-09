@@ -7,14 +7,17 @@ import HeroSection from '@/components/HeroSection'
 import AboutSection from '@/components/AboutSection'
 import FeaturedScooters from '@/components/FeaturedScooters'
 import TarifsSection from '@/components/TarifsSection'
+import HowItWorksSection from '@/components/HowItWorksSection'
+import TestimonialsSection from '@/components/TestimonialsSection'
+import FAQSection from '@/components/FAQSection'
 
 export const metadata: Metadata = {
-  title: 'Location de scooters électriques à Marrakech',
+  title: 'Rouli — Location de scooters électriques à Marrakech | Yallah, Rouli !',
   description:
-    'Explorez Marrakech autrement avec Volt. Location de scooters électriques silencieux et propres, à partir de 170 MAD/jour. Réservation en ligne.',
+    "Louez un scooter électrique à Marrakech avec Rouli. 20 ans d'expérience dans la mobilité, flotte premium, réservation en ligne. Explorez la médina, Guéliz et les jardins à votre rythme. Dès 60 MAD.",
   openGraph: {
-    title: 'Volt Marrakech — Location de scooters électriques',
-    description: 'Explorez Marrakech autrement. Scooters électriques à partir de 170 MAD/jour.',
+    title: 'Rouli — Location de scooters électriques à Marrakech | Yallah, Rouli !',
+    description: "Louez un scooter électrique à Marrakech avec Rouli. Flotte premium, livraison à domicile. Dès 60 MAD.",
   },
 }
 
@@ -22,13 +25,13 @@ export default function HomePage() {
   const localBusinessSchema = {
     '@context': 'https://schema.org',
     '@type': 'LocalBusiness',
-    name: 'Volt Marrakech',
+    name: 'Rouli',
     description: 'Location de scooters électriques à Marrakech',
-    url: 'https://volt-marrakech.ma',
+    url: 'https://rouli.ma',
     telephone: '+212600000000',
-    email: 'contact@volt-marrakech.ma',
+    email: 'contact@rouli.ma',
     image: 'https://images.unsplash.com/photo-1597211684565-dca64d72bdfe?w=1600&q=80',
-    priceRange: '170-300 MAD',
+    priceRange: '60-950 MAD',
     currenciesAccepted: 'MAD',
     paymentAccepted: 'Cash, Card',
     address: {
@@ -68,7 +71,13 @@ export default function HomePage() {
 
       <TarifsSection />
 
-      {/* ─── CTA section ─── */}
+      <HowItWorksSection />
+
+      <TestimonialsSection />
+
+      <FAQSection />
+
+      {/* ─── CTA final ─── */}
       <section id="contact" style={{ padding: '80px 24px' }}>
         <div style={{ maxWidth: 1120, margin: '0 auto' }}>
           <div style={{
@@ -77,32 +86,32 @@ export default function HomePage() {
           }}>
             <div>
               <h2 style={{ fontSize: 32, fontWeight: 500, letterSpacing: '-0.03em', color: '#ffffff', marginBottom: 12 }}>
-                Une question ?<br />On est là.
+                Prêt à explorer<br />Marrakech autrement ?
               </h2>
-              <p style={{ fontSize: 15, color: '#757575', maxWidth: 360 }}>
-                Notre équipe est disponible 7j/7 sur WhatsApp pour vous aider à choisir votre scooter et organiser votre visite.
+              <p style={{ fontSize: 15, color: '#757575', maxWidth: 380 }}>
+                Réservez votre scooter en quelques clics. Livraison à votre hôtel, casque inclus, support 7j/7.
               </p>
             </div>
             <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
-              <a href="https://wa.me/212600000000" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>
+              <Link href="/reserver" style={{ textDecoration: 'none' }}>
                 <button style={{
                   display: 'inline-flex', alignItems: 'center', gap: 8,
                   padding: '14px 24px', background: '#C8FF00', border: 'none',
                   borderRadius: 10, fontSize: 14, fontWeight: 500, color: '#0a0a0a', cursor: 'pointer',
                 }}>
-                  <MessageCircle size={16} strokeWidth={1.5} /> WhatsApp
+                  Réserver maintenant <ArrowRight size={16} strokeWidth={1.5} />
                 </button>
-              </a>
-              <Link href="/reserver" style={{ textDecoration: 'none' }}>
+              </Link>
+              <a href="https://wa.me/212600000000" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>
                 <button style={{
                   display: 'inline-flex', alignItems: 'center', gap: 8,
                   padding: '14px 24px', background: 'transparent',
                   border: '0.5px solid rgba(255,255,255,0.2)',
                   borderRadius: 10, fontSize: 14, fontWeight: 500, color: '#ffffff', cursor: 'pointer',
                 }}>
-                  Réserver en ligne <ArrowRight size={16} strokeWidth={1.5} />
+                  <MessageCircle size={16} strokeWidth={1.5} /> Nous contacter sur WhatsApp
                 </button>
-              </Link>
+              </a>
             </div>
           </div>
         </div>

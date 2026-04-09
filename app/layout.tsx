@@ -13,43 +13,43 @@ export const viewport: Viewport = {
 export async function generateMetadata(): Promise<Metadata> {
   const settings = await getSettings()
 
-  const siteName = `${settings.site_name} Marrakech`
+  const siteName = settings.site_name || 'Rouli'
   const description =
-    'Location de scooters électriques au cœur de Marrakech. Explorez la ville rouge à votre rythme, en toute liberté. À partir de 170 MAD/jour.'
+    'Louez un scooter électrique à Marrakech avec Rouli. 20 ans d\'expérience dans la mobilité, flotte premium, réservation en ligne. Explorez la médina, Guéliz et les jardins à votre rythme. Dès 60 MAD.'
 
   return {
-    metadataBase: new URL('https://volt-marrakech.ma'),
+    metadataBase: new URL('https://rouli.ma'),
     title: {
-      template: `%s | ${siteName} — Location scooter électrique`,
-      default: `${siteName} — Location de scooters électriques`,
+      template: `%s | Rouli — Location scooter électrique Marrakech`,
+      default: `Rouli — Location de scooters électriques à Marrakech | Yallah, Rouli !`,
     },
     description,
-    keywords: 'scooter électrique, Marrakech, location, mobilité douce, ville rouge, visite',
-    authors: [{ name: siteName }],
+    keywords: 'scooter électrique, Marrakech, location, mobilité douce, ville rouge, visite, médina, Guéliz',
+    authors: [{ name: 'Rouli' }],
     manifest: '/manifest.json',
     appleWebApp: {
       capable: true,
       statusBarStyle: 'black-translucent',
-      title: 'Volt',
+      title: 'Rouli',
     },
     openGraph: {
       type: 'website',
       locale: 'fr_MA',
-      siteName,
-      title: `${siteName} — Location de scooters électriques`,
+      siteName: 'Rouli',
+      title: `Rouli — Location de scooters électriques à Marrakech | Yallah, Rouli !`,
       description,
       images: [
         {
           url: settings.hero_image_url || 'https://images.unsplash.com/photo-1539650116574-75c0c6d73d0e?w=1200&q=80',
           width: 1200,
           height: 630,
-          alt: 'Marrakech — Volt scooters électriques',
+          alt: 'Marrakech — Rouli scooters électriques',
         },
       ],
     },
     twitter: {
       card: 'summary_large_image',
-      title: `${siteName} — Location de scooters électriques`,
+      title: `Rouli — Location de scooters électriques à Marrakech | Yallah, Rouli !`,
       description,
       images: [settings.hero_image_url || 'https://images.unsplash.com/photo-1539650116574-75c0c6d73d0e?w=1200&q=80'],
     },
@@ -76,7 +76,7 @@ export default function RootLayout({
         <link rel="apple-touch-icon" href="/icon-512.svg" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-        <meta name="apple-mobile-web-app-title" content="Volt" />
+        <meta name="apple-mobile-web-app-title" content="Rouli" />
         <meta name="mobile-web-app-capable" content="yes" />
       </head>
       <body>

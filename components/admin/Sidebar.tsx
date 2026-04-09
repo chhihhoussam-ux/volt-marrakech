@@ -58,7 +58,7 @@ export default function Sidebar({ mobileOpen, onClose }: SidebarProps) {
             <Zap size={14} strokeWidth={2} color="#0a0a0a" />
           </div>
           <div>
-            <span style={{ fontSize: 15, fontWeight: 500, color: '#ffffff', letterSpacing: '-0.03em' }}>volt.</span>
+            <span style={{ fontSize: 15, fontWeight: 500, color: '#ffffff', letterSpacing: '-0.03em' }}>rouli.</span>
             <span style={{ fontSize: 11, color: '#757575', marginLeft: 4 }}>admin</span>
           </div>
         </Link>

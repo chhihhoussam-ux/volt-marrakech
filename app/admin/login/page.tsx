@@ -64,7 +64,7 @@ export default function AdminLoginPage() {
             <Zap size={17} strokeWidth={2} color="#0a0a0a" />
           </div>
           <span style={{ fontSize: 18, fontWeight: 500, color: '#ffffff', letterSpacing: '-0.03em' }}>
-            volt.{' '}
+            rouli.{' '}
             <span style={{ color: '#757575', fontSize: 13, fontWeight: 400 }}>admin</span>
           </span>
         </div>
@@ -81,7 +81,7 @@ export default function AdminLoginPage() {
           Connexion
         </h1>
         <p style={{ fontSize: 14, color: '#757575', marginBottom: 28 }}>
-          Accès réservé à l'équipe Volt.
+          Accès réservé à l'équipe Rouli.
         </p>
 
         {/* Password input */}

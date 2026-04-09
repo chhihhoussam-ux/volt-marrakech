@@ -38,13 +38,16 @@ export default function TarifsSection() {
   return (
     <section id="tarifs" style={{ padding: '80px 24px', background: '#F5F5F5' }}>
       <div style={{ maxWidth: 1120, margin: '0 auto' }}>
-        <div style={{ textAlign: 'center', marginBottom: 48 }}>
+        <div style={{ textAlign: 'center', marginBottom: 16 }}>
           <p style={{ fontSize: 12, fontWeight: 500, color: '#757575', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 8 }}>
             Nos formules
           </p>
-          <h2 style={{ fontSize: 32, fontWeight: 500, letterSpacing: '-0.03em' }}>
-            Tarifs simples et transparents
+          <h2 style={{ fontSize: 32, fontWeight: 500, letterSpacing: '-0.03em', marginBottom: 16 }}>
+            Tarifs simples. Aucune mauvaise surprise.
           </h2>
+          <p style={{ fontSize: 15, color: '#757575', lineHeight: 1.7, maxWidth: 520, margin: '0 auto 40px' }}>
+            Que vous ayez deux heures devant vous ou une semaine entière, Rouli s&apos;adapte à votre voyage. Tous nos tarifs incluent casque, antivol et assistance.
+          </p>
         </div>
 
         <div className="tarifs-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(280px, 100%), 1fr))', gap: 16 }}>

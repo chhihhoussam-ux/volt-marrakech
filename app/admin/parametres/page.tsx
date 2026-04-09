@@ -101,7 +101,7 @@ export default function ParametresPage() {
       <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: 32, gap: 16, flexWrap: 'wrap' }}>
         <div>
           <h1 style={{ fontSize: 22, fontWeight: 500, letterSpacing: '-0.02em', marginBottom: 4 }}>Paramètres du site</h1>
-          <p style={{ fontSize: 13, color: '#757575' }}>Modifiez l'apparence et le contenu de Volt Marrakech.</p>
+          <p style={{ fontSize: 13, color: '#757575' }}>Modifiez l&apos;apparence et le contenu de Rouli.</p>
         </div>
         <button
           onClick={handleSave}
@@ -139,7 +139,7 @@ export default function ParametresPage() {
         {/* Identité */}
         <Section title="Identité">
           <Row label="Nom du site" hint="Affiché dans les balises meta et onglets">
-            <Input value={settings.site_name} onChange={v => set('site_name', v)} placeholder="Volt" />
+            <Input value={settings.site_name} onChange={v => set('site_name', v)} placeholder="Rouli" />
           </Row>
           <Row label="Couleur accent" hint="Format hexadécimal (ex : #C8FF00)">
             <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
@@ -159,7 +159,7 @@ export default function ParametresPage() {
 
         {/* Logo & Favicon */}
         <Section title="Logo & Favicon">
-          <Row label="Logo" hint="Affiché dans la navbar. Vide = logo texte 'volt.'">
+          <Row label="Logo" hint="Affiché dans la navbar. Vide = logo texte 'rouli.'">
             <ImageUpload
               value={settings.logo_url}
               onChange={v => set('logo_url', v)}

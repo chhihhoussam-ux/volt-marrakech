@@ -76,7 +76,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             }}>
               <Zap size={11} strokeWidth={2} color="#0a0a0a" />
             </div>
-            <span style={{ fontSize: 14, fontWeight: 500, color: '#ffffff', letterSpacing: '-0.02em' }}>volt.</span>
+            <span style={{ fontSize: 14, fontWeight: 500, color: '#ffffff', letterSpacing: '-0.02em' }}>rouli.</span>
           </div>
         </div>
 

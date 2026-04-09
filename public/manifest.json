@@ -1,7 +1,7 @@
 {
-  "name": "Volt Marrakech",
-  "short_name": "Volt",
-  "description": "Location de scooters électriques à Marrakech",
+  "name": "Rouli",
+  "short_name": "Rouli",
+  "description": "Location de scooters électriques à Marrakech. Yallah, Rouli !",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#0a0a0a",

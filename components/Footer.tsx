@@ -18,7 +18,7 @@ export default function Footer() {
         }}>
           {/* Brand */}
           <div>
-            <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: 6, textDecoration: 'none', marginBottom: 16 }}>
+            <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: 6, textDecoration: 'none', marginBottom: 12 }}>
               <div style={{
                 width: 28,
                 height: 28,
@@ -31,11 +31,14 @@ export default function Footer() {
                 <Zap size={15} strokeWidth={2} color="#0a0a0a" />
               </div>
               <span style={{ fontSize: 17, fontWeight: 500, color: '#ffffff', letterSpacing: '-0.03em' }}>
-                volt.
+                rouli.
               </span>
             </Link>
+            <p style={{ fontSize: 12, fontWeight: 500, color: '#C8FF00', marginBottom: 8, fontStyle: 'italic' }}>
+              Yallah, Rouli !
+            </p>
             <p style={{ fontSize: 13, color: '#757575', lineHeight: 1.6, maxWidth: 220 }}>
-              Location de scooters électriques à Marrakech. Explorez la ville autrement.
+              Explorez la ville rouge à votre rythme avec nos scooters électriques. Réservation en ligne, livraison à domicile, assistance 7j/7.
             </p>
           </div>
 
@@ -80,11 +83,11 @@ export default function Footer() {
                 WhatsApp
               </a>
               <a
-                href="mailto:contact@volt-marrakech.ma"
+                href="mailto:contact@rouli.ma"
                 style={{ display: 'flex', alignItems: 'center', gap: 10, textDecoration: 'none', color: '#E0E0E0', fontSize: 14 }}
               >
                 <Mail size={16} strokeWidth={1.5} color="#C8FF00" />
-                contact@volt-marrakech.ma
+                contact@rouli.ma
               </a>
               <div style={{ display: 'flex', alignItems: 'flex-start', gap: 10, color: '#E0E0E0', fontSize: 14 }}>
                 <MapPin size={16} strokeWidth={1.5} color="#C8FF00" style={{ flexShrink: 0, marginTop: 1 }} />
@@ -105,7 +108,7 @@ export default function Footer() {
           gap: 8,
         }}>
           <p style={{ fontSize: 12, color: '#757575' }}>
-            © 2024 Volt Marrakech. Tous droits réservés.
+            © 2025 Rouli. Tous droits réservés.
           </p>
           <p style={{ fontSize: 12, color: '#757575' }}>
             Fait à Marrakech 🇲🇦

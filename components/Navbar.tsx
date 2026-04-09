@@ -56,7 +56,7 @@ export default function Navbar() {
           {/* Logo */}
           <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: 6, textDecoration: 'none' }}>
             {logoUrl ? (
-              <img src={logoUrl} alt="Volt" style={{ height: 28, width: 'auto', objectFit: 'contain' }} />
+              <img src={logoUrl} alt="Rouli" style={{ height: 28, width: 'auto', objectFit: 'contain' }} />
             ) : (
               <>
                 <div style={{
@@ -66,7 +66,7 @@ export default function Navbar() {
                   <Zap size={15} strokeWidth={2} color="#0a0a0a" />
                 </div>
                 <span style={{ fontSize: 17, fontWeight: 500, color: '#0a0a0a', letterSpacing: '-0.03em' }}>
-                  volt.
+                  rouli.
                 </span>
               </>
             )}

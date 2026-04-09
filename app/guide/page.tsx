@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   description:
     'Découvrez les meilleurs endroits de Marrakech en scooter électrique. Médina, Majorelle, souks, palais — notre guide complet pour explorer la ville rouge.',
   openGraph: {
-    title: 'Guide de Marrakech en scooter électrique — Volt',
+    title: 'Guide de Marrakech en scooter électrique — Rouli',
     description:
       'Les incontournables de Marrakech à explorer en scooter électrique : Jardin Majorelle, médina, souks, Jemaa el-Fna, Palmeraie et bien plus.',
     images: [
@@ -114,12 +114,12 @@ const articleSchema = {
   image: 'https://images.unsplash.com/photo-1539650116574-75c0c6d73d0e?w=1200&q=80',
   author: {
     '@type': 'Organization',
-    name: 'Volt Marrakech',
+    name: 'Rouli',
     url: 'https://volt-marrakech.ma',
   },
   publisher: {
     '@type': 'Organization',
-    name: 'Volt Marrakech',
+    name: 'Rouli',
     logo: {
       '@type': 'ImageObject',
       url: 'https://volt-marrakech.ma/logo.svg',
@@ -140,7 +140,7 @@ const touristDestinationSchema = {
   touristType: ['CulturalTourist', 'AdventureTourist'],
   includedInDataCatalog: {
     '@type': 'DataCatalog',
-    name: 'Volt Marrakech Guide',
+    name: 'Rouli Guide',
   },
 }
 
@@ -214,7 +214,7 @@ export default function GuidePage() {
                 Si les calèches et taxis ont longtemps dominé les rues, une nouvelle manière de découvrir Marrakech s'impose doucement : le scooter électrique. Silencieux, léger, zéro émission — il s'intègre parfaitement dans le tissu urbain dense de la médina et permet de passer en quelques minutes de la place Jemaa el-Fna au Jardin Majorelle, de la Bahia à la Palmeraie.
               </p>
               <p style={{ fontSize: 16, color: 'rgba(255,255,255,0.65)', lineHeight: 1.8, marginBottom: 16 }}>
-                Chez Volt Marrakech, nous avons compilé les incontournables de la ville rouge pour vous aider à organiser votre itinéraire. Chaque lieu est décrit avec sa distance depuis le centre, le temps de trajet en scooter, et nos conseils pratiques pour en profiter pleinement.
+                Chez Rouli, nous avons compilé les incontournables de la ville rouge pour vous aider à organiser votre itinéraire. Chaque lieu est décrit avec sa distance depuis le centre, le temps de trajet en scooter, et nos conseils pratiques pour en profiter pleinement.
               </p>
               <p style={{ fontSize: 16, color: 'rgba(255,255,255,0.65)', lineHeight: 1.8 }}>
                 Que vous ayez une journée, un week-end ou une semaine, Marrakech se laisse découvrir sans se livrer tout de suite. Chaque visite révèle une nouvelle couche : les souks changent de couleur selon l'heure, la médina se transforme de jour en nuit, les jardins offrent un calme inattendu en plein cœur du bruit. C'est cette magie que le scooter électrique vous permet de saisir — en liberté, à votre rythme, sans contrainte.
@@ -289,7 +289,7 @@ export default function GuidePage() {
                   }}>
                     <Zap size={14} strokeWidth={1.5} color="#5a9000" style={{ flexShrink: 0, marginTop: 1 }} />
                     <p style={{ fontSize: 12, color: '#3a5a00', lineHeight: 1.6 }}>
-                      <strong>Conseil Volt :</strong> {place.tip}
+                      <strong>Conseil Rouli :</strong> {place.tip}
                     </p>
                   </div>
                 </div>

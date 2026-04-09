@@ -2,32 +2,32 @@ import { supabase } from './supabase'
 import type { SiteSettings } from './types'
 
 export const SETTINGS_DEFAULTS: SiteSettings = {
-  site_name: 'Volt',
+  site_name: 'Rouli',
   accent_color: '#C8FF00',
   logo_url: '',
   favicon_url: '',
   hero_image_url: 'https://images.unsplash.com/photo-1539650116574-75c0c6d73d0e?w=1600&q=80',
   about_text:
-    "Nous sommes une équipe locale avec plus de 5 ans d'expérience dans la mobilité urbaine à Marrakech. Notre flotte de scooters électriques premium vous permet d'explorer la ville rouge à votre rythme, en toute liberté et de manière responsable. Chaque scooter est entretenu quotidiennement et livré avec casque et assistance 7j/7.",
+    "Rouli est né d'une conviction simple : la meilleure façon de découvrir Marrakech, c'est à son propre rythme. Forts de 20 ans d'expérience dans la location de véhicules au Maroc, nous avons décidé de tourner la page de l'essence pour embrasser pleinement l'électrique. Même exigence, même fiabilité, même service — mais en version propre, silencieuse et libre.",
   // Stats bar
-  stat1_value: '4',
+  stat1_value: '6',
   stat1_label: 'Modèles disponibles',
   stat2_value: '120 km',
-  stat2_label: 'Autonomie max',
-  stat3_value: '170 MAD',
-  stat3_label: 'À partir de / jour',
-  stat4_value: '24/7',
-  stat4_label: 'Support WhatsApp',
+  stat2_label: "D'autonomie",
+  stat3_value: '60 MAD',
+  stat3_label: 'À partir de',
+  stat4_value: '7j/7',
+  stat4_label: 'Support',
   // Pricing cards
   price1_duration: '2 Heures',
   price1_price: '60',
-  price1_features: 'Parfait pour un tour rapide|Casque inclus|Assistance téléphonique',
+  price1_features: 'Casque inclus|Assistance téléphonique|Idéal pour la médina et Jemaa el-Fna',
   price2_duration: '1 Journée',
   price2_price: '170',
-  price2_features: 'Explorez la ville en liberté|Casque + antivol inclus|Assistance 7j/7|Carte touristique offerte',
+  price2_features: 'Casque + antivol inclus|Assistance 7j/7|Carte des spots Rouli offerte',
   price3_duration: '1 Semaine',
   price3_price: '950',
-  price3_features: 'Tarif le plus avantageux|Équipements complets|Assistance prioritaire|Extension possible',
+  price3_features: 'Équipements complets|Assistance prioritaire|Extension possible',
 }
 
 export async function getSettings(): Promise<SiteSettings> {

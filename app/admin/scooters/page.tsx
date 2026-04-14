@@ -7,8 +7,8 @@ import type { Scooter, ScooterStatus } from '@/lib/types'
 import ImageUpload from '@/components/admin/ImageUpload'
 
 const STATUS_CFG: Record<ScooterStatus, { label: string; bg: string; color: string }> = {
-  available: { label: 'Disponible', bg: 'rgba(200,255,0,0.12)', color: '#3a6000' },
-  rented:    { label: 'Loué',       bg: 'rgba(220,0,0,0.08)',   color: '#8a0000' },
+  available: { label: 'Disponible', bg: 'rgba(0,176,80,0.15)',   color: '#00B050' },
+  rented:    { label: 'Loué',       bg: 'rgba(255,255,255,0.08)', color: 'rgba(255,255,255,0.4)' },
 }
 
 type FormData = Omit<Scooter, 'id' | 'created_at'>
@@ -17,6 +17,10 @@ const EMPTY: FormData = {
   name: '', model: '', description: '',
   price_per_hour: 0, price_per_day: 0, price_per_week: 0,
   autonomy_km: 0, image_url: '', status: 'available',
+}
+
+const sf: React.CSSProperties = {
+  fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
 }
 
 export default function ScootersPage() {
@@ -65,20 +69,15 @@ export default function ScootersPage() {
     setFormError('')
     try {
       if (modal === 'add') {
-        console.log('[scooters] INSERT payload:', form)
         const result = await supabase.from('scooters').insert([form]).select().single()
-        console.log('[scooters] INSERT response:', result)
         if (result.error) throw result.error
       } else if (editing) {
-        console.log('[scooters] UPDATE id:', editing.id, 'payload:', form)
         const result = await supabase.from('scooters').update(form).eq('id', editing.id).select()
-        console.log('[scooters] UPDATE response:', result)
         if (result.error) throw result.error
       }
       setModal(null)
       await load()
     } catch (e: unknown) {
-      console.error('[scooters] SAVE error:', e)
       setFormError(e instanceof Error ? e.message : 'Erreur lors de la sauvegarde.')
     } finally {
       setSaving(false)
@@ -88,9 +87,7 @@ export default function ScootersPage() {
   async function handleDelete() {
     if (!deleteId) return
     setDeleting(true)
-    console.log('[scooters] DELETE id:', deleteId)
-    const result = await supabase.from('scooters').delete().eq('id', deleteId)
-    console.log('[scooters] DELETE response:', result)
+    await supabase.from('scooters').delete().eq('id', deleteId)
     setDeleteId(null)
     setDeleting(false)
     await load()
@@ -99,9 +96,7 @@ export default function ScootersPage() {
   async function toggleAvailability(s: Scooter) {
     setToggling(s.id)
     const next: ScooterStatus = s.status === 'available' ? 'rented' : 'available'
-    console.log('[scooters] TOGGLE id:', s.id, '->', next)
     const result = await supabase.from('scooters').update({ status: next }).eq('id', s.id).select()
-    console.log('[scooters] TOGGLE response:', result)
     setToggling(null)
     if (!result.error) setScooters(prev => prev.map(x => x.id === s.id ? { ...x, status: next } : x))
   }
@@ -111,19 +106,27 @@ export default function ScootersPage() {
   }
 
   return (
-    <div style={{ padding: '40px 40px 60px' }}>
+    <div style={{ padding: '40px 40px 60px', background: '#0a0a0a', minHeight: '100%' }}>
       {/* Header */}
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 28, gap: 16, flexWrap: 'wrap' }}>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 32, gap: 16, flexWrap: 'wrap' }}>
         <div>
-          <h1 style={{ fontSize: 22, fontWeight: 500, letterSpacing: '-0.02em', marginBottom: 4 }}>Scooters</h1>
-          <p style={{ fontSize: 13, color: '#757575' }}>{scooters.length} scooter{scooters.length !== 1 ? 's' : ''} dans la flotte</p>
+          <h1 style={{
+            fontFamily: 'Georgia, "Times New Roman", serif',
+            fontSize: 24, fontWeight: 700, letterSpacing: '-0.02em', marginBottom: 6, color: '#ffffff',
+          }}>
+            Scooters
+          </h1>
+          <p style={{ ...sf, fontSize: 13, color: 'rgba(255,255,255,0.4)' }}>
+            {scooters.length} scooter{scooters.length !== 1 ? 's' : ''} dans la flotte
+          </p>
         </div>
         <button
           onClick={openAdd}
           style={{
+            ...sf,
             display: 'inline-flex', alignItems: 'center', gap: 7,
-            padding: '10px 16px', borderRadius: 8, border: 'none',
-            background: '#C8FF00', color: '#0a0a0a', fontSize: 13, fontWeight: 500, cursor: 'pointer',
+            padding: '10px 18px', borderRadius: 8, border: 'none',
+            background: '#00B050', color: '#ffffff', fontSize: 13, fontWeight: 500, cursor: 'pointer',
           }}
         >
           <Plus size={16} strokeWidth={1.5} />
@@ -132,22 +135,28 @@ export default function ScootersPage() {
       </div>
 
       {/* Table */}
-      <div style={{ borderRadius: 12, border: '0.5px solid rgba(0,0,0,0.08)', background: '#ffffff', overflow: 'hidden' }}>
+      <div style={{ borderRadius: 12, border: '0.5px solid rgba(255,255,255,0.08)', background: '#161616', overflow: 'hidden' }}>
         {loading ? (
           <div style={{ padding: 24, display: 'flex', flexDirection: 'column', gap: 12 }}>
-            {[1,2,3,4].map(i => <div key={i} style={{ height: 56, background: '#F5F5F5', borderRadius: 8 }} />)}
+            {[1,2,3,4].map(i => <div key={i} style={{ height: 56, background: 'rgba(255,255,255,0.06)', borderRadius: 8 }} />)}
           </div>
         ) : scooters.length === 0 ? (
-          <div style={{ padding: '48px 24px', textAlign: 'center', color: '#757575', fontSize: 14 }}>
+          <div style={{ ...sf, padding: '48px 24px', textAlign: 'center', color: 'rgba(255,255,255,0.3)', fontSize: 14 }}>
             Aucun scooter. Ajoutez-en un pour commencer.
           </div>
         ) : (
           <div style={{ overflowX: 'auto' }}>
             <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 13 }}>
               <thead>
-                <tr style={{ borderBottom: '0.5px solid rgba(0,0,0,0.06)' }}>
+                <tr style={{ background: 'rgba(255,255,255,0.04)' }}>
                   {['Scooter', 'Autonomie', 'Prix/jour', 'Statut', 'Dispo', 'Actions'].map(h => (
-                    <th key={h} style={{ padding: '11px 20px', textAlign: 'left', fontWeight: 500, color: '#757575', whiteSpace: 'nowrap' }}>{h}</th>
+                    <th key={h} style={{
+                      ...sf, padding: '11px 20px', textAlign: 'left', fontWeight: 500,
+                      color: 'rgba(255,255,255,0.4)', whiteSpace: 'nowrap',
+                      fontSize: 11, textTransform: 'uppercase', letterSpacing: '0.08em',
+                    }}>
+                      {h}
+                    </th>
                   ))}
                 </tr>
               </thead>
@@ -156,43 +165,48 @@ export default function ScootersPage() {
                   const st = STATUS_CFG[s.status]
                   const isAvail = s.status === 'available'
                   return (
-                    <tr key={s.id} style={{ borderBottom: i < scooters.length - 1 ? '0.5px solid rgba(0,0,0,0.04)' : 'none' }}>
-                      <td style={{ padding: '12px 20px' }}>
+                    <tr
+                      key={s.id}
+                      style={{ borderBottom: i < scooters.length - 1 ? '0.5px solid rgba(255,255,255,0.06)' : 'none' }}
+                      onMouseEnter={e => (e.currentTarget.style.background = 'rgba(255,255,255,0.02)')}
+                      onMouseLeave={e => (e.currentTarget.style.background = 'transparent')}
+                    >
+                      <td style={{ padding: '14px 20px' }}>
                         <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
                           {s.image_url && (
                             <img src={s.image_url} alt={s.name}
                               style={{ width: 44, height: 34, objectFit: 'cover', borderRadius: 6, flexShrink: 0 }} />
                           )}
                           <div>
-                            <div style={{ fontWeight: 500 }}>{s.name}</div>
-                            <div style={{ fontSize: 11, color: '#757575' }}>{s.model}</div>
+                            <div style={{ ...sf, fontWeight: 500, color: '#ffffff', fontSize: 13 }}>{s.name}</div>
+                            <div style={{ ...sf, fontSize: 11, color: 'rgba(255,255,255,0.35)' }}>{s.model}</div>
                           </div>
                         </div>
                       </td>
-                      <td style={{ padding: '12px 20px', color: '#757575', whiteSpace: 'nowrap' }}>
+                      <td style={{ ...sf, padding: '14px 20px', color: 'rgba(255,255,255,0.4)', whiteSpace: 'nowrap', fontSize: 13 }}>
                         <Battery size={13} strokeWidth={1.5} style={{ display: 'inline', verticalAlign: 'middle', marginRight: 4 }} />
                         {s.autonomy_km} km
                       </td>
-                      <td style={{ padding: '12px 20px', fontWeight: 500, whiteSpace: 'nowrap' }}>
+                      <td style={{ ...sf, padding: '14px 20px', fontWeight: 500, whiteSpace: 'nowrap', color: '#ffffff', fontSize: 13 }}>
                         {s.price_per_day.toFixed(0)} MAD
                       </td>
-                      <td style={{ padding: '12px 20px' }}>
+                      <td style={{ padding: '14px 20px' }}>
                         <span style={{
-                          display: 'inline-block', padding: '3px 9px', borderRadius: 6,
+                          ...sf,
+                          display: 'inline-block', padding: '4px 10px', borderRadius: 6,
                           background: st.bg, color: st.color, fontSize: 11, fontWeight: 500,
                         }}>
                           {st.label}
                         </span>
                       </td>
-                      <td style={{ padding: '12px 20px' }}>
-                        {/* Toggle switch */}
+                      <td style={{ padding: '14px 20px' }}>
                         <button
                           onClick={() => toggleAvailability(s)}
                           disabled={toggling === s.id}
                           title={isAvail ? 'Marquer comme loué' : 'Marquer comme disponible'}
                           style={{
                             width: 36, height: 20, borderRadius: 10, border: 'none', cursor: 'pointer',
-                            background: isAvail ? '#C8FF00' : '#E0E0E0',
+                            background: isAvail ? '#00B050' : 'rgba(255,255,255,0.15)',
                             position: 'relative', transition: 'background 0.2s',
                             opacity: toggling === s.id ? 0.5 : 1, flexShrink: 0,
                           }}
@@ -204,17 +218,27 @@ export default function ScootersPage() {
                           }} />
                         </button>
                       </td>
-                      <td style={{ padding: '12px 20px' }}>
+                      <td style={{ padding: '14px 20px' }}>
                         <div style={{ display: 'flex', gap: 6 }}>
                           <button
                             onClick={() => openEdit(s)}
-                            style={{ display: 'flex', alignItems: 'center', gap: 5, padding: '6px 10px', borderRadius: 7, border: '0.5px solid rgba(0,0,0,0.12)', background: 'transparent', fontSize: 12, color: '#0a0a0a', cursor: 'pointer' }}
+                            style={{
+                              ...sf,
+                              display: 'flex', alignItems: 'center', gap: 5, padding: '6px 10px',
+                              borderRadius: 7, border: '0.5px solid rgba(255,255,255,0.12)', background: 'transparent',
+                              fontSize: 12, color: 'rgba(255,255,255,0.6)', cursor: 'pointer',
+                            }}
                           >
                             <Pencil size={13} strokeWidth={1.5} />Modifier
                           </button>
                           <button
                             onClick={() => setDeleteId(s.id)}
-                            style={{ display: 'flex', alignItems: 'center', gap: 5, padding: '6px 10px', borderRadius: 7, border: '0.5px solid rgba(220,0,0,0.2)', background: 'rgba(220,0,0,0.04)', fontSize: 12, color: '#cc0000', cursor: 'pointer' }}
+                            style={{
+                              ...sf,
+                              display: 'flex', alignItems: 'center', gap: 5, padding: '6px 10px',
+                              borderRadius: 7, border: '0.5px solid rgba(220,0,0,0.3)', background: 'rgba(220,0,0,0.08)',
+                              fontSize: 12, color: '#ff6b6b', cursor: 'pointer',
+                            }}
                           >
                             <Trash2 size={13} strokeWidth={1.5} />
                           </button>
@@ -291,16 +315,29 @@ export default function ScootersPage() {
             </MField>
 
             {formError && (
-              <div style={{ display: 'flex', gap: 8, alignItems: 'center', padding: '10px 14px', borderRadius: 8, background: 'rgba(220,0,0,0.06)', border: '0.5px solid rgba(220,0,0,0.2)', fontSize: 13, color: '#cc0000' }}>
+              <div style={{
+                ...sf,
+                display: 'flex', gap: 8, alignItems: 'center', padding: '10px 14px', borderRadius: 8,
+                background: 'rgba(220,0,0,0.1)', border: '0.5px solid rgba(220,0,0,0.25)', fontSize: 13, color: '#ff6b6b',
+              }}>
                 <AlertCircle size={14} strokeWidth={1.5} />{formError}
               </div>
             )}
 
             <div style={{ display: 'flex', gap: 10, justifyContent: 'flex-end', paddingTop: 4 }}>
-              <button onClick={() => setModal(null)} style={{ padding: '10px 18px', borderRadius: 8, border: '0.5px solid rgba(0,0,0,0.12)', background: 'transparent', fontSize: 13, cursor: 'pointer' }}>
+              <button onClick={() => setModal(null)} style={{
+                ...sf,
+                padding: '10px 18px', borderRadius: 8, border: '0.5px solid rgba(255,255,255,0.12)',
+                background: 'transparent', fontSize: 13, cursor: 'pointer', color: 'rgba(255,255,255,0.6)',
+              }}>
                 Annuler
               </button>
-              <button onClick={handleSave} disabled={saving} style={{ padding: '10px 18px', borderRadius: 8, border: 'none', background: '#C8FF00', color: '#0a0a0a', fontSize: 13, fontWeight: 500, cursor: saving ? 'not-allowed' : 'pointer', opacity: saving ? 0.7 : 1 }}>
+              <button onClick={handleSave} disabled={saving} style={{
+                ...sf,
+                padding: '10px 18px', borderRadius: 8, border: 'none',
+                background: '#00B050', color: '#ffffff', fontSize: 13, fontWeight: 500,
+                cursor: saving ? 'not-allowed' : 'pointer', opacity: saving ? 0.7 : 1,
+              }}>
                 {saving ? 'Enregistrement…' : modal === 'add' ? 'Ajouter' : 'Enregistrer'}
               </button>
             </div>
@@ -311,14 +348,23 @@ export default function ScootersPage() {
       {/* Delete confirmation */}
       {deleteId && (
         <Modal title="Confirmer la suppression" onClose={() => setDeleteId(null)} small>
-          <p style={{ fontSize: 14, color: '#757575', marginBottom: 24 }}>
+          <p style={{ ...sf, fontSize: 14, color: 'rgba(255,255,255,0.5)', marginBottom: 24 }}>
             Cette action est irréversible. Le scooter sera définitivement supprimé.
           </p>
           <div style={{ display: 'flex', gap: 10, justifyContent: 'flex-end' }}>
-            <button onClick={() => setDeleteId(null)} style={{ padding: '10px 18px', borderRadius: 8, border: '0.5px solid rgba(0,0,0,0.12)', background: 'transparent', fontSize: 13, cursor: 'pointer' }}>
+            <button onClick={() => setDeleteId(null)} style={{
+              ...sf,
+              padding: '10px 18px', borderRadius: 8, border: '0.5px solid rgba(255,255,255,0.12)',
+              background: 'transparent', fontSize: 13, cursor: 'pointer', color: 'rgba(255,255,255,0.6)',
+            }}>
               Annuler
             </button>
-            <button onClick={handleDelete} disabled={deleting} style={{ padding: '10px 18px', borderRadius: 8, border: 'none', background: '#0a0a0a', color: '#ffffff', fontSize: 13, fontWeight: 500, cursor: 'pointer', opacity: deleting ? 0.7 : 1 }}>
+            <button onClick={handleDelete} disabled={deleting} style={{
+              ...sf,
+              padding: '10px 18px', borderRadius: 8, border: 'none',
+              background: 'rgba(220,0,0,0.9)', color: '#ffffff', fontSize: 13, fontWeight: 500,
+              cursor: 'pointer', opacity: deleting ? 0.7 : 1,
+            }}>
               {deleting ? 'Suppression…' : 'Supprimer'}
             </button>
           </div>
@@ -328,13 +374,11 @@ export default function ScootersPage() {
   )
 }
 
-// ─── Reusable sub-components ────────────────────────────────────────────────
-
 const inputStyle: React.CSSProperties = {
   width: '100%', padding: '10px 12px', borderRadius: 8,
-  border: '0.5px solid rgba(0,0,0,0.12)', background: '#F5F5F5',
-  fontSize: 13, color: '#0a0a0a', outline: 'none', boxSizing: 'border-box',
-  fontFamily: 'inherit',
+  border: '0.5px solid rgba(255,255,255,0.15)', background: '#1a1a1a',
+  fontSize: 13, color: '#ffffff', outline: 'none', boxSizing: 'border-box',
+  fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
 }
 
 function MI({ value, onChange, placeholder, type = 'text' }: { value: string; onChange: (v: string) => void; placeholder?: string; type?: string }) {
@@ -344,7 +388,13 @@ function MI({ value, onChange, placeholder, type = 'text' }: { value: string; on
 function MField({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <div>
-      <label style={{ display: 'block', fontSize: 12, fontWeight: 500, color: '#757575', marginBottom: 6 }}>{label}</label>
+      <label style={{
+        display: 'block', fontSize: 11, fontWeight: 500, marginBottom: 6,
+        color: 'rgba(255,255,255,0.4)', textTransform: 'uppercase', letterSpacing: '0.08em',
+        fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
+      }}>
+        {label}
+      </label>
       {children}
     </div>
   )
@@ -353,18 +403,26 @@ function MField({ label, children }: { label: string; children: React.ReactNode 
 function Modal({ title, onClose, children, small }: { title: string; onClose: () => void; children: React.ReactNode; small?: boolean }) {
   return (
     <div style={{ position: 'fixed', inset: 0, zIndex: 200, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 24 }}>
-      <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.4)' }} onClick={onClose} />
+      <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.7)' }} onClick={onClose} />
       <div style={{
         position: 'relative', zIndex: 1,
         width: '100%', maxWidth: small ? 400 : 560,
-        background: '#ffffff', borderRadius: 16,
-        border: '0.5px solid rgba(0,0,0,0.08)',
+        background: '#1a1a1a', borderRadius: 16,
+        border: '0.5px solid rgba(255,255,255,0.1)',
         maxHeight: '90vh', display: 'flex', flexDirection: 'column',
         overflow: 'hidden',
       }}>
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '16px 20px', borderBottom: '0.5px solid rgba(0,0,0,0.06)', flexShrink: 0 }}>
-          <span style={{ fontSize: 14, fontWeight: 500 }}>{title}</span>
-          <button onClick={onClose} style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#757575', padding: 2 }}>
+        <div style={{
+          display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+          padding: '16px 20px', borderBottom: '0.5px solid rgba(255,255,255,0.08)', flexShrink: 0,
+        }}>
+          <span style={{
+            fontSize: 14, fontWeight: 500, color: '#ffffff',
+            fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
+          }}>
+            {title}
+          </span>
+          <button onClick={onClose} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'rgba(255,255,255,0.4)', padding: 2 }}>
             <X size={18} strokeWidth={1.5} />
           </button>
         </div>

@@ -29,7 +29,7 @@ const statusConfig: Record<string, {
     label: 'Confirmée',
     message: 'Réservation confirmée — à bientôt !',
     icon: <CheckCircle size={13} strokeWidth={1.5} />,
-    color: '#3a6000', bg: 'rgba(200,255,0,0.12)',
+    color: 'var(--accent)', bg: 'rgba(0,176,80,0.12)',
   },
   cancelled: {
     label: 'Annulée',
@@ -47,7 +47,7 @@ const statusConfig: Record<string, {
 
 export default function ComptePage() {
   return (
-    <Suspense fallback={<div style={{ paddingTop: 56, minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><Zap size={28} strokeWidth={1.5} color="#C8FF00" /></div>}>
+    <Suspense fallback={<div style={{ paddingTop: 56, minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><Zap size={28} strokeWidth={1.5} color="var(--accent)" /></div>}>
       <CompteContent />
     </Suspense>
   )
@@ -149,7 +149,7 @@ function CompteContent() {
       <>
         <Navbar />
         <main style={{ paddingTop: 56, minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-          <Zap size={28} strokeWidth={1.5} color="#C8FF00" />
+          <Zap size={28} strokeWidth={1.5} color="var(--accent)" />
         </main>
       </>
     )
@@ -275,10 +275,10 @@ function CompteContent() {
                     <div style={{
                       display: 'flex', alignItems: 'center', gap: 8,
                       padding: '11px 14px', borderRadius: 8,
-                      background: 'rgba(200,255,0,0.08)', border: '0.5px solid rgba(200,255,0,0.3)',
+                      background: 'rgba(0,176,80,0.08)', border: '0.5px solid rgba(0,176,80,0.3)',
                     }}>
                       <CheckCircle size={15} strokeWidth={1.5} color="#5a9000" />
-                      <span style={{ fontSize: 13, color: '#3a6000' }}>{authSuccess}</span>
+                      <span style={{ fontSize: 13, color: 'var(--accent)' }}>{authSuccess}</span>
                     </div>
                   )}
 
@@ -288,7 +288,7 @@ function CompteContent() {
                     style={{
                       display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 8,
                       padding: '13px', borderRadius: 10, border: 'none',
-                      background: '#C8FF00', color: '#0a0a0a',
+                      background: 'var(--accent)', color: '#0a0a0a',
                       fontSize: 14, fontWeight: 500, cursor: authLoading ? 'not-allowed' : 'pointer',
                       opacity: authLoading ? 0.7 : 1,
                     }}
@@ -327,7 +327,7 @@ function CompteContent() {
                     alignItems: 'center',
                     justifyContent: 'center',
                   }}>
-                    <User size={20} strokeWidth={1.5} color="#C8FF00" />
+                    <User size={20} strokeWidth={1.5} color="var(--accent)" />
                   </div>
                   <div>
                     <p style={{ fontSize: 15, fontWeight: 500 }}>
@@ -391,7 +391,7 @@ function CompteContent() {
                     </p>
                     <a href="/reserver" style={{ textDecoration: 'none' }}>
                       <button style={{
-                        padding: '10px 20px', borderRadius: 8, background: '#C8FF00',
+                        padding: '10px 20px', borderRadius: 8, background: 'var(--accent)',
                         border: 'none', fontSize: 13, fontWeight: 500, color: '#0a0a0a', cursor: 'pointer',
                       }}>
                         Faire une réservation

@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { usePathname, useRouter } from 'next/navigation'
-import { Menu, Zap } from 'lucide-react'
+import { Menu } from 'lucide-react'
 import { isAdminAuthed } from '@/lib/admin-auth'
 import Sidebar from '@/components/admin/Sidebar'
 
@@ -24,19 +24,22 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     setChecked(true)
   }, [pathname])
 
-  // Login page — no sidebar, no auth check needed
   if (isLoginPage) {
     return <>{children}</>
   }
 
-  // Waiting for auth check
   if (!checked) {
     return (
       <div style={{
         minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center',
-        background: '#fafafa',
+        background: '#0a0a0a',
       }}>
-        <Zap size={24} strokeWidth={1.5} color="#C8FF00" />
+        <span style={{
+          fontFamily: 'Georgia, "Times New Roman", serif',
+          fontSize: 22, fontWeight: 700, color: '#00B050', letterSpacing: '-0.03em',
+        }}>
+          keewee.
+        </span>
       </div>
     )
   }
@@ -44,18 +47,17 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   if (!authed) return null
 
   return (
-    <div style={{ display: 'flex', minHeight: '100vh', background: '#fafafa' }}>
-      {/* Sidebar (desktop fixed, mobile overlay) */}
+    <div style={{ display: 'flex', minHeight: '100vh', background: '#0a0a0a' }}>
       <Sidebar mobileOpen={mobileOpen} onClose={() => setMobileOpen(false)} />
 
-      {/* Main content */}
       <div style={{ flex: 1, display: 'flex', flexDirection: 'column', minWidth: 0, overflow: 'hidden' }}>
         {/* Mobile top bar */}
         <div
           className="md:hidden"
           style={{
             height: 52,
-            background: '#0a0a0a',
+            background: '#111111',
+            borderBottom: '0.5px solid rgba(255,255,255,0.08)',
             display: 'flex',
             alignItems: 'center',
             padding: '0 16px',
@@ -65,22 +67,18 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         >
           <button
             onClick={() => setMobileOpen(true)}
-            style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#ffffff', padding: 4 }}
+            style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'rgba(255,255,255,0.6)', padding: 4 }}
           >
             <Menu size={20} strokeWidth={1.5} />
           </button>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-            <div style={{
-              width: 22, height: 22, background: '#C8FF00', borderRadius: 5,
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-            }}>
-              <Zap size={11} strokeWidth={2} color="#0a0a0a" />
-            </div>
-            <span style={{ fontSize: 14, fontWeight: 500, color: '#ffffff', letterSpacing: '-0.02em' }}>rouli.</span>
-          </div>
+          <span style={{
+            fontFamily: 'Georgia, "Times New Roman", serif',
+            fontSize: 16, fontWeight: 700, color: '#ffffff', letterSpacing: '-0.02em',
+          }}>
+            keewee.
+          </span>
         </div>
 
-        {/* Page content */}
         <main style={{ flex: 1, overflowY: 'auto' }}>
           {children}
         </main>

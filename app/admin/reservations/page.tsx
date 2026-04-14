@@ -37,10 +37,10 @@ function rentalSummary(r: Row): string {
 }
 
 const ST: Record<Status, { label: string; bg: string; color: string }> = {
-  pending:   { label: 'En attente',  bg: 'rgba(255,180,0,0.1)',  color: '#8a6000' },
-  confirmed: { label: 'Confirmée',   bg: 'rgba(200,255,0,0.12)', color: '#3a6000' },
-  cancelled: { label: 'Annulée',     bg: 'rgba(220,0,0,0.08)',   color: '#8a0000' },
-  completed: { label: 'Terminée',    bg: 'rgba(0,0,0,0.05)',     color: '#757575' },
+  pending:   { label: 'En attente',  bg: 'rgba(0,176,80,0.15)',    color: '#00B050' },
+  confirmed: { label: 'Confirmée',   bg: 'rgba(0,176,80,0.25)',    color: '#00B050' },
+  cancelled: { label: 'Annulée',     bg: 'rgba(255,255,255,0.08)', color: 'rgba(255,255,255,0.4)' },
+  completed: { label: 'Terminée',    bg: 'rgba(255,255,255,0.06)', color: 'rgba(255,255,255,0.3)' },
 }
 
 const NEXT_STATUS: Record<Status, Status[]> = {
@@ -55,6 +55,10 @@ const ACTION_LABEL: Record<Status, string> = {
   cancelled:  'Annuler',
   pending:   '',
   completed: '',
+}
+
+const sf: React.CSSProperties = {
+  fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
 }
 
 function fmt(d: string) {
@@ -72,7 +76,7 @@ export default function ReservationsPage() {
   async function load() {
     setLoading(true)
     const [
-      { data: reservationsData, error },
+      { data: reservationsData },
       { data: scootersData },
       { data: profilesData },
     ] = await Promise.all([
@@ -80,8 +84,6 @@ export default function ReservationsPage() {
       supabase.from('scooters').select('id, name, model'),
       supabase.from('profiles').select('id, full_name'),
     ])
-    console.log('reservations:', reservationsData)
-    console.log('error:', error)
     const merged = (reservationsData || []).map(r => ({
       ...r,
       scooter_name: scootersData?.find(s => s.id === r.scooter_id)?.name ?? 'Scooter inconnu',
@@ -122,25 +124,33 @@ export default function ReservationsPage() {
   }
 
   return (
-    <div style={{ padding: '40px 40px 60px' }}>
-      <div style={{ marginBottom: 24 }}>
-        <h1 style={{ fontSize: 22, fontWeight: 500, letterSpacing: '-0.02em', marginBottom: 4 }}>Réservations</h1>
-        <p style={{ fontSize: 13, color: '#757575' }}>{rows.length} réservation{rows.length !== 1 ? 's' : ''} au total</p>
+    <div style={{ padding: '40px 40px 60px', background: '#0a0a0a', minHeight: '100%' }}>
+      <div style={{ marginBottom: 28 }}>
+        <h1 style={{
+          fontFamily: 'Georgia, "Times New Roman", serif',
+          fontSize: 24, fontWeight: 700, letterSpacing: '-0.02em', marginBottom: 6, color: '#ffffff',
+        }}>
+          Réservations
+        </h1>
+        <p style={{ ...sf, fontSize: 13, color: 'rgba(255,255,255,0.4)' }}>
+          {rows.length} réservation{rows.length !== 1 ? 's' : ''} au total
+        </p>
       </div>
 
       {/* Filter tabs */}
-      <div style={{ display: 'flex', gap: 6, marginBottom: 20, flexWrap: 'wrap' }}>
+      <div style={{ display: 'flex', gap: 6, marginBottom: 24, flexWrap: 'wrap' }}>
         {FILTERS.map(f => (
           <button
             key={f.value}
             onClick={() => setFilter(f.value)}
             style={{
+              ...sf,
               display: 'inline-flex', alignItems: 'center', gap: 6,
               padding: '7px 14px', borderRadius: 8,
               border: '0.5px solid',
-              borderColor: filter === f.value ? '#0a0a0a' : 'rgba(0,0,0,0.1)',
-              background: filter === f.value ? '#0a0a0a' : '#ffffff',
-              color: filter === f.value ? '#ffffff' : '#757575',
+              borderColor: filter === f.value ? '#00B050' : 'rgba(255,255,255,0.1)',
+              background: filter === f.value ? 'rgba(0,176,80,0.12)' : 'transparent',
+              color: filter === f.value ? '#00B050' : 'rgba(255,255,255,0.4)',
               fontSize: 12, fontWeight: filter === f.value ? 500 : 400,
               cursor: 'pointer', transition: 'all 0.12s',
             }}
@@ -148,9 +158,10 @@ export default function ReservationsPage() {
             {f.label}
             {counts[f.value] > 0 && (
               <span style={{
+                ...sf,
                 minWidth: 18, height: 18, borderRadius: 9,
-                background: filter === f.value ? 'rgba(255,255,255,0.15)' : '#F5F5F5',
-                color: filter === f.value ? '#ffffff' : '#757575',
+                background: filter === f.value ? 'rgba(0,176,80,0.2)' : 'rgba(255,255,255,0.08)',
+                color: filter === f.value ? '#00B050' : 'rgba(255,255,255,0.4)',
                 fontSize: 10, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '0 4px',
               }}>
                 {counts[f.value]}
@@ -161,22 +172,28 @@ export default function ReservationsPage() {
       </div>
 
       {/* Table */}
-      <div style={{ borderRadius: 12, border: '0.5px solid rgba(0,0,0,0.08)', background: '#ffffff', overflow: 'hidden' }}>
+      <div style={{ borderRadius: 12, border: '0.5px solid rgba(255,255,255,0.08)', background: '#161616', overflow: 'hidden' }}>
         {loading ? (
           <div style={{ padding: 24, display: 'flex', flexDirection: 'column', gap: 12 }}>
-            {[1,2,3,4,5].map(i => <div key={i} style={{ height: 52, background: '#F5F5F5', borderRadius: 8 }} />)}
+            {[1,2,3,4,5].map(i => <div key={i} style={{ height: 52, background: 'rgba(255,255,255,0.06)', borderRadius: 8 }} />)}
           </div>
         ) : filtered.length === 0 ? (
-          <div style={{ padding: '48px 24px', textAlign: 'center', color: '#757575', fontSize: 14 }}>
-            {filter === 'all' ? 'Aucune réservation.' : `Aucune réservation avec ce statut.`}
+          <div style={{ ...sf, padding: '48px 24px', textAlign: 'center', color: 'rgba(255,255,255,0.3)', fontSize: 14 }}>
+            {filter === 'all' ? 'Aucune réservation.' : 'Aucune réservation avec ce statut.'}
           </div>
         ) : (
           <div style={{ overflowX: 'auto' }}>
             <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 13 }}>
               <thead>
-                <tr style={{ borderBottom: '0.5px solid rgba(0,0,0,0.06)' }}>
+                <tr style={{ background: 'rgba(255,255,255,0.04)' }}>
                   {['Client', 'Téléphone', 'Scooter', 'Durée', 'Période', 'Prix', 'Statut', 'Actions'].map(h => (
-                    <th key={h} style={{ padding: '11px 20px', textAlign: 'left', fontWeight: 500, color: '#757575', whiteSpace: 'nowrap' }}>{h}</th>
+                    <th key={h} style={{
+                      ...sf, padding: '11px 20px', textAlign: 'left', fontWeight: 500,
+                      color: 'rgba(255,255,255,0.4)', whiteSpace: 'nowrap',
+                      fontSize: 11, textTransform: 'uppercase', letterSpacing: '0.08em',
+                    }}>
+                      {h}
+                    </th>
                   ))}
                 </tr>
               </thead>
@@ -185,41 +202,48 @@ export default function ReservationsPage() {
                   const st = ST[r.status]
                   const actions = NEXT_STATUS[r.status]
                   return (
-                    <tr key={r.id} style={{ borderBottom: i < filtered.length - 1 ? '0.5px solid rgba(0,0,0,0.04)' : 'none' }}>
-                      <td style={{ padding: '12px 20px' }}>
-                        <div style={{ fontWeight: 500 }}>
+                    <tr
+                      key={r.id}
+                      style={{ borderBottom: i < filtered.length - 1 ? '0.5px solid rgba(255,255,255,0.06)' : 'none' }}
+                      onMouseEnter={e => (e.currentTarget.style.background = 'rgba(255,255,255,0.02)')}
+                      onMouseLeave={e => (e.currentTarget.style.background = 'transparent')}
+                    >
+                      <td style={{ padding: '14px 20px' }}>
+                        <div style={{ ...sf, fontWeight: 500, color: '#ffffff', fontSize: 13 }}>
                           {r.client_name}
                         </div>
                       </td>
-                      <td style={{ padding: '12px 20px', whiteSpace: 'nowrap', fontSize: 12, color: '#757575' }}>
+                      <td style={{ ...sf, padding: '14px 20px', whiteSpace: 'nowrap', fontSize: 12, color: 'rgba(255,255,255,0.35)' }}>
                         {r.phone || '—'}
                       </td>
-                      <td style={{ padding: '12px 20px', whiteSpace: 'nowrap' }}>
+                      <td style={{ ...sf, padding: '14px 20px', whiteSpace: 'nowrap', color: 'rgba(255,255,255,0.7)', fontSize: 13 }}>
                         {r.scooter_name}
                       </td>
-                      <td style={{ padding: '12px 20px', whiteSpace: 'nowrap' }}>
+                      <td style={{ padding: '14px 20px', whiteSpace: 'nowrap' }}>
                         <span style={{
+                          ...sf,
                           display: 'inline-block', padding: '2px 8px', borderRadius: 5,
-                          background: '#F5F5F5', fontSize: 11, fontWeight: 500, color: '#757575',
+                          background: 'rgba(255,255,255,0.06)', fontSize: 11, fontWeight: 500, color: 'rgba(255,255,255,0.4)',
                         }}>
                           {rentalSummary(r)}
                         </span>
                       </td>
-                      <td style={{ padding: '12px 20px', color: '#757575', whiteSpace: 'nowrap', fontSize: 12 }}>
+                      <td style={{ ...sf, padding: '14px 20px', color: 'rgba(255,255,255,0.35)', whiteSpace: 'nowrap', fontSize: 12 }}>
                         {fmt(r.start_date)}{r.start_date !== r.end_date && <><br />{fmt(r.end_date)}</>}
                       </td>
-                      <td style={{ padding: '12px 20px', fontWeight: 500, whiteSpace: 'nowrap' }}>
+                      <td style={{ ...sf, padding: '14px 20px', fontWeight: 500, whiteSpace: 'nowrap', color: '#ffffff', fontSize: 13 }}>
                         {r.total_price.toFixed(0)} MAD
                       </td>
-                      <td style={{ padding: '12px 20px' }}>
+                      <td style={{ padding: '14px 20px' }}>
                         <span style={{
-                          display: 'inline-block', padding: '3px 9px', borderRadius: 6,
+                          ...sf,
+                          display: 'inline-block', padding: '4px 10px', borderRadius: 6,
                           background: st.bg, color: st.color, fontSize: 11, fontWeight: 500,
                         }}>
                           {st.label}
                         </span>
                       </td>
-                      <td style={{ padding: '12px 20px' }}>
+                      <td style={{ padding: '14px 20px' }}>
                         {actions.length > 0 ? (
                           <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
                             {actions.map(next => {
@@ -231,13 +255,14 @@ export default function ReservationsPage() {
                                   onClick={() => changeStatus(r.id, next)}
                                   disabled={updating === r.id}
                                   style={{
+                                    ...sf,
                                     padding: '5px 12px', borderRadius: 6, fontSize: 11, fontWeight: 500,
                                     whiteSpace: 'nowrap',
                                     cursor: updating === r.id ? 'not-allowed' : 'pointer',
                                     opacity: updating === r.id ? 0.5 : 1,
-                                    border: isConfirm ? 'none' : '0.5px solid rgba(220,0,0,0.2)',
-                                    background: isConfirm ? '#C8FF00' : isCancel ? 'rgba(220,0,0,0.04)' : 'transparent',
-                                    color: isConfirm ? '#0a0a0a' : isCancel ? '#cc0000' : '#0a0a0a',
+                                    border: isConfirm ? 'none' : '0.5px solid rgba(220,0,0,0.3)',
+                                    background: isConfirm ? '#00B050' : isCancel ? 'rgba(220,0,0,0.1)' : 'transparent',
+                                    color: isConfirm ? '#ffffff' : isCancel ? '#ff6b6b' : 'rgba(255,255,255,0.6)',
                                   }}
                                 >
                                   {ACTION_LABEL[next]}
@@ -246,7 +271,7 @@ export default function ReservationsPage() {
                             })}
                           </div>
                         ) : (
-                          <span style={{ fontSize: 12, color: '#C0C0C0' }}>—</span>
+                          <span style={{ ...sf, fontSize: 12, color: 'rgba(255,255,255,0.2)' }}>—</span>
                         )}
                       </td>
                     </tr>

@@ -36,7 +36,8 @@ export default function Sidebar({ mobileOpen, onClose }: SidebarProps) {
   const sidebar = (
     <aside style={{
       width: 240,
-      background: '#0a0a0a',
+      background: '#111111',
+      borderRight: '0.5px solid rgba(255,255,255,0.08)',
       display: 'flex',
       flexDirection: 'column',
       height: '100%',
@@ -44,36 +45,41 @@ export default function Sidebar({ mobileOpen, onClose }: SidebarProps) {
     }}>
       {/* Logo */}
       <div style={{
-        padding: '20px 20px 24px',
+        padding: '22px 20px 24px',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
-        borderBottom: '0.5px solid rgba(255,255,255,0.06)',
+        borderBottom: '0.5px solid rgba(255,255,255,0.08)',
       }}>
-        <Link href="/admin" style={{ display: 'flex', alignItems: 'center', gap: 8, textDecoration: 'none' }}>
-          <div style={{
-            width: 28, height: 28, background: '#C8FF00', borderRadius: 7,
-            display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
-          }}>
-            <Zap size={14} strokeWidth={2} color="#0a0a0a" />
-          </div>
+        <Link href="/admin" style={{ textDecoration: 'none' }}>
           <div>
-            <span style={{ fontSize: 15, fontWeight: 500, color: '#ffffff', letterSpacing: '-0.03em' }}>rouli.</span>
-            <span style={{ fontSize: 11, color: '#757575', marginLeft: 4 }}>admin</span>
+            <span style={{
+              fontFamily: 'Georgia, "Times New Roman", serif',
+              fontSize: 18, fontWeight: 700, color: '#ffffff', letterSpacing: '-0.03em',
+            }}>
+              keewee.
+            </span>
+            <span style={{
+              fontSize: 10, color: 'rgba(255,255,255,0.3)', marginLeft: 5,
+              fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
+              textTransform: 'uppercase', letterSpacing: '0.08em',
+            }}>
+              admin
+            </span>
           </div>
         </Link>
         {/* Close button — mobile only */}
         <button
           onClick={onClose}
           className="md:hidden"
-          style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#757575', padding: 2 }}
+          style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'rgba(255,255,255,0.4)', padding: 2 }}
         >
           <X size={18} strokeWidth={1.5} />
         </button>
       </div>
 
       {/* Nav */}
-      <nav style={{ flex: 1, padding: '12px 12px', display: 'flex', flexDirection: 'column', gap: 2, overflowY: 'auto' }}>
+      <nav style={{ flex: 1, padding: '16px 12px', display: 'flex', flexDirection: 'column', gap: 2, overflowY: 'auto' }}>
         {NAV.map((item) => {
           const active = isActive(item)
           return (
@@ -85,14 +91,15 @@ export default function Sidebar({ mobileOpen, onClose }: SidebarProps) {
                 display: 'flex',
                 alignItems: 'center',
                 gap: 10,
-                padding: '9px 12px',
+                padding: '10px 12px',
                 borderRadius: 8,
                 textDecoration: 'none',
-                background: active ? 'rgba(200,255,0,0.1)' : 'transparent',
-                color: active ? '#C8FF00' : '#757575',
+                background: active ? 'rgba(0,176,80,0.1)' : 'transparent',
+                color: active ? '#00B050' : 'rgba(255,255,255,0.5)',
                 fontSize: 13,
                 fontWeight: active ? 500 : 400,
                 transition: 'all 0.12s',
+                fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
               }}
             >
               <item.icon size={16} strokeWidth={1.5} />
@@ -109,8 +116,9 @@ export default function Sidebar({ mobileOpen, onClose }: SidebarProps) {
           target="_blank"
           style={{
             display: 'flex', alignItems: 'center', gap: 10,
-            padding: '9px 12px', borderRadius: 8, textDecoration: 'none',
-            color: '#757575', fontSize: 13, marginBottom: 2,
+            padding: '10px 12px', borderRadius: 8, textDecoration: 'none',
+            color: 'rgba(255,255,255,0.4)', fontSize: 13, marginBottom: 2,
+            fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
           }}
         >
           <Globe size={16} strokeWidth={1.5} />
@@ -120,8 +128,9 @@ export default function Sidebar({ mobileOpen, onClose }: SidebarProps) {
           onClick={handleLogout}
           style={{
             display: 'flex', alignItems: 'center', gap: 10, width: '100%',
-            padding: '9px 12px', borderRadius: 8, border: 'none', background: 'transparent',
-            color: '#757575', fontSize: 13, cursor: 'pointer', textAlign: 'left',
+            padding: '10px 12px', borderRadius: 8, border: 'none', background: 'transparent',
+            color: 'rgba(255,255,255,0.4)', fontSize: 13, cursor: 'pointer', textAlign: 'left',
+            fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
           }}
         >
           <LogOut size={16} strokeWidth={1.5} />
@@ -144,12 +153,10 @@ export default function Sidebar({ mobileOpen, onClose }: SidebarProps) {
           className="md:hidden"
           style={{ position: 'fixed', inset: 0, zIndex: 100 }}
         >
-          {/* Backdrop */}
           <div
-            style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.5)' }}
+            style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.6)' }}
             onClick={onClose}
           />
-          {/* Sidebar */}
           <div style={{ position: 'absolute', top: 0, left: 0, height: '100%' }}>
             {sidebar}
           </div>

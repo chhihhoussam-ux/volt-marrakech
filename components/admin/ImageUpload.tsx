@@ -204,12 +204,12 @@ export default function ImageUpload({
               style={{ animation: 'spin 0.8s linear infinite' }}
             >
               <circle cx="12" cy="12" r="10" stroke="#E0E0E0" strokeWidth="2.5" />
-              <path d="M12 2 a10 10 0 0 1 10 10" stroke="#C8FF00" strokeWidth="2.5" strokeLinecap="round" />
+              <path d="M12 2 a10 10 0 0 1 10 10" stroke="var(--accent)" strokeWidth="2.5" strokeLinecap="round" />
             </svg>
             {/* Progress bar */}
             <div style={{ width: '100%', maxWidth: 200, height: 3, borderRadius: 2, background: '#E0E0E0', overflow: 'hidden' }}>
               <div style={{
-                height: '100%', background: '#C8FF00', borderRadius: 2,
+                height: '100%', background: 'var(--accent)', borderRadius: 2,
                 width: `${progress}%`, transition: 'width 0.25s ease',
               }} />
             </div>
@@ -250,8 +250,6 @@ export default function ImageUpload({
         <p style={{ fontSize: 11, color: '#757575', marginTop: 5 }}>{hint}</p>
       )}
 
-      {/* CSS for spinner animation (injected inline since we avoid external CSS) */}
-      <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
     </div>
   )
 }

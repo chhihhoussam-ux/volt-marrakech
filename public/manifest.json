@@ -1,11 +1,11 @@
 {
-  "name": "Rouli",
-  "short_name": "Rouli",
-  "description": "Location de scooters électriques à Marrakech. Yallah, Rouli !",
+  "name": "Keewee",
+  "short_name": "Keewee",
+  "description": "Location de scooters électriques à Marrakech. Yallah, Keewee !",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#0a0a0a",
-  "theme_color": "#C8FF00",
+  "theme_color": "#00B050",
   "orientation": "portrait",
   "icons": [
     {

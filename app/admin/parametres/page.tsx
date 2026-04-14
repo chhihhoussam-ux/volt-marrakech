@@ -64,16 +64,13 @@ export default function ParametresPage() {
     setError('')
     try {
       const rows = Object.entries(settings).map(([key, value]) => ({ key, value: value || '' }))
-      console.log('[settings] UPSERT rows:', rows)
       for (const row of rows) {
         const result = await supabase.from('settings').upsert(row, { onConflict: 'key' })
-        console.log('[settings] UPSERT', row.key, '->', result)
         if (result.error) throw result.error
       }
       setSaved(true)
       setTimeout(() => setSaved(false), 3000)
     } catch (e: unknown) {
-      console.error('[settings] SAVE error:', e)
       setError(e instanceof Error ? e.message : 'Erreur lors de la sauvegarde.')
     } finally {
       setSaving(false)
@@ -86,34 +83,46 @@ export default function ParametresPage() {
 
   if (loading) {
     return (
-      <div style={{ padding: '40px 40px 60px' }}>
-        <div style={{ height: 28, width: 200, background: '#F5F5F5', borderRadius: 6, marginBottom: 32 }} />
+      <div style={{ padding: '40px 40px 60px', background: '#0a0a0a', minHeight: '100%' }}>
+        <div style={{ height: 28, width: 200, background: 'rgba(255,255,255,0.06)', borderRadius: 6, marginBottom: 32 }} />
         <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-          {[1,2,3,4,5].map(i => <div key={i} style={{ height: 80, background: '#F5F5F5', borderRadius: 10 }} />)}
+          {[1,2,3,4,5].map(i => <div key={i} style={{ height: 80, background: 'rgba(255,255,255,0.04)', borderRadius: 10 }} />)}
         </div>
       </div>
     )
   }
 
   return (
-    <div style={{ padding: '40px 40px 60px', maxWidth: 720 }}>
+    <div style={{ padding: '40px 40px 60px', maxWidth: 720, background: '#0a0a0a', minHeight: '100%' }}>
       {/* Header */}
-      <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: 32, gap: 16, flexWrap: 'wrap' }}>
+      <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: 36, gap: 16, flexWrap: 'wrap' }}>
         <div>
-          <h1 style={{ fontSize: 22, fontWeight: 500, letterSpacing: '-0.02em', marginBottom: 4 }}>Paramètres du site</h1>
-          <p style={{ fontSize: 13, color: '#757575' }}>Modifiez l&apos;apparence et le contenu de Rouli.</p>
+          <h1 style={{
+            fontFamily: 'Georgia, "Times New Roman", serif',
+            fontSize: 24, fontWeight: 700, letterSpacing: '-0.02em', marginBottom: 6, color: '#ffffff',
+          }}>
+            Paramètres du site
+          </h1>
+          <p style={{
+            fontSize: 13, color: 'rgba(255,255,255,0.4)',
+            fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
+          }}>
+            Modifiez l&apos;apparence et le contenu de Keewee.
+          </p>
         </div>
         <button
           onClick={handleSave}
           disabled={saving}
           style={{
             display: 'inline-flex', alignItems: 'center', gap: 7,
-            padding: '10px 18px', borderRadius: 8,
-            border: saved ? '0.5px solid rgba(200,255,0,0.3)' : 'none',
-            background: saved ? 'rgba(200,255,0,0.1)' : '#C8FF00',
-            color: saved ? '#3a6000' : '#0a0a0a',
+            padding: '10px 20px', borderRadius: 8,
+            border: 'none',
+            background: saved ? 'rgba(0,176,80,0.2)' : '#00B050',
+            color: saved ? '#00B050' : '#ffffff',
             fontSize: 13, fontWeight: 500, cursor: saving ? 'not-allowed' : 'pointer',
             opacity: saving ? 0.7 : 1, whiteSpace: 'nowrap',
+            fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
+            transition: 'background 0.2s',
           }}
         >
           {saved
@@ -126,8 +135,9 @@ export default function ParametresPage() {
       {error && (
         <div style={{
           display: 'flex', alignItems: 'center', gap: 8, padding: '11px 14px',
-          borderRadius: 8, background: 'rgba(220,0,0,0.06)', border: '0.5px solid rgba(220,0,0,0.2)',
-          marginBottom: 20, fontSize: 13, color: '#cc0000',
+          borderRadius: 8, background: 'rgba(220,0,0,0.1)', border: '0.5px solid rgba(220,0,0,0.25)',
+          marginBottom: 24, fontSize: 13, color: '#ff6b6b',
+          fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
         }}>
           <AlertCircle size={14} strokeWidth={1.5} />
           {error}
@@ -139,17 +149,17 @@ export default function ParametresPage() {
         {/* Identité */}
         <Section title="Identité">
           <Row label="Nom du site" hint="Affiché dans les balises meta et onglets">
-            <Input value={settings.site_name} onChange={v => set('site_name', v)} placeholder="Rouli" />
+            <Input value={settings.site_name} onChange={v => set('site_name', v)} placeholder="Keewee" />
           </Row>
-          <Row label="Couleur accent" hint="Format hexadécimal (ex : #C8FF00)">
+          <Row label="Couleur accent" hint="Format hexadécimal (ex : #00B050)">
             <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
               <input
                 type="color"
-                value={settings.accent_color || '#C8FF00'}
+                value={settings.accent_color || '#00B050'}
                 onChange={e => set('accent_color', e.target.value)}
-                style={{ width: 44, height: 36, borderRadius: 6, border: '0.5px solid rgba(0,0,0,0.12)', cursor: 'pointer', padding: 2, background: 'none' }}
+                style={{ width: 44, height: 36, borderRadius: 6, border: '0.5px solid rgba(255,255,255,0.15)', cursor: 'pointer', padding: 2, background: 'none' }}
               />
-              <Input value={settings.accent_color} onChange={v => set('accent_color', v)} placeholder="#C8FF00" />
+              <Input value={settings.accent_color} onChange={v => set('accent_color', v)} placeholder="#00B050" />
             </div>
           </Row>
           <Row label="Numéro WhatsApp" hint="Sans + ni espaces (ex : 212600000000)">
@@ -159,7 +169,7 @@ export default function ParametresPage() {
 
         {/* Logo & Favicon */}
         <Section title="Logo & Favicon">
-          <Row label="Logo" hint="Affiché dans la navbar. Vide = logo texte 'rouli.'">
+          <Row label="Logo" hint="Affiché dans la navbar. Vide = logo texte 'keewee.'">
             <ImageUpload
               value={settings.logo_url}
               onChange={v => set('logo_url', v)}
@@ -197,8 +207,8 @@ export default function ParametresPage() {
               rows={5}
               style={{
                 width: '100%', padding: '10px 14px', borderRadius: 8,
-                border: '0.5px solid rgba(0,0,0,0.12)', background: '#F5F5F5',
-                fontSize: 13, color: '#0a0a0a', outline: 'none', resize: 'vertical',
+                border: '0.5px solid rgba(255,255,255,0.15)', background: '#1a1a1a',
+                fontSize: 13, color: '#ffffff', outline: 'none', resize: 'vertical',
                 lineHeight: 1.6, fontFamily: 'inherit', boxSizing: 'border-box',
               }}
             />
@@ -232,11 +242,15 @@ export default function ParametresPage() {
             { dKey: 'price3_duration', pKey: 'price3_price', fKey: 'price3_features', num: 3 },
           ] as const).map((card, i) => (
             <div key={i} style={{
-              padding: '14px 16px', borderRadius: 10,
-              border: '0.5px solid rgba(0,0,0,0.08)', background: '#fafafa',
+              padding: '16px', borderRadius: 10,
+              border: '0.5px solid rgba(255,255,255,0.08)', background: 'rgba(255,255,255,0.03)',
               display: 'flex', flexDirection: 'column', gap: 12,
             }}>
-              <p style={{ fontSize: 12, fontWeight: 500, color: '#757575', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 0 }}>
+              <p style={{
+                fontSize: 11, fontWeight: 500, color: 'rgba(255,255,255,0.4)', textTransform: 'uppercase',
+                letterSpacing: '0.1em', marginBottom: 0,
+                fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
+              }}>
                 Formule {card.num}
               </p>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
@@ -255,8 +269,8 @@ export default function ParametresPage() {
                   placeholder={DEFAULTS[card.fKey].replace(/\|/g, '\n')}
                   style={{
                     width: '100%', padding: '10px 14px', borderRadius: 8,
-                    border: '0.5px solid rgba(0,0,0,0.12)', background: '#ffffff',
-                    fontSize: 13, color: '#0a0a0a', outline: 'none', resize: 'vertical',
+                    border: '0.5px solid rgba(255,255,255,0.15)', background: '#1a1a1a',
+                    fontSize: 13, color: '#ffffff', outline: 'none', resize: 'vertical',
                     lineHeight: 1.6, fontFamily: 'inherit', boxSizing: 'border-box',
                   }}
                 />
@@ -272,9 +286,14 @@ export default function ParametresPage() {
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
-    <div style={{ borderRadius: 12, border: '0.5px solid rgba(0,0,0,0.08)', background: '#ffffff', overflow: 'hidden' }}>
-      <div style={{ padding: '13px 20px', borderBottom: '0.5px solid rgba(0,0,0,0.06)', background: '#fafafa' }}>
-        <span style={{ fontSize: 12, fontWeight: 500, color: '#757575', textTransform: 'uppercase', letterSpacing: '0.06em' }}>{title}</span>
+    <div style={{ borderRadius: 12, border: '0.5px solid rgba(255,255,255,0.08)', background: '#161616', overflow: 'hidden' }}>
+      <div style={{ padding: '13px 20px', borderBottom: '0.5px solid rgba(255,255,255,0.06)' }}>
+        <span style={{
+          fontSize: 11, fontWeight: 500, color: 'rgba(255,255,255,0.4)', textTransform: 'uppercase', letterSpacing: '0.1em',
+          fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
+        }}>
+          {title}
+        </span>
       </div>
       <div style={{ padding: '16px 20px', display: 'flex', flexDirection: 'column', gap: 16 }}>{children}</div>
     </div>
@@ -284,9 +303,20 @@ function Section({ title, children }: { title: string; children: React.ReactNode
 function Row({ label, hint, children }: { label: string; hint?: string; children: React.ReactNode }) {
   return (
     <div>
-      <label style={{ display: 'block', fontSize: 13, fontWeight: 500, marginBottom: 6 }}>{label}</label>
+      <label style={{
+        display: 'block', fontSize: 12, fontWeight: 500, marginBottom: 6,
+        color: 'rgba(255,255,255,0.6)', textTransform: 'uppercase', letterSpacing: '0.06em',
+        fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
+      }}>
+        {label}
+      </label>
       {children}
-      {hint && <p style={{ fontSize: 11, color: '#757575', marginTop: 4 }}>{hint}</p>}
+      {hint && <p style={{
+        fontSize: 11, color: 'rgba(255,255,255,0.25)', marginTop: 4,
+        fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
+      }}>
+        {hint}
+      </p>}
     </div>
   )
 }
@@ -300,9 +330,13 @@ function Input({ value, onChange, placeholder }: { value: string; onChange: (v: 
       placeholder={placeholder}
       style={{
         width: '100%', padding: '10px 14px', borderRadius: 8,
-        border: '0.5px solid rgba(0,0,0,0.12)', background: '#F5F5F5',
-        fontSize: 13, color: '#0a0a0a', outline: 'none', boxSizing: 'border-box',
+        border: '0.5px solid rgba(255,255,255,0.15)', background: '#1a1a1a',
+        fontSize: 13, color: '#ffffff', outline: 'none', boxSizing: 'border-box',
+        fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
+        transition: 'border-color 0.15s',
       }}
+      onFocus={e => (e.target.style.borderColor = '#00B050')}
+      onBlur={e => (e.target.style.borderColor = 'rgba(255,255,255,0.15)')}
     />
   )
 }

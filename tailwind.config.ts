@@ -9,11 +9,13 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        accent: '#C8FF00',
+        accent: '#00B050',
+        'accent-hover': '#009040',
         ink: '#0a0a0a',
       },
       fontFamily: {
-        sans: ['-apple-system', 'BlinkMacSystemFont', '"SF Pro Display"', '"SF Pro Text"', 'sans-serif'],
+        sans: ['-apple-system', 'BlinkMacSystemFont', '"SF Pro Text"', '"Helvetica Neue"', 'sans-serif'],
+        serif: ['Georgia', '"Times New Roman"', 'serif'],
       },
       borderRadius: {
         DEFAULT: '8px',

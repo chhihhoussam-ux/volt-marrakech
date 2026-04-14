@@ -1,53 +1,58 @@
 import Link from 'next/link'
-import { Zap, MessageCircle, MapPin, Mail } from 'lucide-react'
+import { MessageCircle, MapPin, Mail } from 'lucide-react'
 
 export default function Footer() {
   return (
     <footer style={{
-      borderTop: '0.5px solid rgba(0,0,0,0.08)',
       background: '#0a0a0a',
       color: '#ffffff',
-      padding: '48px 24px 32px',
+      padding: '64px 24px 40px',
     }}>
-      <div style={{ maxWidth: 1120, margin: '0 auto' }}>
+      <div style={{ maxWidth: 1200, margin: '0 auto' }}>
         <div className="footer-grid" style={{
           display: 'grid',
           gridTemplateColumns: 'repeat(auto-fit, minmax(min(200px, 100%), 1fr))',
-          gap: 40,
-          marginBottom: 48,
+          gap: 48,
+          marginBottom: 56,
         }}>
           {/* Brand */}
           <div>
-            <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: 6, textDecoration: 'none', marginBottom: 12 }}>
-              <div style={{
-                width: 28,
-                height: 28,
-                background: '#C8FF00',
-                borderRadius: 6,
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
+            <Link href="/" style={{ textDecoration: 'none', display: 'inline-block', marginBottom: 16 }}>
+              <span style={{
+                fontFamily: 'Georgia, "Times New Roman", serif',
+                fontSize: 22,
+                fontWeight: 700,
+                color: '#ffffff',
+                letterSpacing: '-0.03em',
               }}>
-                <Zap size={15} strokeWidth={2} color="#0a0a0a" />
-              </div>
-              <span style={{ fontSize: 17, fontWeight: 500, color: '#ffffff', letterSpacing: '-0.03em' }}>
-                rouli.
+                keewee.
               </span>
             </Link>
-            <p style={{ fontSize: 12, fontWeight: 500, color: '#C8FF00', marginBottom: 8, fontStyle: 'italic' }}>
-              Yallah, Rouli !
+            <p style={{
+              fontSize: 12, fontWeight: 500, color: 'var(--accent)', marginBottom: 10,
+              fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
+              letterSpacing: '0.04em',
+            }}>
+              Yallah, Keewee !
             </p>
-            <p style={{ fontSize: 13, color: '#757575', lineHeight: 1.6, maxWidth: 220 }}>
+            <p style={{
+              fontSize: 13, color: '#757575', lineHeight: 1.7, maxWidth: 220,
+              fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
+            }}>
               Explorez la ville rouge à votre rythme avec nos scooters électriques. Réservation en ligne, livraison à domicile, assistance 7j/7.
             </p>
           </div>
 
           {/* Navigation */}
           <div>
-            <p style={{ fontSize: 12, fontWeight: 500, color: '#757575', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 16 }}>
+            <p style={{
+              fontSize: 11, fontWeight: 500, color: '#757575', textTransform: 'uppercase',
+              letterSpacing: '0.12em', marginBottom: 20,
+              fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
+            }}>
               Navigation
             </p>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
               {[
                 { href: '/', label: 'Accueil' },
                 { href: '/scooters', label: 'Catalogue' },
@@ -57,9 +62,10 @@ export default function Footer() {
               ].map((link) => (
                 <Link key={link.href} href={link.href} style={{
                   fontSize: 14,
-                  color: '#E0E0E0',
+                  color: 'rgba(255,255,255,0.6)',
                   textDecoration: 'none',
                   transition: 'color 0.15s',
+                  fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
                 }}>
                   {link.label}
                 </Link>
@@ -69,28 +75,44 @@ export default function Footer() {
 
           {/* Contact */}
           <div>
-            <p style={{ fontSize: 12, fontWeight: 500, color: '#757575', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 16 }}>
+            <p style={{
+              fontSize: 11, fontWeight: 500, color: '#757575', textTransform: 'uppercase',
+              letterSpacing: '0.12em', marginBottom: 20,
+              fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
+            }}>
               Contact
             </p>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
               <a
                 href="https://wa.me/212600000000"
                 target="_blank"
                 rel="noopener noreferrer"
-                style={{ display: 'flex', alignItems: 'center', gap: 10, textDecoration: 'none', color: '#E0E0E0', fontSize: 14 }}
+                style={{
+                  display: 'flex', alignItems: 'center', gap: 10, textDecoration: 'none',
+                  color: 'rgba(255,255,255,0.6)', fontSize: 14,
+                  fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
+                }}
               >
-                <MessageCircle size={16} strokeWidth={1.5} color="#C8FF00" />
+                <MessageCircle size={16} strokeWidth={1.5} color="var(--accent)" />
                 WhatsApp
               </a>
               <a
-                href="mailto:contact@rouli.ma"
-                style={{ display: 'flex', alignItems: 'center', gap: 10, textDecoration: 'none', color: '#E0E0E0', fontSize: 14 }}
+                href="mailto:contact@keewee.ma"
+                style={{
+                  display: 'flex', alignItems: 'center', gap: 10, textDecoration: 'none',
+                  color: 'rgba(255,255,255,0.6)', fontSize: 14,
+                  fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
+                }}
               >
-                <Mail size={16} strokeWidth={1.5} color="#C8FF00" />
-                contact@rouli.ma
+                <Mail size={16} strokeWidth={1.5} color="var(--accent)" />
+                contact@keewee.ma
               </a>
-              <div style={{ display: 'flex', alignItems: 'flex-start', gap: 10, color: '#E0E0E0', fontSize: 14 }}>
-                <MapPin size={16} strokeWidth={1.5} color="#C8FF00" style={{ flexShrink: 0, marginTop: 1 }} />
+              <div style={{
+                display: 'flex', alignItems: 'flex-start', gap: 10,
+                color: 'rgba(255,255,255,0.6)', fontSize: 14,
+                fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
+              }}>
+                <MapPin size={16} strokeWidth={1.5} color="var(--accent)" style={{ flexShrink: 0, marginTop: 1 }} />
                 <span>Avenue Mohammed V,<br />Marrakech 40000</span>
               </div>
             </div>
@@ -99,7 +121,7 @@ export default function Footer() {
 
         {/* Bottom bar */}
         <div className="footer-bottom" style={{
-          paddingTop: 24,
+          paddingTop: 28,
           borderTop: '0.5px solid rgba(255,255,255,0.08)',
           display: 'flex',
           justifyContent: 'space-between',
@@ -107,10 +129,16 @@ export default function Footer() {
           flexWrap: 'wrap',
           gap: 8,
         }}>
-          <p style={{ fontSize: 12, color: '#757575' }}>
-            © 2025 Rouli. Tous droits réservés.
+          <p style={{
+            fontSize: 12, color: '#757575',
+            fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
+          }}>
+            © 2025 Keewee. Tous droits réservés.
           </p>
-          <p style={{ fontSize: 12, color: '#757575' }}>
+          <p style={{
+            fontSize: 12, color: '#757575',
+            fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
+          }}>
             Fait à Marrakech 🇲🇦
           </p>
         </div>

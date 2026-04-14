@@ -49,39 +49,39 @@ export default function AdminLoginPage() {
     >
       <div style={{ width: '100%', maxWidth: 340 }}>
         {/* Logo */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 48 }}>
-          <div
-            style={{
-              width: 32,
-              height: 32,
-              background: '#C8FF00',
-              borderRadius: 8,
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}
-          >
-            <Zap size={17} strokeWidth={2} color="#0a0a0a" />
-          </div>
-          <span style={{ fontSize: 18, fontWeight: 500, color: '#ffffff', letterSpacing: '-0.03em' }}>
-            rouli.{' '}
-            <span style={{ color: '#757575', fontSize: 13, fontWeight: 400 }}>admin</span>
+        <div style={{ marginBottom: 48 }}>
+          <span style={{
+            fontFamily: 'Georgia, "Times New Roman", serif',
+            fontSize: 22, fontWeight: 700, color: '#ffffff', letterSpacing: '-0.03em',
+          }}>
+            keewee.
+          </span>
+          <span style={{
+            fontSize: 10, color: 'rgba(255,255,255,0.3)', marginLeft: 6,
+            fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
+            textTransform: 'uppercase', letterSpacing: '0.08em',
+          }}>
+            admin
           </span>
         </div>
 
         <h1
           style={{
-            fontSize: 22,
-            fontWeight: 500,
+            fontFamily: 'Georgia, "Times New Roman", serif',
+            fontSize: 24,
+            fontWeight: 700,
             color: '#ffffff',
-            letterSpacing: '-0.03em',
-            marginBottom: 6,
+            letterSpacing: '-0.02em',
+            marginBottom: 8,
           }}
         >
           Connexion
         </h1>
-        <p style={{ fontSize: 14, color: '#757575', marginBottom: 28 }}>
-          Accès réservé à l'équipe Rouli.
+        <p style={{
+          fontSize: 14, color: 'rgba(255,255,255,0.4)', marginBottom: 32,
+          fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
+        }}>
+          Accès réservé à l&apos;équipe Keewee.
         </p>
 
         {/* Password input */}
@@ -166,8 +166,8 @@ export default function AdminLoginPage() {
             padding: '13px',
             borderRadius: 8,
             border: 'none',
-            background: '#C8FF00',
-            color: '#0a0a0a',
+            background: '#00B050',
+            color: '#ffffff',
             fontSize: 14,
             fontWeight: 500,
             cursor: loading ? 'not-allowed' : 'pointer',

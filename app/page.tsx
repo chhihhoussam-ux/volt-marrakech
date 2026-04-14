@@ -12,12 +12,12 @@ import TestimonialsSection from '@/components/TestimonialsSection'
 import FAQSection from '@/components/FAQSection'
 
 export const metadata: Metadata = {
-  title: 'Rouli — Location de scooters électriques à Marrakech | Yallah, Rouli !',
+  title: 'Keewee — Location de scooters électriques à Marrakech | Yallah, Keewee !',
   description:
-    "Louez un scooter électrique à Marrakech avec Rouli. 20 ans d'expérience dans la mobilité, flotte premium, réservation en ligne. Explorez la médina, Guéliz et les jardins à votre rythme. Dès 60 MAD.",
+    "Louez un scooter électrique à Marrakech avec Keewee. 20 ans d'expérience dans la mobilité, flotte premium, réservation en ligne. Explorez la médina, Guéliz et les jardins à votre rythme. Dès 60 MAD.",
   openGraph: {
-    title: 'Rouli — Location de scooters électriques à Marrakech | Yallah, Rouli !',
-    description: "Louez un scooter électrique à Marrakech avec Rouli. Flotte premium, livraison à domicile. Dès 60 MAD.",
+    title: 'Keewee — Location de scooters électriques à Marrakech | Yallah, Keewee !',
+    description: "Louez un scooter électrique à Marrakech avec Keewee. Flotte premium, livraison à domicile. Dès 60 MAD.",
   },
 }
 
@@ -25,11 +25,11 @@ export default function HomePage() {
   const localBusinessSchema = {
     '@context': 'https://schema.org',
     '@type': 'LocalBusiness',
-    name: 'Rouli',
+    name: 'Keewee',
     description: 'Location de scooters électriques à Marrakech',
-    url: 'https://rouli.ma',
+    url: 'https://keewee.ma',
     telephone: '+212600000000',
-    email: 'contact@rouli.ma',
+    email: 'contact@keewee.ma',
     image: 'https://images.unsplash.com/photo-1597211684565-dca64d72bdfe?w=1600&q=80',
     priceRange: '60-950 MAD',
     currenciesAccepted: 'MAD',
@@ -78,17 +78,30 @@ export default function HomePage() {
       <FAQSection />
 
       {/* ─── CTA final ─── */}
-      <section id="contact" style={{ padding: '80px 24px' }}>
-        <div style={{ maxWidth: 1120, margin: '0 auto' }}>
+      <section id="contact" style={{ padding: '0 24px 0' }}>
+        <div style={{ maxWidth: 1200, margin: '0 auto' }}>
           <div style={{
-            background: '#0a0a0a', borderRadius: 16, padding: '56px 48px',
-            display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 32,
+            background: 'var(--accent)',
+            padding: '80px 64px',
+            display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+            flexWrap: 'wrap', gap: 40,
           }}>
             <div>
-              <h2 style={{ fontSize: 32, fontWeight: 500, letterSpacing: '-0.03em', color: '#ffffff', marginBottom: 12 }}>
+              <h2 style={{
+                fontFamily: 'Georgia, "Times New Roman", serif',
+                fontSize: 'clamp(28px, 5vw, 48px)',
+                fontWeight: 700,
+                letterSpacing: '-0.02em',
+                color: '#0a0a0a',
+                marginBottom: 16,
+                lineHeight: 1.1,
+              }}>
                 Prêt à explorer<br />Marrakech autrement ?
               </h2>
-              <p style={{ fontSize: 15, color: '#757575', maxWidth: 380 }}>
+              <p style={{
+                fontSize: 16, color: 'rgba(0,0,0,0.6)', maxWidth: 400,
+                fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
+              }}>
                 Réservez votre scooter en quelques clics. Livraison à votre hôtel, casque inclus, support 7j/7.
               </p>
             </div>
@@ -96,8 +109,9 @@ export default function HomePage() {
               <Link href="/reserver" style={{ textDecoration: 'none' }}>
                 <button style={{
                   display: 'inline-flex', alignItems: 'center', gap: 8,
-                  padding: '14px 24px', background: '#C8FF00', border: 'none',
-                  borderRadius: 10, fontSize: 14, fontWeight: 500, color: '#0a0a0a', cursor: 'pointer',
+                  padding: '16px 28px', background: '#0a0a0a', border: 'none',
+                  borderRadius: 10, fontSize: 15, fontWeight: 500, color: '#ffffff', cursor: 'pointer',
+                  fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
                 }}>
                   Réserver maintenant <ArrowRight size={16} strokeWidth={1.5} />
                 </button>
@@ -105,11 +119,12 @@ export default function HomePage() {
               <a href="https://wa.me/212600000000" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>
                 <button style={{
                   display: 'inline-flex', alignItems: 'center', gap: 8,
-                  padding: '14px 24px', background: 'transparent',
-                  border: '0.5px solid rgba(255,255,255,0.2)',
-                  borderRadius: 10, fontSize: 14, fontWeight: 500, color: '#ffffff', cursor: 'pointer',
+                  padding: '16px 28px', background: 'transparent',
+                  border: '1px solid rgba(0,0,0,0.2)',
+                  borderRadius: 10, fontSize: 15, fontWeight: 500, color: '#0a0a0a', cursor: 'pointer',
+                  fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
                 }}>
-                  <MessageCircle size={16} strokeWidth={1.5} /> Nous contacter sur WhatsApp
+                  <MessageCircle size={16} strokeWidth={1.5} /> WhatsApp
                 </button>
               </a>
             </div>

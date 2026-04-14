@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Zap, Menu, X, ArrowRight } from 'lucide-react'
+import { Menu, X, ArrowRight } from 'lucide-react'
 import { useState, useEffect } from 'react'
 import { useSettings } from '@/lib/settings-context'
 
@@ -11,13 +11,11 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false)
   const { logo_url: logoUrl } = useSettings()
 
-  // Lock body scroll when drawer is open
   useEffect(() => {
     document.body.style.overflow = menuOpen ? 'hidden' : ''
     return () => { document.body.style.overflow = '' }
   }, [menuOpen])
 
-  // Close drawer on route change
   useEffect(() => { setMenuOpen(false) }, [pathname])
 
   const links = [
@@ -37,54 +35,46 @@ export default function Navbar() {
           left: 0,
           right: 0,
           zIndex: 50,
-          height: 56,
-          background: 'rgba(255,255,255,0.92)',
+          height: 60,
+          background: 'rgba(255,255,255,0.95)',
           backdropFilter: 'blur(12px)',
           WebkitBackdropFilter: 'blur(12px)',
-          borderBottom: '0.5px solid rgba(0,0,0,0.08)',
+          borderBottom: '0.5px solid #E0E0E0',
         }}
       >
         <div style={{
-          maxWidth: 1120,
+          maxWidth: 1200,
           margin: '0 auto',
-          padding: '0 20px',
+          padding: '0 24px',
           height: '100%',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
         }}>
           {/* Logo */}
-          <Link href="/" style={{ display: 'flex', alignItems: 'center', gap: 6, textDecoration: 'none' }}>
+          <Link href="/" style={{ textDecoration: 'none', flexShrink: 0 }}>
             {logoUrl ? (
-              <img src={logoUrl} alt="Rouli" style={{ height: 28, width: 'auto', objectFit: 'contain' }} />
+              <img src={logoUrl} alt="Keewee" style={{ height: 30, width: 'auto', objectFit: 'contain' }} />
             ) : (
-              <>
-                <div style={{
-                  width: 28, height: 28, background: '#C8FF00', borderRadius: 6,
-                  display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
-                }}>
-                  <Zap size={15} strokeWidth={2} color="#0a0a0a" />
-                </div>
-                <span style={{ fontSize: 17, fontWeight: 500, color: '#0a0a0a', letterSpacing: '-0.03em' }}>
-                  rouli.
-                </span>
-              </>
+              <span style={{
+                fontFamily: 'Georgia, "Times New Roman", serif',
+                fontSize: 20,
+                fontWeight: 700,
+                color: '#0a0a0a',
+                letterSpacing: '-0.03em',
+              }}>
+                keewee.
+              </span>
             )}
           </Link>
 
           {/* Desktop links */}
-          <div className="hidden md:flex" style={{ alignItems: 'center', gap: 28 }}>
+          <div className="hidden md:flex" style={{ alignItems: 'center', gap: 32 }}>
             {links.filter(l => l.href !== '/compte').map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                style={{
-                  fontSize: 14,
-                  color: pathname === link.href ? '#0a0a0a' : '#757575',
-                  textDecoration: 'none',
-                  fontWeight: pathname === link.href ? 500 : 400,
-                  transition: 'color 0.15s',
-                }}
+                className={`nav-link-item${pathname === link.href ? ' active' : ''}`}
               >
                 {link.label}
               </Link>
@@ -92,21 +82,22 @@ export default function Navbar() {
           </div>
 
           {/* Desktop right */}
-          <div className="hidden md:flex" style={{ alignItems: 'center', gap: 12 }}>
+          <div className="hidden md:flex" style={{ alignItems: 'center', gap: 16 }}>
             <Link href="/compte" style={{ textDecoration: 'none' }}>
-              <span style={{ fontSize: 14, color: '#757575' }}>Mon compte</span>
+              <span style={{
+                fontSize: 14,
+                color: '#757575',
+                fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
+              }}>
+                Mon compte
+              </span>
             </Link>
             <Link href="/reserver" style={{ textDecoration: 'none' }}>
-              <button style={{
-                height: 36, padding: '0 16px', background: '#C8FF00', border: 'none',
-                borderRadius: 8, fontSize: 13, fontWeight: 500, color: '#0a0a0a', cursor: 'pointer',
-              }}>
-                Réserver
-              </button>
+              <button className="btn-reserve">Réserver</button>
             </Link>
           </div>
 
-          {/* Mobile hamburger — only on < md */}
+          {/* Mobile hamburger */}
           <button
             className="md:hidden touch-target"
             onClick={() => setMenuOpen(o => !o)}
@@ -128,7 +119,7 @@ export default function Navbar() {
           className="md:hidden"
           style={{
             position: 'fixed',
-            top: 56,
+            top: 60,
             left: 0,
             right: 0,
             bottom: 0,
@@ -140,7 +131,6 @@ export default function Navbar() {
             overflowY: 'auto',
           }}
         >
-          {/* Nav links */}
           <nav style={{ display: 'flex', flexDirection: 'column', gap: 4, flex: 1 }}>
             {links.map((link) => (
               <Link
@@ -148,38 +138,39 @@ export default function Navbar() {
                 href={link.href}
                 onClick={() => setMenuOpen(false)}
                 style={{
-                  fontSize: 24,
-                  fontWeight: 500,
+                  fontFamily: 'Georgia, "Times New Roman", serif',
+                  fontSize: 28,
+                  fontWeight: 700,
                   color: pathname === link.href ? '#0a0a0a' : '#757575',
                   textDecoration: 'none',
-                  padding: '12px 0',
+                  padding: '14px 0',
                   borderBottom: '0.5px solid rgba(0,0,0,0.05)',
                   letterSpacing: '-0.02em',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'space-between',
-                  minHeight: 56,
+                  minHeight: 60,
                 }}
               >
                 {link.label}
                 {pathname === link.href && (
                   <span style={{
-                    width: 6, height: 6, borderRadius: '50%',
-                    background: '#C8FF00', flexShrink: 0,
+                    width: 8, height: 8, borderRadius: '50%',
+                    background: 'var(--accent)', flexShrink: 0,
                   }} />
                 )}
               </Link>
             ))}
           </nav>
 
-          {/* CTA at bottom */}
           <div style={{ paddingTop: 32 }}>
             <Link href="/reserver" onClick={() => setMenuOpen(false)} style={{ textDecoration: 'none', display: 'block' }}>
               <button style={{
                 width: '100%', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 8,
-                padding: '16px 24px', background: '#C8FF00', border: 'none',
-                borderRadius: 12, fontSize: 16, fontWeight: 500, color: '#0a0a0a', cursor: 'pointer',
+                padding: '16px 24px', background: 'var(--accent)', border: 'none',
+                borderRadius: 12, fontSize: 16, fontWeight: 500, color: '#ffffff', cursor: 'pointer',
                 minHeight: 56,
+                fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
               }}>
                 Réserver maintenant
                 <ArrowRight size={18} strokeWidth={1.5} />

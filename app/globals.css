@@ -3,7 +3,8 @@
 @tailwind utilities;
 
 :root {
-  --accent: #C8FF00;
+  --accent: #00B050;
+  --accent-hover: #009040;
   --ink: #0a0a0a;
   --white: #ffffff;
   --gray-50: #F5F5F5;
@@ -18,7 +19,7 @@
   padding: 0;
 }
 
-/* Prevent iOS input zoom (font-size must be >= 16px on focus) */
+/* Prevent iOS input zoom */
 input, select, textarea {
   font-size: 16px;
 }
@@ -28,7 +29,6 @@ input, select, textarea {
   }
 }
 
-/* iOS button reset */
 button {
   -webkit-appearance: none;
   appearance: none;
@@ -42,16 +42,17 @@ html {
 body {
   background-color: #ffffff;
   color: #0a0a0a;
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", sans-serif;
   font-weight: 400;
   font-size: 15px;
   line-height: 1.5;
   letter-spacing: 0;
 }
 
-/* Typography scale */
+/* Headings — serif */
 h1, h2, h3, h4, h5, h6 {
-  font-weight: 500;
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 700;
   letter-spacing: -0.02em;
 }
 
@@ -77,41 +78,47 @@ h1, h2, h3, h4, h5, h6 {
 /* Selection */
 ::selection {
   background: var(--accent);
-  color: var(--ink);
+  color: #ffffff;
 }
 
 @layer components {
   .btn-accent {
-    @apply inline-flex items-center gap-2 px-5 py-2.5 rounded text-sm font-medium bg-[#C8FF00] text-[#0a0a0a] transition-all duration-150;
+    @apply inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-medium transition-all duration-200;
+    background: var(--accent);
+    color: #ffffff;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+    position: relative;
+    overflow: hidden;
   }
   .btn-accent:hover {
-    @apply opacity-90;
+    background: var(--accent-hover);
+    transform: scale(0.99);
   }
 
   .btn-outline {
-    @apply inline-flex items-center gap-2 px-5 py-2.5 rounded text-sm font-medium border text-[#0a0a0a] transition-all duration-150;
+    @apply inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-medium border transition-all duration-150;
     border-color: var(--border);
     border-width: 0.5px;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
   }
   .btn-outline:hover {
     background-color: var(--gray-50);
   }
 
   .card {
-    @apply rounded-xl border bg-white;
-    border-color: rgba(0, 0, 0, 0.08);
-    border-width: 0.5px;
+    @apply rounded-xl bg-[#F5F5F5];
   }
 
   .input-field {
-    @apply w-full rounded-lg px-4 py-3 text-sm bg-[#F5F5F5] border transition-all duration-150;
+    @apply w-full rounded-lg px-4 py-3 text-sm bg-[#F5F5F5] transition-all duration-150;
     border: 0.5px solid rgba(0, 0, 0, 0.1);
     color: #0a0a0a;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
   }
   .input-field:focus {
     outline: none;
     background: white;
-    border-color: #0a0a0a;
+    border-color: var(--accent);
   }
   .input-field::placeholder {
     color: #757575;
@@ -119,34 +126,105 @@ h1, h2, h3, h4, h5, h6 {
 
   .badge {
     @apply inline-flex items-center gap-1 px-2 py-0.5 rounded text-xs font-medium;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
   }
 
   .badge-available {
-    background-color: rgba(200, 255, 0, 0.15);
-    color: #3a5a00;
+    background-color: rgba(0, 176, 80, 0.15);
+    color: #006030;
   }
 
   .badge-rented {
     background-color: rgba(220, 0, 0, 0.08);
     color: #8a0000;
   }
+
+  /* Animated underline for nav links */
+  .nav-link {
+    position: relative;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+  }
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--accent);
+    transition: width 0.25s ease;
+  }
+  .nav-link:hover::after {
+    width: 100%;
+  }
+}
+
+/* ─── Navbar ─────────────────────────────────────────────────────────────── */
+
+.nav-link-item {
+  position: relative;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+  font-size: 14px;
+  text-decoration: none;
+  color: #757575;
+  transition: color 0.2s;
+}
+.nav-link-item.active { color: #0a0a0a; }
+.nav-link-item::after {
+  content: '';
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  width: 0;
+  height: 1.5px;
+  background: var(--accent);
+  transition: width 0.25s ease;
+}
+.nav-link-item:hover::after { width: 100%; }
+.nav-link-item:hover { color: #0a0a0a; }
+
+.btn-reserve {
+  height: 36px;
+  padding: 0 18px;
+  background: var(--accent);
+  border: none;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #ffffff;
+  cursor: pointer;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+  transition: background 0.2s, transform 0.15s;
+}
+.btn-reserve:hover { background: var(--accent-hover); }
+.btn-reserve:active { transform: scale(0.98); }
+
+/* ─── Hero ────────────────────────────────────────────────────────────────── */
+
+.hero-h1 { font-size: clamp(64px, 10vw, 120px); }
+.hero-text { padding-left: 72px; padding-bottom: 80px; padding-right: 24px; }
+@media (max-width: 768px) {
+  .hero-h1 { font-size: clamp(52px, 14vw, 72px) !important; }
+  .hero-text { padding-left: 24px !important; padding-bottom: 60px !important; }
+}
+
+/* ─── Spinner ─────────────────────────────────────────────────────────────── */
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* No horizontal scroll */
+html, body {
+  overflow-x: hidden;
+  max-width: 100%;
 }
 
 /* ─────────────────────────────────────────────
    RESPONSIVE — Mobile (< 768px)
    ───────────────────────────────────────────── */
 
-/* No horizontal scroll, ever */
-html, body {
-  overflow-x: hidden;
-  max-width: 100%;
-}
-
 @media (max-width: 767px) {
 
-  /* ── Hero ── */
   .hero-title {
-    font-size: 40px !important;
+    font-size: 56px !important;
   }
   .hero-content {
     padding-top: 100px !important;
@@ -167,24 +245,20 @@ html, body {
   .hero-stats-bar {
     grid-template-columns: repeat(2, 1fr) !important;
   }
-  /* In 2x2 layout: remove right border from 2nd and 4th cells */
   .hero-stats-bar > div:nth-child(2),
   .hero-stats-bar > div:nth-child(4) {
     border-right: none !important;
   }
-  /* Add bottom border between rows */
   .hero-stats-bar > div:nth-child(1),
   .hero-stats-bar > div:nth-child(2) {
     border-bottom: 0.5px solid rgba(255,255,255,0.1);
   }
 
-  /* ── About grid ── */
   .about-grid {
     grid-template-columns: 1fr !important;
     gap: 32px !important;
   }
 
-  /* ── Scooters / Tarifs grids ── */
   .scooters-grid {
     grid-template-columns: 1fr !important;
   }
@@ -192,7 +266,6 @@ html, body {
     grid-template-columns: 1fr !important;
   }
 
-  /* ── Footer ── */
   .footer-grid {
     grid-template-columns: 1fr !important;
     gap: 32px !important;
@@ -203,7 +276,6 @@ html, body {
     text-align: center !important;
   }
 
-  /* ── /scooters filter bar ── */
   .filters-row {
     flex-direction: column !important;
     align-items: flex-start !important;
@@ -216,12 +288,10 @@ html, body {
     width: 100% !important;
   }
 
-  /* ── /reserver & /admin 2-col form grids ── */
   .form-grid-2 {
     grid-template-columns: 1fr !important;
   }
 
-  /* ── Guide page ── */
   .guide-grid {
     grid-template-columns: 1fr !important;
   }
@@ -229,7 +299,6 @@ html, body {
     grid-template-columns: 1fr 1fr !important;
   }
 
-  /* ── Touch targets ── */
   .touch-target {
     min-height: 44px !important;
     min-width: 44px !important;

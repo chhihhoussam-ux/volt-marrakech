@@ -187,11 +187,11 @@ export default function GuidePage() {
             <div style={{
               display: 'inline-flex', alignItems: 'center', gap: 6,
               padding: '4px 12px', borderRadius: 20,
-              background: 'rgba(200,255,0,0.12)', border: '0.5px solid rgba(200,255,0,0.3)',
+              background: 'rgba(0,176,80,0.12)', border: '0.5px solid rgba(0,176,80,0.3)',
               marginBottom: 24,
             }}>
-              <MapPin size={12} strokeWidth={2} color="#C8FF00" />
-              <span style={{ fontSize: 12, fontWeight: 500, color: '#C8FF00' }}>Guide de voyage</span>
+              <MapPin size={12} strokeWidth={2} color="var(--accent)" />
+              <span style={{ fontSize: 12, fontWeight: 500, color: 'var(--accent)' }}>Guide de voyage</span>
             </div>
 
             <h1 style={{
@@ -282,8 +282,8 @@ export default function GuidePage() {
                   <div style={{
                     padding: '12px 14px',
                     borderRadius: 8,
-                    background: 'rgba(200,255,0,0.06)',
-                    border: '0.5px solid rgba(200,255,0,0.2)',
+                    background: 'rgba(0,176,80,0.06)',
+                    border: '0.5px solid rgba(0,176,80,0.2)',
                     display: 'flex',
                     gap: 8,
                   }}>
@@ -321,7 +321,7 @@ export default function GuidePage() {
                   <div style={{
                     width: 44, height: 44, borderRadius: 10, background: '#0a0a0a',
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    color: '#C8FF00', marginBottom: 20,
+                    color: 'var(--accent)', marginBottom: 20,
                   }}>
                     {item.icon}
                   </div>
@@ -337,7 +337,7 @@ export default function GuidePage() {
         <section style={{ padding: '80px 24px' }}>
           <div style={{ maxWidth: 680, margin: '0 auto', textAlign: 'center' }}>
             <div style={{
-              width: 56, height: 56, background: '#C8FF00', borderRadius: 14,
+              width: 56, height: 56, background: 'var(--accent)', borderRadius: 14,
               display: 'flex', alignItems: 'center', justifyContent: 'center',
               margin: '0 auto 24px',
             }}>
@@ -353,7 +353,7 @@ export default function GuidePage() {
               <Link href="/reserver" style={{ textDecoration: 'none' }}>
                 <button style={{
                   display: 'inline-flex', alignItems: 'center', gap: 8,
-                  padding: '14px 28px', background: '#C8FF00', border: 'none',
+                  padding: '14px 28px', background: 'var(--accent)', border: 'none',
                   borderRadius: 10, fontSize: 15, fontWeight: 500, color: '#0a0a0a', cursor: 'pointer',
                 }}>
                   Réserver votre scooter <ArrowRight size={16} strokeWidth={1.5} />

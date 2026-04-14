@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { X, Calendar, User } from 'lucide-react'
+import { X, Calendar } from 'lucide-react'
 import { supabase } from '@/lib/supabase'
 
 interface Profile {
@@ -23,10 +23,14 @@ interface Reservation {
 }
 
 const ST_COLOR: Record<string, { bg: string; color: string; label: string }> = {
-  pending:   { bg: 'rgba(255,180,0,0.1)',  color: '#8a6000', label: 'En attente' },
-  confirmed: { bg: 'rgba(200,255,0,0.12)', color: '#3a6000', label: 'Confirmée'  },
-  cancelled: { bg: 'rgba(220,0,0,0.08)',   color: '#8a0000', label: 'Annulée'    },
-  completed: { bg: 'rgba(0,0,0,0.05)',     color: '#757575', label: 'Terminée'   },
+  pending:   { bg: 'rgba(0,176,80,0.15)',    color: '#00B050',               label: 'En attente' },
+  confirmed: { bg: 'rgba(0,176,80,0.25)',    color: '#00B050',               label: 'Confirmée'  },
+  cancelled: { bg: 'rgba(255,255,255,0.08)', color: 'rgba(255,255,255,0.4)', label: 'Annulée'    },
+  completed: { bg: 'rgba(255,255,255,0.06)', color: 'rgba(255,255,255,0.3)', label: 'Terminée'   },
+}
+
+const sf: React.CSSProperties = {
+  fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
 }
 
 function fmtDate(d: string) {
@@ -56,7 +60,6 @@ export default function ClientsPage() {
 
     if (!profileData) { setLoading(false); return }
 
-    // Fetch reservation counts in one query
     const { data: resData } = await supabase
       .from('reservations')
       .select('user_id')
@@ -83,30 +86,43 @@ export default function ClientsPage() {
   }
 
   return (
-    <div style={{ padding: '40px 40px 60px', display: 'flex', gap: 24, alignItems: 'flex-start' }}>
+    <div style={{ padding: '40px 40px 60px', background: '#0a0a0a', minHeight: '100%', display: 'flex', gap: 24, alignItems: 'flex-start' }}>
       {/* Main list */}
       <div style={{ flex: 1, minWidth: 0 }}>
-        <div style={{ marginBottom: 24 }}>
-          <h1 style={{ fontSize: 22, fontWeight: 500, letterSpacing: '-0.02em', marginBottom: 4 }}>Clients</h1>
-          <p style={{ fontSize: 13, color: '#757575' }}>{profiles.length} compte{profiles.length !== 1 ? 's' : ''} enregistré{profiles.length !== 1 ? 's' : ''}</p>
+        <div style={{ marginBottom: 28 }}>
+          <h1 style={{
+            fontFamily: 'Georgia, "Times New Roman", serif',
+            fontSize: 24, fontWeight: 700, letterSpacing: '-0.02em', marginBottom: 6, color: '#ffffff',
+          }}>
+            Clients
+          </h1>
+          <p style={{ ...sf, fontSize: 13, color: 'rgba(255,255,255,0.4)' }}>
+            {profiles.length} compte{profiles.length !== 1 ? 's' : ''} enregistré{profiles.length !== 1 ? 's' : ''}
+          </p>
         </div>
 
-        <div style={{ borderRadius: 12, border: '0.5px solid rgba(0,0,0,0.08)', background: '#ffffff', overflow: 'hidden' }}>
+        <div style={{ borderRadius: 12, border: '0.5px solid rgba(255,255,255,0.08)', background: '#161616', overflow: 'hidden' }}>
           {loading ? (
             <div style={{ padding: 24, display: 'flex', flexDirection: 'column', gap: 10 }}>
-              {[1,2,3,4,5].map(i => <div key={i} style={{ height: 56, background: '#F5F5F5', borderRadius: 8 }} />)}
+              {[1,2,3,4,5].map(i => <div key={i} style={{ height: 56, background: 'rgba(255,255,255,0.06)', borderRadius: 8 }} />)}
             </div>
           ) : profiles.length === 0 ? (
-            <div style={{ padding: '48px 24px', textAlign: 'center', color: '#757575', fontSize: 14 }}>
+            <div style={{ ...sf, padding: '48px 24px', textAlign: 'center', color: 'rgba(255,255,255,0.3)', fontSize: 14 }}>
               Aucun client inscrit pour le moment.
             </div>
           ) : (
             <div style={{ overflowX: 'auto' }}>
               <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 13 }}>
                 <thead>
-                  <tr style={{ borderBottom: '0.5px solid rgba(0,0,0,0.06)' }}>
+                  <tr style={{ background: 'rgba(255,255,255,0.04)' }}>
                     {['Client', 'Email', 'Inscrit le', 'Réservations'].map(h => (
-                      <th key={h} style={{ padding: '11px 20px', textAlign: 'left', fontWeight: 500, color: '#757575', whiteSpace: 'nowrap' }}>{h}</th>
+                      <th key={h} style={{
+                        ...sf, padding: '11px 20px', textAlign: 'left', fontWeight: 500,
+                        color: 'rgba(255,255,255,0.4)', whiteSpace: 'nowrap',
+                        fontSize: 11, textTransform: 'uppercase', letterSpacing: '0.08em',
+                      }}>
+                        {h}
+                      </th>
                     ))}
                   </tr>
                 </thead>
@@ -116,33 +132,38 @@ export default function ClientsPage() {
                       key={p.id}
                       onClick={() => selectClient(p)}
                       style={{
-                        borderBottom: i < profiles.length - 1 ? '0.5px solid rgba(0,0,0,0.04)' : 'none',
+                        borderBottom: i < profiles.length - 1 ? '0.5px solid rgba(255,255,255,0.06)' : 'none',
                         cursor: 'pointer',
-                        background: selected?.id === p.id ? 'rgba(200,255,0,0.04)' : 'transparent',
+                        background: selected?.id === p.id ? 'rgba(0,176,80,0.06)' : 'transparent',
                         transition: 'background 0.1s',
                       }}
+                      onMouseEnter={e => { if (selected?.id !== p.id) e.currentTarget.style.background = 'rgba(255,255,255,0.02)' }}
+                      onMouseLeave={e => { if (selected?.id !== p.id) e.currentTarget.style.background = 'transparent' }}
                     >
-                      <td style={{ padding: '12px 20px' }}>
+                      <td style={{ padding: '14px 20px' }}>
                         <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
                           <div style={{
                             width: 32, height: 32, borderRadius: '50%',
-                            background: '#0a0a0a', color: '#C8FF00',
+                            background: 'rgba(0,176,80,0.15)', color: '#00B050',
                             display: 'flex', alignItems: 'center', justifyContent: 'center',
-                            fontSize: 11, fontWeight: 500, flexShrink: 0,
+                            ...sf, fontSize: 11, fontWeight: 500, flexShrink: 0,
                           }}>
                             {initials(p.full_name, p.email)}
                           </div>
-                          <span style={{ fontWeight: 500 }}>{p.full_name || <span style={{ color: '#757575', fontWeight: 400 }}>Sans nom</span>}</span>
+                          <span style={{ ...sf, fontWeight: 500, color: '#ffffff', fontSize: 13 }}>
+                            {p.full_name || <span style={{ color: 'rgba(255,255,255,0.3)', fontWeight: 400 }}>Sans nom</span>}
+                          </span>
                         </div>
                       </td>
-                      <td style={{ padding: '12px 20px', color: '#757575' }}>{p.email}</td>
-                      <td style={{ padding: '12px 20px', color: '#757575', whiteSpace: 'nowrap' }}>{fmtDate(p.created_at)}</td>
-                      <td style={{ padding: '12px 20px' }}>
+                      <td style={{ ...sf, padding: '14px 20px', color: 'rgba(255,255,255,0.4)', fontSize: 13 }}>{p.email}</td>
+                      <td style={{ ...sf, padding: '14px 20px', color: 'rgba(255,255,255,0.35)', whiteSpace: 'nowrap', fontSize: 13 }}>{fmtDate(p.created_at)}</td>
+                      <td style={{ padding: '14px 20px' }}>
                         <span style={{
+                          ...sf,
                           display: 'inline-flex', alignItems: 'center', gap: 4,
-                          padding: '3px 9px', borderRadius: 6, fontSize: 11, fontWeight: 500,
-                          background: (p.res_count || 0) > 0 ? 'rgba(200,255,0,0.1)' : '#F5F5F5',
-                          color: (p.res_count || 0) > 0 ? '#3a6000' : '#757575',
+                          padding: '4px 10px', borderRadius: 6, fontSize: 11, fontWeight: 500,
+                          background: (p.res_count || 0) > 0 ? 'rgba(0,176,80,0.15)' : 'rgba(255,255,255,0.06)',
+                          color: (p.res_count || 0) > 0 ? '#00B050' : 'rgba(255,255,255,0.3)',
                         }}>
                           <Calendar size={10} strokeWidth={2} />
                           {p.res_count || 0}
@@ -163,8 +184,8 @@ export default function ClientsPage() {
           width: 340,
           flexShrink: 0,
           borderRadius: 12,
-          border: '0.5px solid rgba(0,0,0,0.08)',
-          background: '#ffffff',
+          border: '0.5px solid rgba(255,255,255,0.08)',
+          background: '#161616',
           position: 'sticky',
           top: 24,
           maxHeight: 'calc(100vh - 80px)',
@@ -173,54 +194,55 @@ export default function ClientsPage() {
           overflow: 'hidden',
         }}>
           {/* Panel header */}
-          <div style={{ padding: '16px 20px', borderBottom: '0.5px solid rgba(0,0,0,0.06)', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexShrink: 0 }}>
+          <div style={{ padding: '16px 20px', borderBottom: '0.5px solid rgba(255,255,255,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexShrink: 0 }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
               <div style={{
-                width: 36, height: 36, borderRadius: '50%', background: '#0a0a0a',
+                width: 36, height: 36, borderRadius: '50%',
+                background: 'rgba(0,176,80,0.15)',
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
-                color: '#C8FF00', fontSize: 12, fontWeight: 500,
+                color: '#00B050', ...sf, fontSize: 12, fontWeight: 500,
               }}>
                 {initials(selected.full_name, selected.email)}
               </div>
               <div>
-                <div style={{ fontSize: 13, fontWeight: 500 }}>{selected.full_name || 'Sans nom'}</div>
-                <div style={{ fontSize: 11, color: '#757575' }}>{selected.email}</div>
+                <div style={{ ...sf, fontSize: 13, fontWeight: 500, color: '#ffffff' }}>{selected.full_name || 'Sans nom'}</div>
+                <div style={{ ...sf, fontSize: 11, color: 'rgba(255,255,255,0.35)' }}>{selected.email}</div>
               </div>
             </div>
-            <button onClick={() => setSelected(null)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#757575', padding: 2 }}>
+            <button onClick={() => setSelected(null)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'rgba(255,255,255,0.35)', padding: 2 }}>
               <X size={17} strokeWidth={1.5} />
             </button>
           </div>
 
           {/* Meta */}
-          <div style={{ padding: '14px 20px', borderBottom: '0.5px solid rgba(0,0,0,0.06)', display: 'flex', gap: 16, flexShrink: 0 }}>
+          <div style={{ padding: '14px 20px', borderBottom: '0.5px solid rgba(255,255,255,0.08)', display: 'flex', gap: 16, flexShrink: 0 }}>
             <div>
-              <div style={{ fontSize: 10, color: '#757575', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 2 }}>Inscrit le</div>
-              <div style={{ fontSize: 12 }}>{fmtDate(selected.created_at)}</div>
+              <div style={{ ...sf, fontSize: 10, color: 'rgba(255,255,255,0.3)', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 4 }}>Inscrit le</div>
+              <div style={{ ...sf, fontSize: 12, color: '#ffffff' }}>{fmtDate(selected.created_at)}</div>
             </div>
             {selected.phone && (
               <div>
-                <div style={{ fontSize: 10, color: '#757575', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 2 }}>Téléphone</div>
-                <div style={{ fontSize: 12 }}>{selected.phone}</div>
+                <div style={{ ...sf, fontSize: 10, color: 'rgba(255,255,255,0.3)', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 4 }}>Téléphone</div>
+                <div style={{ ...sf, fontSize: 12, color: '#ffffff' }}>{selected.phone}</div>
               </div>
             )}
             <div>
-              <div style={{ fontSize: 10, color: '#757575', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 2 }}>Réservations</div>
-              <div style={{ fontSize: 12, fontWeight: 500 }}>{selected.res_count || 0}</div>
+              <div style={{ ...sf, fontSize: 10, color: 'rgba(255,255,255,0.3)', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 4 }}>Réservations</div>
+              <div style={{ ...sf, fontSize: 12, fontWeight: 500, color: '#ffffff' }}>{selected.res_count || 0}</div>
             </div>
           </div>
 
           {/* Reservations history */}
           <div style={{ flex: 1, overflowY: 'auto', padding: '14px 20px' }}>
-            <p style={{ fontSize: 11, fontWeight: 500, color: '#757575', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 12 }}>
+            <p style={{ ...sf, fontSize: 10, fontWeight: 500, color: 'rgba(255,255,255,0.3)', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 12 }}>
               Historique
             </p>
             {histLoading ? (
               <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-                {[1,2,3].map(i => <div key={i} style={{ height: 64, background: '#F5F5F5', borderRadius: 8 }} />)}
+                {[1,2,3].map(i => <div key={i} style={{ height: 64, background: 'rgba(255,255,255,0.06)', borderRadius: 8 }} />)}
               </div>
             ) : history.length === 0 ? (
-              <div style={{ textAlign: 'center', padding: '24px 0', color: '#757575', fontSize: 13 }}>
+              <div style={{ ...sf, textAlign: 'center', padding: '24px 0', color: 'rgba(255,255,255,0.3)', fontSize: 13 }}>
                 Aucune réservation.
               </div>
             ) : (
@@ -230,20 +252,21 @@ export default function ClientsPage() {
                   return (
                     <div key={r.id} style={{
                       padding: '12px 14px', borderRadius: 10,
-                      border: '0.5px solid rgba(0,0,0,0.08)', background: '#fafafa',
+                      border: '0.5px solid rgba(255,255,255,0.08)', background: 'rgba(255,255,255,0.03)',
                     }}>
                       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 6 }}>
-                        <span style={{ fontSize: 12, fontWeight: 500 }}>{r.scooters?.name || '—'}</span>
+                        <span style={{ ...sf, fontSize: 12, fontWeight: 500, color: '#ffffff' }}>{r.scooters?.name || '—'}</span>
                         <span style={{
+                          ...sf,
                           padding: '2px 7px', borderRadius: 5,
                           background: st.bg, color: st.color, fontSize: 10, fontWeight: 500,
                         }}>
                           {st.label}
                         </span>
                       </div>
-                      <div style={{ fontSize: 11, color: '#757575', display: 'flex', justifyContent: 'space-between' }}>
+                      <div style={{ ...sf, fontSize: 11, color: 'rgba(255,255,255,0.35)', display: 'flex', justifyContent: 'space-between' }}>
                         <span>{fmtDate(r.start_date)} → {fmtDate(r.end_date)}</span>
-                        <span style={{ fontWeight: 500, color: '#0a0a0a' }}>{r.total_price.toFixed(0)} MAD</span>
+                        <span style={{ fontWeight: 500, color: '#ffffff' }}>{r.total_price.toFixed(0)} MAD</span>
                       </div>
                     </div>
                   )

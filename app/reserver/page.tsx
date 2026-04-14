@@ -70,7 +70,7 @@ export default function ReserverPage() {
   return (
     <Suspense fallback={
       <div style={{ paddingTop: 56, minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <Zap size={28} strokeWidth={1.5} color="#C8FF00" />
+        <Zap size={28} strokeWidth={1.5} color="var(--accent)" />
       </div>
     }>
       <ReserverContent />
@@ -181,7 +181,7 @@ function ReserverContent() {
         <Navbar />
         <main style={{ paddingTop: 56, minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 12 }}>
-            <Zap size={28} strokeWidth={1.5} color="#C8FF00" />
+            <Zap size={28} strokeWidth={1.5} color="var(--accent)" />
             <p style={{ color: '#757575', fontSize: 14 }}>Chargement...</p>
           </div>
         </main>
@@ -250,7 +250,7 @@ function ReserverContent() {
             <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
               <Link href="/compte" style={{ textDecoration: 'none' }}>
                 <button style={{
-                  padding: '11px 20px', borderRadius: 8, background: '#C8FF00', border: 'none',
+                  padding: '11px 20px', borderRadius: 8, background: 'var(--accent)', border: 'none',
                   fontSize: 14, fontWeight: 500, color: '#0a0a0a', cursor: 'pointer',
                 }}>
                   Mes réservations
@@ -328,7 +328,7 @@ function ReserverContent() {
               {selectedScooter && (
                 <div style={{
                   padding: '16px', borderRadius: 10,
-                  border: '0.5px solid rgba(200,255,0,0.4)', background: 'rgba(200,255,0,0.04)',
+                  border: '0.5px solid rgba(0,176,80,0.4)', background: 'rgba(0,176,80,0.04)',
                   display: 'flex', gap: 16, alignItems: 'center',
                 }}>
                   {selectedScooter.image_url && (
@@ -469,7 +469,7 @@ function ReserverContent() {
                       {totalPrice.toFixed(0)} <span style={{ fontSize: 14, fontWeight: 400, color: '#757575' }}>MAD</span>
                     </p>
                   </div>
-                  <div style={{ padding: '6px 12px', borderRadius: 6, background: 'rgba(200,255,0,0.1)', fontSize: 12, color: '#C8FF00' }}>
+                  <div style={{ padding: '6px 12px', borderRadius: 6, background: 'rgba(0,176,80,0.1)', fontSize: 12, color: 'var(--accent)' }}>
                     {rentalType === 'hourly' ? 'Tarif heure' : rentalType === 'daily' ? 'Tarif jour' : 'Tarif semaine'}
                   </div>
                 </div>
@@ -481,7 +481,7 @@ function ReserverContent() {
                 style={{
                   width: '100%', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 8,
                   padding: '14px 24px', borderRadius: 10, border: 'none',
-                  background: canContinue ? '#C8FF00' : '#E0E0E0',
+                  background: canContinue ? 'var(--accent)' : '#E0E0E0',
                   color: canContinue ? '#0a0a0a' : '#757575',
                   fontSize: 14, fontWeight: 500, minHeight: 48,
                   cursor: canContinue ? 'pointer' : 'not-allowed',
@@ -559,7 +559,7 @@ function ReserverContent() {
                   style={{
                     flex: 2, display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 8,
                     padding: '13px', borderRadius: 10, border: 'none',
-                    background: user ? '#C8FF00' : '#E0E0E0',
+                    background: user ? 'var(--accent)' : '#E0E0E0',
                     color: user ? '#0a0a0a' : '#757575',
                     fontSize: 14, fontWeight: 500,
                     cursor: user && !submitting ? 'pointer' : 'not-allowed',

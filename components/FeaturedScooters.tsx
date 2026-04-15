@@ -34,12 +34,12 @@ export default function FeaturedScooters() {
             <p style={{
               fontSize: 11, fontWeight: 500, color: '#00B050', textTransform: 'uppercase',
               letterSpacing: '0.15em', marginBottom: 12,
-              fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
+              fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
             }}>
               Notre flotte
             </p>
             <h2 style={{
-              fontFamily: 'Georgia, "Times New Roman", serif',
+              fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
               fontSize: 'clamp(32px, 5vw, 52px)',
               fontWeight: 700,
               letterSpacing: '-0.02em',
@@ -55,7 +55,7 @@ export default function FeaturedScooters() {
               padding: '10px 20px', background: 'transparent',
               border: '0.5px solid rgba(0,0,0,0.15)', borderRadius: 8,
               fontSize: 13, color: '#0a0a0a', cursor: 'pointer',
-              fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
+              fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
             }}>
               Voir tout <ArrowRight size={14} strokeWidth={1.5} />
             </button>
@@ -64,7 +64,7 @@ export default function FeaturedScooters() {
 
         <p style={{
           fontSize: 16, color: '#757575', lineHeight: 1.7, marginBottom: 48, maxWidth: 600,
-          fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
+          fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
         }}>
           Chaque modèle de notre flotte a été sélectionné pour affronter les ruelles de la médina, les grands axes de Guéliz et les chemins de la Palmeraie. Silencieux, maniables et rechargés chaque nuit.
         </p>
@@ -85,7 +85,7 @@ export default function FeaturedScooters() {
           <div style={{
             textAlign: 'center', padding: '64px 24px', background: '#F5F5F5', borderRadius: 12,
           }}>
-            <p style={{ color: '#757575', fontSize: 15, fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif' }}>
+            <p style={{ color: '#757575', fontSize: 15, fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif' }}>
               Aucun scooter disponible pour l&apos;instant.
             </p>
           </div>

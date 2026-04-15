@@ -12,7 +12,10 @@
       "Read(//tmp/**)",
       "Bash(node:*)",
       "Bash(npx tsc:*)",
-      "Bash(ls /Users/houssamchhih/volt-marrakech/.env*)"
+      "Bash(ls /Users/houssamchhih/volt-marrakech/.env*)",
+      "Bash(find . -name '*.tsx' -not -path './node_modules/*' -exec sed -i '' -e 's/fontFamily: '\\\\''Georgia, \"Times New Roman\", serif'\\\\''/fontFamily: '\\\\''var\\(--font-dm-sans\\), \"DM Sans\", -apple-system, sans-serif'\\\\''/g' -e 's/fontFamily: \"Georgia, \\\\\\\\\"Times New Roman\\\\\\\\\", serif\"/fontFamily: \"var\\(--font-dm-sans\\), \\\\\\\\\"DM Sans\\\\\\\\\", -apple-system, sans-serif\"/g' '{}' ';')",
+      "Bash(find . -name '*.tsx' -not -path './node_modules/*' -exec sed -i '' -e 's/fontFamily: '\\\\''-apple-system, BlinkMacSystemFont, \"SF Pro Text\", sans-serif'\\\\''/fontFamily: '\\\\''var\\(--font-dm-sans\\), \"DM Sans\", -apple-system, sans-serif'\\\\''/g' -e 's/fontFamily: \"-apple-system, BlinkMacSystemFont, '\\\\''SF Pro Text'\\\\'', sans-serif\"/fontFamily: \"var\\(--font-dm-sans\\), '\\\\''DM Sans'\\\\'', -apple-system, sans-serif\"/g' '{}' ';')",
+      "Bash(echo \"EXIT:$?\")"
     ]
   }
 }

@@ -20,7 +20,7 @@ const EMPTY: FormData = {
 }
 
 const sf: React.CSSProperties = {
-  fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
+  fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
 }
 
 export default function ScootersPage() {
@@ -111,7 +111,7 @@ export default function ScootersPage() {
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 32, gap: 16, flexWrap: 'wrap' }}>
         <div>
           <h1 style={{
-            fontFamily: 'Georgia, "Times New Roman", serif',
+            fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
             fontSize: 24, fontWeight: 700, letterSpacing: '-0.02em', marginBottom: 6, color: '#ffffff',
           }}>
             Scooters
@@ -378,7 +378,7 @@ const inputStyle: React.CSSProperties = {
   width: '100%', padding: '10px 12px', borderRadius: 8,
   border: '0.5px solid rgba(255,255,255,0.15)', background: '#1a1a1a',
   fontSize: 13, color: '#ffffff', outline: 'none', boxSizing: 'border-box',
-  fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
+  fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
 }
 
 function MI({ value, onChange, placeholder, type = 'text' }: { value: string; onChange: (v: string) => void; placeholder?: string; type?: string }) {
@@ -391,7 +391,7 @@ function MField({ label, children }: { label: string; children: React.ReactNode 
       <label style={{
         display: 'block', fontSize: 11, fontWeight: 500, marginBottom: 6,
         color: 'rgba(255,255,255,0.4)', textTransform: 'uppercase', letterSpacing: '0.08em',
-        fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
+        fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
       }}>
         {label}
       </label>
@@ -418,7 +418,7 @@ function Modal({ title, onClose, children, small }: { title: string; onClose: ()
         }}>
           <span style={{
             fontSize: 14, fontWeight: 500, color: '#ffffff',
-            fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
+            fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
           }}>
             {title}
           </span>

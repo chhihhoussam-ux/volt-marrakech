@@ -26,12 +26,12 @@ export default function TestimonialsSection() {
           <p style={{
             fontSize: 11, fontWeight: 500, color: '#00B050', textTransform: 'uppercase',
             letterSpacing: '0.15em', marginBottom: 16,
-            fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
+            fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
           }}>
             Ce qu&apos;ils en disent
           </p>
           <h2 style={{
-            fontFamily: 'Georgia, "Times New Roman", serif',
+            fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
             fontSize: 'clamp(28px, 5vw, 52px)',
             fontWeight: 700,
             letterSpacing: '-0.02em',
@@ -54,7 +54,7 @@ export default function TestimonialsSection() {
             }}>
               {/* Decorative quote */}
               <div style={{
-                fontFamily: 'Georgia, "Times New Roman", serif',
+                fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
                 fontSize: 80, fontWeight: 700, color: '#00B050', opacity: 0.15,
                 lineHeight: 0.8, position: 'absolute', top: 20, left: 28, userSelect: 'none',
               }}>
@@ -70,20 +70,20 @@ export default function TestimonialsSection() {
               </div>
               <p style={{
                 fontSize: 15, color: '#0a0a0a', lineHeight: 1.7, flex: 1,
-                fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
+                fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
               }}>
                 &ldquo;{review.text}&rdquo;
               </p>
               <div>
                 <p style={{
                   fontSize: 14, fontWeight: 500, color: '#0a0a0a',
-                  fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
+                  fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
                 }}>
                   {review.author}
                 </p>
                 <p style={{
                   fontSize: 12, color: '#757575',
-                  fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
+                  fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
                 }}>
                   {review.location}
                 </p>

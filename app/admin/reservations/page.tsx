@@ -58,7 +58,7 @@ const ACTION_LABEL: Record<Status, string> = {
 }
 
 const sf: React.CSSProperties = {
-  fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
+  fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
 }
 
 function fmt(d: string) {
@@ -127,7 +127,7 @@ export default function ReservationsPage() {
     <div style={{ padding: '40px 40px 60px', background: '#0a0a0a', minHeight: '100%' }}>
       <div style={{ marginBottom: 28 }}>
         <h1 style={{
-          fontFamily: 'Georgia, "Times New Roman", serif',
+          fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
           fontSize: 24, fontWeight: 700, letterSpacing: '-0.02em', marginBottom: 6, color: '#ffffff',
         }}>
           Réservations

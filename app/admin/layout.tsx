@@ -35,7 +35,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         background: '#0a0a0a',
       }}>
         <span style={{
-          fontFamily: 'Georgia, "Times New Roman", serif',
+          fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
           fontSize: 22, fontWeight: 700, color: '#00B050', letterSpacing: '-0.03em',
         }}>
           keewee.
@@ -72,7 +72,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             <Menu size={20} strokeWidth={1.5} />
           </button>
           <span style={{
-            fontFamily: 'Georgia, "Times New Roman", serif',
+            fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
             fontSize: 16, fontWeight: 700, color: '#ffffff', letterSpacing: '-0.02em',
           }}>
             keewee.

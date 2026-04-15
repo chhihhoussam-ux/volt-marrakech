@@ -86,14 +86,14 @@ export default function AdminDashboardPage() {
     <div style={{ padding: '40px 40px 60px', background: '#0a0a0a', minHeight: '100%' }}>
       <div style={{ marginBottom: 36 }}>
         <h1 style={{
-          fontFamily: 'Georgia, "Times New Roman", serif',
+          fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
           fontSize: 24, fontWeight: 700, letterSpacing: '-0.02em', marginBottom: 6, color: '#ffffff',
         }}>
           Dashboard
         </h1>
         <p style={{
           fontSize: 13, color: 'rgba(255,255,255,0.4)',
-          fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
+          fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
         }}>
           Vue d&apos;ensemble de l&apos;activité Keewee
         </p>
@@ -104,7 +104,7 @@ export default function AdminDashboardPage() {
           padding: '12px 16px', borderRadius: 8, marginBottom: 24,
           background: 'rgba(220,0,0,0.08)', border: '0.5px solid rgba(220,0,0,0.2)',
           fontSize: 13, color: '#ff6b6b',
-          fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
+          fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
         }}>
           {error}
         </div>
@@ -126,14 +126,14 @@ export default function AdminDashboardPage() {
             }}>
               <div>
                 <div style={{
-                  fontFamily: 'Georgia, "Times New Roman", serif',
+                  fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
                   fontSize: 30, fontWeight: 700, letterSpacing: '-0.04em', marginBottom: 4, color: '#ffffff',
                 }}>
                   {k.value}
                 </div>
                 <div style={{
                   fontSize: 12, color: 'rgba(255,255,255,0.4)',
-                  fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
+                  fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
                 }}>
                   {k.label}
                 </div>
@@ -158,7 +158,7 @@ export default function AdminDashboardPage() {
         <div style={{ padding: '16px 24px', borderBottom: '0.5px solid rgba(255,255,255,0.06)' }}>
           <h2 style={{
             fontSize: 14, fontWeight: 500, color: '#ffffff',
-            fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
+            fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
           }}>
             Dernières réservations
           </h2>
@@ -171,7 +171,7 @@ export default function AdminDashboardPage() {
         ) : recent.length === 0 ? (
           <div style={{
             padding: '40px 24px', textAlign: 'center', color: 'rgba(255,255,255,0.3)', fontSize: 14,
-            fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
+            fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
           }}>
             Aucune réservation pour l&apos;instant.
           </div>
@@ -185,7 +185,7 @@ export default function AdminDashboardPage() {
                       padding: '11px 24px', textAlign: 'left', fontWeight: 500,
                       color: 'rgba(255,255,255,0.4)', whiteSpace: 'nowrap',
                       fontSize: 11, textTransform: 'uppercase', letterSpacing: '0.08em',
-                      fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
+                      fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
                     }}>
                       {h}
                     </th>
@@ -208,26 +208,26 @@ export default function AdminDashboardPage() {
                       <td style={{ padding: '14px 24px', whiteSpace: 'nowrap' }}>
                         <div style={{
                           fontWeight: 500, marginBottom: 1, color: '#ffffff', fontSize: 13,
-                          fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
+                          fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
                         }}>
                           {r.profiles?.full_name || '—'}
                         </div>
                         <div style={{
                           fontSize: 11, color: 'rgba(255,255,255,0.35)',
-                          fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
+                          fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
                         }}>
                           {r.profiles?.email || '—'}
                         </div>
                       </td>
                       <td style={{
                         padding: '14px 24px', color: 'rgba(255,255,255,0.7)', fontSize: 13,
-                        fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
+                        fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
                       }}>
                         {r.scooters?.name || '—'}
                       </td>
                       <td style={{
                         padding: '14px 24px', whiteSpace: 'nowrap', color: 'rgba(255,255,255,0.4)', fontSize: 13,
-                        fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
+                        fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
                       }}>
                         {fmt(r.start_date)} → {fmt(r.end_date)}
                       </td>
@@ -235,14 +235,14 @@ export default function AdminDashboardPage() {
                         <span style={{
                           display: 'inline-block', padding: '4px 10px', borderRadius: 6,
                           background: st.bg, color: st.color, fontSize: 11, fontWeight: 500,
-                          fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
+                          fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
                         }}>
                           {st.label}
                         </span>
                       </td>
                       <td style={{
                         padding: '14px 24px', fontWeight: 500, whiteSpace: 'nowrap', color: '#ffffff', fontSize: 13,
-                        fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
+                        fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
                       }}>
                         {r.total_price.toFixed(0)} MAD
                       </td>

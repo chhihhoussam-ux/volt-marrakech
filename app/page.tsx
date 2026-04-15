@@ -88,7 +88,7 @@ export default function HomePage() {
           }}>
             <div>
               <h2 style={{
-                fontFamily: 'Georgia, "Times New Roman", serif',
+                fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
                 fontSize: 'clamp(28px, 5vw, 48px)',
                 fontWeight: 700,
                 letterSpacing: '-0.02em',
@@ -100,7 +100,7 @@ export default function HomePage() {
               </h2>
               <p style={{
                 fontSize: 16, color: 'rgba(0,0,0,0.6)', maxWidth: 400,
-                fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
+                fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
               }}>
                 Réservez votre scooter en quelques clics. Livraison à votre hôtel, casque inclus, support 7j/7.
               </p>
@@ -111,7 +111,7 @@ export default function HomePage() {
                   display: 'inline-flex', alignItems: 'center', gap: 8,
                   padding: '16px 28px', background: '#0a0a0a', border: 'none',
                   borderRadius: 10, fontSize: 15, fontWeight: 500, color: '#ffffff', cursor: 'pointer',
-                  fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
+                  fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
                 }}>
                   Réserver maintenant <ArrowRight size={16} strokeWidth={1.5} />
                 </button>
@@ -122,7 +122,7 @@ export default function HomePage() {
                   padding: '16px 28px', background: 'transparent',
                   border: '1px solid rgba(0,0,0,0.2)',
                   borderRadius: 10, fontSize: 15, fontWeight: 500, color: '#0a0a0a', cursor: 'pointer',
-                  fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
+                  fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
                 }}>
                   <MessageCircle size={16} strokeWidth={1.5} /> WhatsApp
                 </button>

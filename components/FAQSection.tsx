@@ -40,12 +40,12 @@ export default function FAQSection() {
           <p style={{
             fontSize: 11, fontWeight: 500, color: '#00B050', textTransform: 'uppercase',
             letterSpacing: '0.15em', marginBottom: 16,
-            fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
+            fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
           }}>
             Questions fréquentes
           </p>
           <h2 style={{
-            fontFamily: 'Georgia, "Times New Roman", serif',
+            fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
             fontSize: 'clamp(28px, 5vw, 48px)',
             fontWeight: 700,
             letterSpacing: '-0.02em',
@@ -68,7 +68,7 @@ export default function FAQSection() {
                 }}
               >
                 <span style={{
-                  fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
+                  fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
                   fontSize: 16, fontWeight: 500, color: '#0a0a0a', letterSpacing: '-0.01em',
                 }}>
                   {faq.q}
@@ -87,7 +87,7 @@ export default function FAQSection() {
               </button>
               {open === i && (
                 <p style={{
-                  fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
+                  fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
                   fontSize: 15, color: '#757575', lineHeight: 1.7, paddingBottom: 22,
                 }}>
                   {faq.a}

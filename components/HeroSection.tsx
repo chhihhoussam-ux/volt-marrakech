@@ -44,7 +44,7 @@ export default function HeroSection() {
             textTransform: 'uppercase',
             marginBottom: 20,
             fontWeight: 400,
-            fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
+            fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
           }}>
             100% électrique · Zéro émission · Marrakech
           </p>
@@ -53,7 +53,7 @@ export default function HeroSection() {
           <h1
             className="hero-h1"
             style={{
-              fontFamily: 'Georgia, "Times New Roman", serif',
+              fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
               fontWeight: 700,
               lineHeight: 0.95,
               letterSpacing: '-0.03em',
@@ -73,7 +73,7 @@ export default function HeroSection() {
             lineHeight: 1.6,
             marginBottom: 44,
             fontWeight: 400,
-            fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
+            fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
           }}>
             La médina à votre rythme. La ville rouge sous un nouvel angle. Louez un scooter électrique et explorez Marrakech librement.
           </p>
@@ -85,7 +85,7 @@ export default function HeroSection() {
                 display: 'inline-flex', alignItems: 'center', gap: 8,
                 padding: '14px 28px', background: '#00B050', border: 'none',
                 borderRadius: 8, fontSize: 15, fontWeight: 500, color: '#ffffff', cursor: 'pointer',
-                fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
+                fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
               }}>
                 Réserver maintenant
                 <ArrowRight size={16} strokeWidth={1.5} />
@@ -97,7 +97,7 @@ export default function HeroSection() {
                 padding: '14px 28px', background: 'transparent',
                 border: '0.5px solid rgba(255,255,255,0.35)',
                 borderRadius: 8, fontSize: 15, fontWeight: 400, color: '#ffffff', cursor: 'pointer',
-                fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
+                fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
               }}>
                 Voir nos scooters
               </button>
@@ -121,14 +121,14 @@ export default function HeroSection() {
               borderRight: i < stats.length - 1 ? '0.5px solid rgba(255,255,255,0.08)' : 'none',
             }}>
               <div style={{
-                fontFamily: 'Georgia, "Times New Roman", serif',
+                fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
                 fontSize: 22, fontWeight: 700, letterSpacing: '-0.03em', color: '#ffffff', marginBottom: 4,
               }}>
                 {stat.value}
               </div>
               <div style={{
                 fontSize: 11, color: 'rgba(255,255,255,0.45)', textTransform: 'uppercase', letterSpacing: '0.06em',
-                fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
+                fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
               }}>
                 {stat.label}
               </div>

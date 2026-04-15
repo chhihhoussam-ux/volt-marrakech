@@ -1,7 +1,15 @@
 import type { Metadata, Viewport } from 'next'
+import { DM_Sans } from 'next/font/google'
 import './globals.css'
 import { getSettings } from '@/lib/settings'
 import { SettingsProvider } from '@/lib/settings-context'
+
+const dmSans = DM_Sans({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-dm-sans',
+  display: 'swap',
+})
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -71,7 +79,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="fr">
+    <html lang="fr" className={dmSans.variable}>
       <head>
         <link rel="apple-touch-icon" href="/icon-512.svg" />
         <meta name="apple-mobile-web-app-capable" content="yes" />

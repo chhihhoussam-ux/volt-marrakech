@@ -51,14 +51,14 @@ export default function AdminLoginPage() {
         {/* Logo */}
         <div style={{ marginBottom: 48 }}>
           <span style={{
-            fontFamily: 'Georgia, "Times New Roman", serif',
+            fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
             fontSize: 22, fontWeight: 700, color: '#ffffff', letterSpacing: '-0.03em',
           }}>
             keewee.
           </span>
           <span style={{
             fontSize: 10, color: 'rgba(255,255,255,0.3)', marginLeft: 6,
-            fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
+            fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
             textTransform: 'uppercase', letterSpacing: '0.08em',
           }}>
             admin
@@ -67,7 +67,7 @@ export default function AdminLoginPage() {
 
         <h1
           style={{
-            fontFamily: 'Georgia, "Times New Roman", serif',
+            fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
             fontSize: 24,
             fontWeight: 700,
             color: '#ffffff',
@@ -79,7 +79,7 @@ export default function AdminLoginPage() {
         </h1>
         <p style={{
           fontSize: 14, color: 'rgba(255,255,255,0.4)', marginBottom: 32,
-          fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
+          fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
         }}>
           Accès réservé à l&apos;équipe Keewee.
         </p>

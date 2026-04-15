@@ -14,8 +14,7 @@ const config: Config = {
         ink: '#0a0a0a',
       },
       fontFamily: {
-        sans: ['-apple-system', 'BlinkMacSystemFont', '"SF Pro Text"', '"Helvetica Neue"', 'sans-serif'],
-        serif: ['Georgia', '"Times New Roman"', 'serif'],
+        sans: ['var(--font-dm-sans)', '"DM Sans"', '-apple-system', 'sans-serif'],
       },
       borderRadius: {
         DEFAULT: '8px',

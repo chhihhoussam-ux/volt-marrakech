@@ -11,6 +11,7 @@
   --gray-200: #E0E0E0;
   --gray-500: #757575;
   --border: rgba(0, 0, 0, 0.1);
+  --font-dm-sans: 'DM Sans', -apple-system, sans-serif;
 }
 
 *, *::before, *::after {
@@ -42,18 +43,33 @@ html {
 body {
   background-color: #ffffff;
   color: #0a0a0a;
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", sans-serif;
+  font-family: var(--font-dm-sans), 'DM Sans', -apple-system, sans-serif;
   font-weight: 400;
   font-size: 15px;
   line-height: 1.5;
   letter-spacing: 0;
 }
 
-/* Headings — serif */
-h1, h2, h3, h4, h5, h6 {
-  font-family: Georgia, "Times New Roman", serif;
+/* Headings — DM Sans */
+h1 {
+  font-family: var(--font-dm-sans), 'DM Sans', -apple-system, sans-serif;
   font-weight: 700;
+  letter-spacing: -0.03em;
+}
+h2 {
+  font-family: var(--font-dm-sans), 'DM Sans', -apple-system, sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+}
+h3 {
+  font-family: var(--font-dm-sans), 'DM Sans', -apple-system, sans-serif;
+  font-weight: 600;
   letter-spacing: -0.02em;
+}
+h4, h5, h6 {
+  font-family: var(--font-dm-sans), 'DM Sans', -apple-system, sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.015em;
 }
 
 /* Scrollbar */
@@ -86,7 +102,7 @@ h1, h2, h3, h4, h5, h6 {
     @apply inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-medium transition-all duration-200;
     background: var(--accent);
     color: #ffffff;
-    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+    font-family: var(--font-dm-sans), 'DM Sans', -apple-system, sans-serif;
     position: relative;
     overflow: hidden;
   }
@@ -99,7 +115,7 @@ h1, h2, h3, h4, h5, h6 {
     @apply inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-medium border transition-all duration-150;
     border-color: var(--border);
     border-width: 0.5px;
-    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+    font-family: var(--font-dm-sans), 'DM Sans', -apple-system, sans-serif;
   }
   .btn-outline:hover {
     background-color: var(--gray-50);
@@ -113,7 +129,7 @@ h1, h2, h3, h4, h5, h6 {
     @apply w-full rounded-lg px-4 py-3 text-sm bg-[#F5F5F5] transition-all duration-150;
     border: 0.5px solid rgba(0, 0, 0, 0.1);
     color: #0a0a0a;
-    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+    font-family: var(--font-dm-sans), 'DM Sans', -apple-system, sans-serif;
   }
   .input-field:focus {
     outline: none;
@@ -126,7 +142,7 @@ h1, h2, h3, h4, h5, h6 {
 
   .badge {
     @apply inline-flex items-center gap-1 px-2 py-0.5 rounded text-xs font-medium;
-    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+    font-family: var(--font-dm-sans), 'DM Sans', -apple-system, sans-serif;
   }
 
   .badge-available {
@@ -142,7 +158,7 @@ h1, h2, h3, h4, h5, h6 {
   /* Animated underline for nav links */
   .nav-link {
     position: relative;
-    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+    font-family: var(--font-dm-sans), 'DM Sans', -apple-system, sans-serif;
   }
   .nav-link::after {
     content: '';
@@ -163,7 +179,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .nav-link-item {
   position: relative;
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+  font-family: var(--font-dm-sans), 'DM Sans', -apple-system, sans-serif;
   font-size: 14px;
   text-decoration: none;
   color: #757575;
@@ -193,7 +209,7 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 500;
   color: #ffffff;
   cursor: pointer;
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+  font-family: var(--font-dm-sans), 'DM Sans', -apple-system, sans-serif;
   transition: background 0.2s, transform 0.15s;
 }
 .btn-reserve:hover { background: var(--accent-hover); }

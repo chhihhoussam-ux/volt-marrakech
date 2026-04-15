@@ -45,12 +45,12 @@ export default function AboutSection() {
             <p style={{
               fontSize: 11, fontWeight: 500, color: '#00B050', textTransform: 'uppercase',
               letterSpacing: '0.15em', marginBottom: 16,
-              fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
+              fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
             }}>
               Pourquoi Keewee
             </p>
             <h2 style={{
-              fontFamily: 'Georgia, "Times New Roman", serif',
+              fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
               fontSize: 'clamp(28px, 4vw, 48px)',
               fontWeight: 700,
               letterSpacing: '-0.02em',
@@ -62,13 +62,13 @@ export default function AboutSection() {
             </h2>
             <p style={{
               fontSize: 15, color: 'rgba(255,255,255,0.5)', lineHeight: 1.8, marginBottom: 20,
-              fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
+              fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
             }}>
               Keewee est né d&apos;une conviction simple : la meilleure façon de découvrir Marrakech, c&apos;est à son propre rythme. Forts de 20 ans d&apos;expérience dans la location de véhicules au Maroc, nous avons embrassé l&apos;électrique.
             </p>
             <p style={{
               fontSize: 15, color: 'rgba(255,255,255,0.5)', lineHeight: 1.8,
-              fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
+              fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
             }}>
               Chaque scooter est inspecté et rechargé quotidiennement. Chaque client repart avec un casque homologué, un antivol, et un numéro WhatsApp actif 7j/7.
             </p>
@@ -77,7 +77,7 @@ export default function AboutSection() {
               {keyFigures.map((fig, i) => (
                 <div key={i}>
                   <div style={{
-                    fontFamily: 'Georgia, "Times New Roman", serif',
+                    fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
                     fontSize: 56, fontWeight: 700, letterSpacing: '-0.04em',
                     color: '#ffffff', lineHeight: 1, marginBottom: 6,
                   }}>
@@ -85,7 +85,7 @@ export default function AboutSection() {
                   </div>
                   <div style={{
                     fontSize: 12, color: 'rgba(255,255,255,0.4)', textTransform: 'uppercase', letterSpacing: '0.08em',
-                    fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
+                    fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
                   }}>
                     {fig.label}
                   </div>
@@ -113,13 +113,13 @@ export default function AboutSection() {
                 </div>
                 <p style={{
                   fontSize: 14, fontWeight: 500, color: '#ffffff', marginBottom: 8, letterSpacing: '-0.01em',
-                  fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
+                  fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
                 }}>
                   {f.title}
                 </p>
                 <p style={{
                   fontSize: 13, color: 'rgba(255,255,255,0.4)', lineHeight: 1.6,
-                  fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
+                  fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
                 }}>
                   {f.desc}
                 </p>

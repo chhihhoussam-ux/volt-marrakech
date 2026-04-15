@@ -42,12 +42,12 @@ export default function TarifsSection() {
           <p style={{
             fontSize: 11, fontWeight: 500, color: '#00B050', textTransform: 'uppercase',
             letterSpacing: '0.15em', marginBottom: 16,
-            fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
+            fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
           }}>
             Nos formules
           </p>
           <h2 style={{
-            fontFamily: 'Georgia, "Times New Roman", serif',
+            fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
             fontSize: 'clamp(28px, 5vw, 52px)',
             fontWeight: 700,
             letterSpacing: '-0.02em',
@@ -57,7 +57,7 @@ export default function TarifsSection() {
           </h2>
           <p style={{
             fontSize: 16, color: '#757575', lineHeight: 1.7, maxWidth: 520, margin: '0 auto',
-            fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
+            fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
           }}>
             Que vous ayez deux heures devant vous ou une semaine entière, Keewee s&apos;adapte à votre voyage. Tous nos tarifs incluent casque, antivol et assistance.
           </p>
@@ -83,7 +83,7 @@ export default function TarifsSection() {
                   position: 'absolute', top: -13, left: '50%', transform: 'translateX(-50%)',
                   background: '#00B050', color: '#ffffff', padding: '4px 14px',
                   borderRadius: 20, fontSize: 11, fontWeight: 500, whiteSpace: 'nowrap',
-                  fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
+                  fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
                 }}>
                   Le plus populaire
                 </div>
@@ -98,19 +98,19 @@ export default function TarifsSection() {
               </div>
               <p style={{
                 fontSize: 13, color: tarif.accent ? 'rgba(255,255,255,0.5)' : '#757575', marginBottom: 6,
-                fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
+                fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
               }}>
                 {tarif.duration}
               </p>
               <div style={{ marginBottom: 28 }}>
                 <span style={{
                   fontSize: 13, color: tarif.accent ? 'rgba(255,255,255,0.4)' : '#757575',
-                  fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
+                  fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
                 }}>
                   à partir de{' '}
                 </span>
                 <span style={{
-                  fontFamily: 'Georgia, "Times New Roman", serif',
+                  fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
                   fontSize: 40, fontWeight: 700, letterSpacing: '-0.04em',
                   color: tarif.accent ? '#ffffff' : '#0a0a0a',
                 }}>
@@ -118,7 +118,7 @@ export default function TarifsSection() {
                 </span>
                 <span style={{
                   fontSize: 14, color: tarif.accent ? 'rgba(255,255,255,0.4)' : '#757575', marginLeft: 6,
-                  fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
+                  fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
                 }}>
                   MAD
                 </span>
@@ -136,7 +136,7 @@ export default function TarifsSection() {
                     </div>
                     <span style={{
                       fontSize: 14, color: tarif.accent ? 'rgba(255,255,255,0.75)' : '#0a0a0a',
-                      fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
+                      fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
                       lineHeight: 1.5,
                     }}>
                       {feat}
@@ -151,7 +151,7 @@ export default function TarifsSection() {
                   background: tarif.accent ? '#00B050' : 'transparent',
                   color: tarif.accent ? '#ffffff' : '#0a0a0a',
                   fontSize: 14, fontWeight: 500, cursor: 'pointer',
-                  fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
+                  fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
                 }}>
                   Choisir cette formule
                 </button>

@@ -57,7 +57,7 @@ export default function Navbar() {
               <img src={logoUrl} alt="Keewee" style={{ height: 30, width: 'auto', objectFit: 'contain' }} />
             ) : (
               <span style={{
-                fontFamily: 'Georgia, "Times New Roman", serif',
+                fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
                 fontSize: 20,
                 fontWeight: 700,
                 color: '#0a0a0a',
@@ -87,7 +87,7 @@ export default function Navbar() {
               <span style={{
                 fontSize: 14,
                 color: '#757575',
-                fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
+                fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
               }}>
                 Mon compte
               </span>
@@ -138,7 +138,7 @@ export default function Navbar() {
                 href={link.href}
                 onClick={() => setMenuOpen(false)}
                 style={{
-                  fontFamily: 'Georgia, "Times New Roman", serif',
+                  fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
                   fontSize: 28,
                   fontWeight: 700,
                   color: pathname === link.href ? '#0a0a0a' : '#757575',
@@ -170,7 +170,7 @@ export default function Navbar() {
                 padding: '16px 24px', background: 'var(--accent)', border: 'none',
                 borderRadius: 12, fontSize: 16, fontWeight: 500, color: '#ffffff', cursor: 'pointer',
                 minHeight: 56,
-                fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
+                fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
               }}>
                 Réserver maintenant
                 <ArrowRight size={18} strokeWidth={1.5} />

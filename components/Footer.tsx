@@ -19,7 +19,7 @@ export default function Footer() {
           <div>
             <Link href="/" style={{ textDecoration: 'none', display: 'inline-block', marginBottom: 16 }}>
               <span style={{
-                fontFamily: 'Georgia, "Times New Roman", serif',
+                fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
                 fontSize: 22,
                 fontWeight: 700,
                 color: '#ffffff',
@@ -30,14 +30,14 @@ export default function Footer() {
             </Link>
             <p style={{
               fontSize: 12, fontWeight: 500, color: 'var(--accent)', marginBottom: 10,
-              fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
+              fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
               letterSpacing: '0.04em',
             }}>
               Yallah, Keewee !
             </p>
             <p style={{
               fontSize: 13, color: '#757575', lineHeight: 1.7, maxWidth: 220,
-              fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
+              fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
             }}>
               Explorez la ville rouge à votre rythme avec nos scooters électriques. Réservation en ligne, livraison à domicile, assistance 7j/7.
             </p>
@@ -48,7 +48,7 @@ export default function Footer() {
             <p style={{
               fontSize: 11, fontWeight: 500, color: '#757575', textTransform: 'uppercase',
               letterSpacing: '0.12em', marginBottom: 20,
-              fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
+              fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
             }}>
               Navigation
             </p>
@@ -65,7 +65,7 @@ export default function Footer() {
                   color: 'rgba(255,255,255,0.6)',
                   textDecoration: 'none',
                   transition: 'color 0.15s',
-                  fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
+                  fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
                 }}>
                   {link.label}
                 </Link>
@@ -78,7 +78,7 @@ export default function Footer() {
             <p style={{
               fontSize: 11, fontWeight: 500, color: '#757575', textTransform: 'uppercase',
               letterSpacing: '0.12em', marginBottom: 20,
-              fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
+              fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
             }}>
               Contact
             </p>
@@ -90,7 +90,7 @@ export default function Footer() {
                 style={{
                   display: 'flex', alignItems: 'center', gap: 10, textDecoration: 'none',
                   color: 'rgba(255,255,255,0.6)', fontSize: 14,
-                  fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
+                  fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
                 }}
               >
                 <MessageCircle size={16} strokeWidth={1.5} color="var(--accent)" />
@@ -101,7 +101,7 @@ export default function Footer() {
                 style={{
                   display: 'flex', alignItems: 'center', gap: 10, textDecoration: 'none',
                   color: 'rgba(255,255,255,0.6)', fontSize: 14,
-                  fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
+                  fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
                 }}
               >
                 <Mail size={16} strokeWidth={1.5} color="var(--accent)" />
@@ -110,7 +110,7 @@ export default function Footer() {
               <div style={{
                 display: 'flex', alignItems: 'flex-start', gap: 10,
                 color: 'rgba(255,255,255,0.6)', fontSize: 14,
-                fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
+                fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
               }}>
                 <MapPin size={16} strokeWidth={1.5} color="var(--accent)" style={{ flexShrink: 0, marginTop: 1 }} />
                 <span>Avenue Mohammed V,<br />Marrakech 40000</span>
@@ -131,13 +131,13 @@ export default function Footer() {
         }}>
           <p style={{
             fontSize: 12, color: '#757575',
-            fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
+            fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
           }}>
             © 2025 Keewee. Tous droits réservés.
           </p>
           <p style={{
             fontSize: 12, color: '#757575',
-            fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
+            fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
           }}>
             Fait à Marrakech 🇲🇦
           </p>

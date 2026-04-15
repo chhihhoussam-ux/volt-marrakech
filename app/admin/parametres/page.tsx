@@ -98,14 +98,14 @@ export default function ParametresPage() {
       <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: 36, gap: 16, flexWrap: 'wrap' }}>
         <div>
           <h1 style={{
-            fontFamily: 'Georgia, "Times New Roman", serif',
+            fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
             fontSize: 24, fontWeight: 700, letterSpacing: '-0.02em', marginBottom: 6, color: '#ffffff',
           }}>
             Paramètres du site
           </h1>
           <p style={{
             fontSize: 13, color: 'rgba(255,255,255,0.4)',
-            fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
+            fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
           }}>
             Modifiez l&apos;apparence et le contenu de Keewee.
           </p>
@@ -121,7 +121,7 @@ export default function ParametresPage() {
             color: saved ? '#00B050' : '#ffffff',
             fontSize: 13, fontWeight: 500, cursor: saving ? 'not-allowed' : 'pointer',
             opacity: saving ? 0.7 : 1, whiteSpace: 'nowrap',
-            fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
+            fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
             transition: 'background 0.2s',
           }}
         >
@@ -137,7 +137,7 @@ export default function ParametresPage() {
           display: 'flex', alignItems: 'center', gap: 8, padding: '11px 14px',
           borderRadius: 8, background: 'rgba(220,0,0,0.1)', border: '0.5px solid rgba(220,0,0,0.25)',
           marginBottom: 24, fontSize: 13, color: '#ff6b6b',
-          fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
+          fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
         }}>
           <AlertCircle size={14} strokeWidth={1.5} />
           {error}
@@ -249,7 +249,7 @@ export default function ParametresPage() {
               <p style={{
                 fontSize: 11, fontWeight: 500, color: 'rgba(255,255,255,0.4)', textTransform: 'uppercase',
                 letterSpacing: '0.1em', marginBottom: 0,
-                fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
+                fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
               }}>
                 Formule {card.num}
               </p>
@@ -290,7 +290,7 @@ function Section({ title, children }: { title: string; children: React.ReactNode
       <div style={{ padding: '13px 20px', borderBottom: '0.5px solid rgba(255,255,255,0.06)' }}>
         <span style={{
           fontSize: 11, fontWeight: 500, color: 'rgba(255,255,255,0.4)', textTransform: 'uppercase', letterSpacing: '0.1em',
-          fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
+          fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
         }}>
           {title}
         </span>
@@ -306,14 +306,14 @@ function Row({ label, hint, children }: { label: string; hint?: string; children
       <label style={{
         display: 'block', fontSize: 12, fontWeight: 500, marginBottom: 6,
         color: 'rgba(255,255,255,0.6)', textTransform: 'uppercase', letterSpacing: '0.06em',
-        fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
+        fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
       }}>
         {label}
       </label>
       {children}
       {hint && <p style={{
         fontSize: 11, color: 'rgba(255,255,255,0.25)', marginTop: 4,
-        fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
+        fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
       }}>
         {hint}
       </p>}
@@ -332,7 +332,7 @@ function Input({ value, onChange, placeholder }: { value: string; onChange: (v: 
         width: '100%', padding: '10px 14px', borderRadius: 8,
         border: '0.5px solid rgba(255,255,255,0.15)', background: '#1a1a1a',
         fontSize: 13, color: '#ffffff', outline: 'none', boxSizing: 'border-box',
-        fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
+        fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
         transition: 'border-color 0.15s',
       }}
       onFocus={e => (e.target.style.borderColor = '#00B050')}

@@ -54,7 +54,7 @@ export default function ScooterCard({ scooter, showReserveButton = true }: Scoot
             background: isAvailable ? 'rgba(0,176,80,0.15)' : 'rgba(220,0,0,0.1)',
             color: isAvailable ? '#004d20' : '#8a0000',
             backdropFilter: 'blur(4px)',
-            fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
+            fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
           }}>
             <span style={{
               width: 5, height: 5, borderRadius: '50%',
@@ -86,7 +86,7 @@ export default function ScooterCard({ scooter, showReserveButton = true }: Scoot
                   cursor: 'pointer',
                   background: 'var(--accent)',
                   color: '#ffffff',
-                  fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
+                  fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
                 }}>
                   Réserver <ArrowRight size={14} strokeWidth={1.5} />
                 </button>
@@ -100,14 +100,14 @@ export default function ScooterCard({ scooter, showReserveButton = true }: Scoot
       <div style={{ padding: '20px 20px 20px' }}>
         <div style={{ marginBottom: 14 }}>
           <h3 style={{
-            fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
+            fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
             fontSize: 16, fontWeight: 500, color: '#0a0a0a', marginBottom: 3, letterSpacing: '-0.01em',
           }}>
             {scooter.name}
           </h3>
           <p style={{
             fontSize: 12, color: '#757575',
-            fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
+            fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
           }}>
             {scooter.model}
           </p>
@@ -121,7 +121,7 @@ export default function ScooterCard({ scooter, showReserveButton = true }: Scoot
           <Battery size={15} strokeWidth={1.5} color="#757575" />
           <span style={{
             fontSize: 13, color: '#757575',
-            fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
+            fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
           }}>
             {scooter.autonomy_km} km d&apos;autonomie
           </span>
@@ -131,14 +131,14 @@ export default function ScooterCard({ scooter, showReserveButton = true }: Scoot
         <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between' }}>
           <div>
             <span style={{
-              fontFamily: 'Georgia, "Times New Roman", serif',
+              fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
               fontSize: 24, fontWeight: 700, color: '#0a0a0a', letterSpacing: '-0.03em',
             }}>
               {scooter.price_per_day.toFixed(0)}
             </span>
             <span style={{
               fontSize: 13, color: '#757575', marginLeft: 4,
-              fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
+              fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
             }}>
               MAD/jour
             </span>
@@ -156,7 +156,7 @@ export default function ScooterCard({ scooter, showReserveButton = true }: Scoot
                   background: isAvailable ? 'var(--accent)' : '#E0E0E0',
                   color: isAvailable ? '#ffffff' : '#757575',
                   transition: 'background 0.2s',
-                  fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
+                  fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
                 }}
               >
                 {isAvailable ? 'Réserver' : 'Indisponible'}

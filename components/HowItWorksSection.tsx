@@ -31,12 +31,12 @@ export default function HowItWorksSection() {
           <p style={{
             fontSize: 11, fontWeight: 500, color: '#00B050', textTransform: 'uppercase',
             letterSpacing: '0.15em', marginBottom: 16,
-            fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
+            fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
           }}>
             Simple comme bonjour
           </p>
           <h2 style={{
-            fontFamily: 'Georgia, "Times New Roman", serif',
+            fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
             fontSize: 'clamp(28px, 5vw, 52px)',
             fontWeight: 700,
             letterSpacing: '-0.02em',
@@ -59,7 +59,7 @@ export default function HowItWorksSection() {
             }}>
               {/* Decorative number */}
               <div style={{
-                fontFamily: 'Georgia, "Times New Roman", serif',
+                fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
                 fontSize: 80, fontWeight: 700, letterSpacing: '-0.05em',
                 color: '#00B050', opacity: 0.15, lineHeight: 1,
                 position: 'absolute', top: 24, right: 28, userSelect: 'none',
@@ -75,13 +75,13 @@ export default function HowItWorksSection() {
               </div>
               <p style={{
                 fontSize: 17, fontWeight: 500, color: '#0a0a0a', marginBottom: 12, letterSpacing: '-0.01em',
-                fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
+                fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
               }}>
                 {step.title}
               </p>
               <p style={{
                 fontSize: 14, color: '#757575', lineHeight: 1.7,
-                fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
+                fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
               }}>
                 {step.desc}
               </p>

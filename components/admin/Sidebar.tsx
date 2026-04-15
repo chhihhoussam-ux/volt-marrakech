@@ -54,14 +54,14 @@ export default function Sidebar({ mobileOpen, onClose }: SidebarProps) {
         <Link href="/admin" style={{ textDecoration: 'none' }}>
           <div>
             <span style={{
-              fontFamily: 'Georgia, "Times New Roman", serif',
+              fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
               fontSize: 18, fontWeight: 700, color: '#ffffff', letterSpacing: '-0.03em',
             }}>
               keewee.
             </span>
             <span style={{
               fontSize: 10, color: 'rgba(255,255,255,0.3)', marginLeft: 5,
-              fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
+              fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
               textTransform: 'uppercase', letterSpacing: '0.08em',
             }}>
               admin
@@ -99,7 +99,7 @@ export default function Sidebar({ mobileOpen, onClose }: SidebarProps) {
                 fontSize: 13,
                 fontWeight: active ? 500 : 400,
                 transition: 'all 0.12s',
-                fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
+                fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
               }}
             >
               <item.icon size={16} strokeWidth={1.5} />
@@ -118,7 +118,7 @@ export default function Sidebar({ mobileOpen, onClose }: SidebarProps) {
             display: 'flex', alignItems: 'center', gap: 10,
             padding: '10px 12px', borderRadius: 8, textDecoration: 'none',
             color: 'rgba(255,255,255,0.4)', fontSize: 13, marginBottom: 2,
-            fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
+            fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
           }}
         >
           <Globe size={16} strokeWidth={1.5} />
@@ -130,7 +130,7 @@ export default function Sidebar({ mobileOpen, onClose }: SidebarProps) {
             display: 'flex', alignItems: 'center', gap: 10, width: '100%',
             padding: '10px 12px', borderRadius: 8, border: 'none', background: 'transparent',
             color: 'rgba(255,255,255,0.4)', fontSize: 13, cursor: 'pointer', textAlign: 'left',
-            fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif',
+            fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
           }}
         >
           <LogOut size={16} strokeWidth={1.5} />

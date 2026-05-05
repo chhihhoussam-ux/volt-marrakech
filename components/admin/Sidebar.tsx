@@ -57,7 +57,7 @@ export default function Sidebar({ mobileOpen, onClose }: SidebarProps) {
               fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
               fontSize: 18, fontWeight: 700, color: '#ffffff', letterSpacing: '-0.03em',
             }}>
-              keewee.
+              almone.
             </span>
             <span style={{
               fontSize: 10, color: 'rgba(255,255,255,0.3)', marginLeft: 5,

@@ -47,7 +47,7 @@ export default function AboutSection() {
               letterSpacing: '0.15em', marginBottom: 16,
               fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
             }}>
-              Pourquoi Keewee
+              Pourquoi Almone
             </p>
             <h2 style={{
               fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
@@ -64,7 +64,7 @@ export default function AboutSection() {
               fontSize: 15, color: 'rgba(255,255,255,0.5)', lineHeight: 1.8, marginBottom: 20,
               fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
             }}>
-              Keewee est né d&apos;une conviction simple : la meilleure façon de découvrir Marrakech, c&apos;est à son propre rythme. Forts de 20 ans d&apos;expérience dans la location de véhicules au Maroc, nous avons embrassé l&apos;électrique.
+              Almone est né d&apos;une conviction simple : la meilleure façon de découvrir Marrakech, c&apos;est à son propre rythme. Forts de 20 ans d&apos;expérience dans la location de véhicules au Maroc, nous avons embrassé l&apos;électrique.
             </p>
             <p style={{
               fontSize: 15, color: 'rgba(255,255,255,0.5)', lineHeight: 1.8,

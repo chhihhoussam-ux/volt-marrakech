@@ -107,7 +107,7 @@ export default function ParametresPage() {
             fontSize: 13, color: 'rgba(255,255,255,0.4)',
             fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
           }}>
-            Modifiez l&apos;apparence et le contenu de Keewee.
+            Modifiez l&apos;apparence et le contenu de Almone.
           </p>
         </div>
         <button
@@ -149,7 +149,7 @@ export default function ParametresPage() {
         {/* Identité */}
         <Section title="Identité">
           <Row label="Nom du site" hint="Affiché dans les balises meta et onglets">
-            <Input value={settings.site_name} onChange={v => set('site_name', v)} placeholder="Keewee" />
+            <Input value={settings.site_name} onChange={v => set('site_name', v)} placeholder="Almone" />
           </Row>
           <Row label="Couleur accent" hint="Format hexadécimal (ex : #00B050)">
             <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
@@ -169,7 +169,7 @@ export default function ParametresPage() {
 
         {/* Logo & Favicon */}
         <Section title="Logo & Favicon">
-          <Row label="Logo" hint="Affiché dans la navbar. Vide = logo texte 'keewee.'">
+          <Row label="Logo" hint="Affiché dans la navbar. Vide = logo texte 'almone.'">
             <ImageUpload
               value={settings.logo_url}
               onChange={v => set('logo_url', v)}

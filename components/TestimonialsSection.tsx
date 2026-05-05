@@ -37,7 +37,7 @@ export default function TestimonialsSection() {
             letterSpacing: '-0.02em',
             color: '#0a0a0a',
           }}>
-            Ils ont roulé avec Keewee.
+            Ils ont roulé avec Almone.
           </h2>
         </div>
 

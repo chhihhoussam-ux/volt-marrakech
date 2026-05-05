@@ -25,7 +25,7 @@ export default function Footer() {
                 color: '#ffffff',
                 letterSpacing: '-0.03em',
               }}>
-                keewee.
+                almone.
               </span>
             </Link>
             <p style={{
@@ -33,7 +33,7 @@ export default function Footer() {
               fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
               letterSpacing: '0.04em',
             }}>
-              Yallah, Keewee !
+              Yallah, Almone !
             </p>
             <p style={{
               fontSize: 13, color: '#757575', lineHeight: 1.7, maxWidth: 220,
@@ -97,7 +97,7 @@ export default function Footer() {
                 WhatsApp
               </a>
               <a
-                href="mailto:contact@keewee.ma"
+                href="mailto:contact@almone.ma"
                 style={{
                   display: 'flex', alignItems: 'center', gap: 10, textDecoration: 'none',
                   color: 'rgba(255,255,255,0.6)', fontSize: 14,
@@ -105,7 +105,7 @@ export default function Footer() {
                 }}
               >
                 <Mail size={16} strokeWidth={1.5} color="var(--accent)" />
-                contact@keewee.ma
+                contact@almone.ma
               </a>
               <div style={{
                 display: 'flex', alignItems: 'flex-start', gap: 10,
@@ -133,7 +133,7 @@ export default function Footer() {
             fontSize: 12, color: '#757575',
             fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
           }}>
-            © 2025 Keewee. Tous droits réservés.
+            © 2025 Almone. Tous droits réservés.
           </p>
           <p style={{
             fontSize: 12, color: '#757575',

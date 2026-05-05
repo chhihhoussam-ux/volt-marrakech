@@ -38,7 +38,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
           fontSize: 22, fontWeight: 700, color: '#00B050', letterSpacing: '-0.03em',
         }}>
-          keewee.
+          almone.
         </span>
       </div>
     )
@@ -75,7 +75,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
             fontSize: 16, fontWeight: 700, color: '#ffffff', letterSpacing: '-0.02em',
           }}>
-            keewee.
+            almone.
           </span>
         </div>
 

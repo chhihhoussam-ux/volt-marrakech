@@ -9,7 +9,7 @@ const faqs = [
     a: "Pour les scooters de moins de 50cc électriques, le permis B suffit. Pour les modèles plus puissants, un permis A peut être demandé.",
   },
   {
-    q: "Quelle est l'autonomie des scooters Keewee ?",
+    q: "Quelle est l'autonomie des scooters Almone ?",
     a: "Entre 60 et 120 km selon le modèle. Pour une journée classique à Marrakech, c'est largement suffisant.",
   },
   {
@@ -25,8 +25,8 @@ const faqs = [
     a: "Absolument. Vous pouvez réserver plusieurs véhicules simultanément depuis notre site ou via WhatsApp.",
   },
   {
-    q: "Keewee, c'est quoi exactement ?",
-    a: "Keewee, c'est l'invitation à avancer, explorer, bouger. 20 ans d'expérience dans la mobilité au Maroc, reconvertis au service de la balade électrique.",
+    q: "Almone, c'est quoi exactement ?",
+    a: "Almone, c'est l'invitation à avancer, explorer, bouger. 20 ans d'expérience dans la mobilité au Maroc, reconvertis au service de la balade électrique.",
   },
 ]
 

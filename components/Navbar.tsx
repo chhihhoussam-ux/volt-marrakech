@@ -54,7 +54,7 @@ export default function Navbar() {
           {/* Logo */}
           <Link href="/" style={{ textDecoration: 'none', flexShrink: 0 }}>
             {logoUrl ? (
-              <img src={logoUrl} alt="Keewee" style={{ height: 30, width: 'auto', objectFit: 'contain' }} />
+              <img src={logoUrl} alt="Almone" style={{ height: 30, width: 'auto', objectFit: 'contain' }} />
             ) : (
               <span style={{
                 fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
@@ -63,7 +63,7 @@ export default function Navbar() {
                 color: '#0a0a0a',
                 letterSpacing: '-0.03em',
               }}>
-                keewee.
+                almone.
               </span>
             )}
           </Link>

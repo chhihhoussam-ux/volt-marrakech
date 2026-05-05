@@ -12,12 +12,12 @@ import TestimonialsSection from '@/components/TestimonialsSection'
 import FAQSection from '@/components/FAQSection'
 
 export const metadata: Metadata = {
-  title: 'Keewee — Location de scooters électriques à Marrakech | Yallah, Keewee !',
+  title: 'Almone — Location de scooters électriques à Marrakech | Yallah, Almone !',
   description:
-    "Louez un scooter électrique à Marrakech avec Keewee. 20 ans d'expérience dans la mobilité, flotte premium, réservation en ligne. Explorez la médina, Guéliz et les jardins à votre rythme. Dès 60 MAD.",
+    "Louez un scooter électrique à Marrakech avec Almone. 20 ans d'expérience dans la mobilité, flotte premium, réservation en ligne. Explorez la médina, Guéliz et les jardins à votre rythme. Dès 60 MAD.",
   openGraph: {
-    title: 'Keewee — Location de scooters électriques à Marrakech | Yallah, Keewee !',
-    description: "Louez un scooter électrique à Marrakech avec Keewee. Flotte premium, livraison à domicile. Dès 60 MAD.",
+    title: 'Almone — Location de scooters électriques à Marrakech | Yallah, Almone !',
+    description: "Louez un scooter électrique à Marrakech avec Almone. Flotte premium, livraison à domicile. Dès 60 MAD.",
   },
 }
 
@@ -25,11 +25,11 @@ export default function HomePage() {
   const localBusinessSchema = {
     '@context': 'https://schema.org',
     '@type': 'LocalBusiness',
-    name: 'Keewee',
+    name: 'Almone',
     description: 'Location de scooters électriques à Marrakech',
-    url: 'https://keewee.ma',
+    url: 'https://almone.ma',
     telephone: '+212600000000',
-    email: 'contact@keewee.ma',
+    email: 'contact@almone.ma',
     image: 'https://images.unsplash.com/photo-1597211684565-dca64d72bdfe?w=1600&q=80',
     priceRange: '60-950 MAD',
     currenciesAccepted: 'MAD',

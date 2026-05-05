@@ -59,7 +59,7 @@ export default function TarifsSection() {
             fontSize: 16, color: '#757575', lineHeight: 1.7, maxWidth: 520, margin: '0 auto',
             fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
           }}>
-            Que vous ayez deux heures devant vous ou une semaine entière, Keewee s&apos;adapte à votre voyage. Tous nos tarifs incluent casque, antivol et assistance.
+            Que vous ayez deux heures devant vous ou une semaine entière, Almone s&apos;adapte à votre voyage. Tous nos tarifs incluent casque, antivol et assistance.
           </p>
         </div>
 

@@ -95,7 +95,7 @@ export default function AdminDashboardPage() {
           fontSize: 13, color: 'rgba(255,255,255,0.4)',
           fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
         }}>
-          Vue d&apos;ensemble de l&apos;activité Keewee
+          Vue d&apos;ensemble de l&apos;activité Almone
         </p>
       </div>
 

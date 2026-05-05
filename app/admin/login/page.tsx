@@ -54,7 +54,7 @@ export default function AdminLoginPage() {
             fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
             fontSize: 22, fontWeight: 700, color: '#ffffff', letterSpacing: '-0.03em',
           }}>
-            keewee.
+            almone.
           </span>
           <span style={{
             fontSize: 10, color: 'rgba(255,255,255,0.3)', marginLeft: 6,
@@ -81,7 +81,7 @@ export default function AdminLoginPage() {
           fontSize: 14, color: 'rgba(255,255,255,0.4)', marginBottom: 32,
           fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
         }}>
-          Accès réservé à l&apos;équipe Keewee.
+          Accès réservé à l&apos;équipe Almone.
         </p>
 
         {/* Password input */}

@@ -61,7 +61,7 @@ export default function HeroSection() {
             }}
           >
             <span style={{ color: '#ffffff' }}>Yallah, </span>
-            <span style={{ color: '#00B050' }}>Keewee !</span>
+            <span style={{ color: '#00B050' }}>Almone !</span>
           </h1>
 
           {/* Subtitle */}

@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import {
-  LayoutDashboard, Settings, Zap, Calendar, Users, Globe, LogOut, X,
+  LayoutDashboard, Settings, Zap, Calendar, Users, Globe, LogOut, X, MapPin,
 } from 'lucide-react'
 import { adminLogout } from '@/lib/admin-auth'
 
@@ -12,6 +12,7 @@ const NAV = [
   { href: '/admin/scooters', label: 'Scooters', icon: Zap },
   { href: '/admin/reservations', label: 'Réservations', icon: Calendar },
   { href: '/admin/clients', label: 'Clients', icon: Users },
+  { href: '/admin/locations', label: 'Nos adresses', icon: MapPin },
   { href: '/admin/parametres', label: 'Paramètres', icon: Settings },
 ]
 
@@ -94,8 +95,8 @@ export default function Sidebar({ mobileOpen, onClose }: SidebarProps) {
                 padding: '10px 12px',
                 borderRadius: 8,
                 textDecoration: 'none',
-                background: active ? 'rgba(0,176,80,0.1)' : 'transparent',
-                color: active ? '#00B050' : 'rgba(255,255,255,0.5)',
+                background: active ? 'rgba(255,103,0,0.1)' : 'transparent',
+                color: active ? '#FF6700' : 'rgba(255,255,255,0.5)',
                 fontSize: 13,
                 fontWeight: active ? 500 : 400,
                 transition: 'all 0.12s',

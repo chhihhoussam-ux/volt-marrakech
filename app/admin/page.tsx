@@ -23,8 +23,8 @@ interface RecentReservation {
 }
 
 const STATUS_STYLE: Record<string, { label: string; bg: string; color: string }> = {
-  pending:   { label: 'En attente',  bg: 'rgba(0,176,80,0.15)',    color: '#00B050' },
-  confirmed: { label: 'Confirmée',   bg: 'rgba(0,176,80,0.25)',    color: '#00B050' },
+  pending:   { label: 'En attente',  bg: 'rgba(255,103,0,0.15)',    color: '#FF6700' },
+  confirmed: { label: 'Confirmée',   bg: 'rgba(255,103,0,0.25)',    color: '#FF6700' },
   cancelled: { label: 'Annulée',     bg: 'rgba(255,255,255,0.08)', color: 'rgba(255,255,255,0.4)' },
   completed: { label: 'Terminée',    bg: 'rgba(255,255,255,0.06)', color: 'rgba(255,255,255,0.35)' },
 }
@@ -140,9 +140,9 @@ export default function AdminDashboardPage() {
               </div>
               <div style={{
                 width: 42, height: 42, borderRadius: 10,
-                background: k.accent ? 'rgba(0,176,80,0.15)' : 'rgba(255,255,255,0.06)',
+                background: k.accent ? 'rgba(255,103,0,0.15)' : 'rgba(255,255,255,0.06)',
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
-                color: k.accent ? '#00B050' : 'rgba(255,255,255,0.4)',
+                color: k.accent ? '#FF6700' : 'rgba(255,255,255,0.4)',
               }}>
                 {k.icon}
               </div>

@@ -23,8 +23,8 @@ interface Reservation {
 }
 
 const ST_COLOR: Record<string, { bg: string; color: string; label: string }> = {
-  pending:   { bg: 'rgba(0,176,80,0.15)',    color: '#00B050',               label: 'En attente' },
-  confirmed: { bg: 'rgba(0,176,80,0.25)',    color: '#00B050',               label: 'Confirmée'  },
+  pending:   { bg: 'rgba(255,103,0,0.15)',    color: '#FF6700',               label: 'En attente' },
+  confirmed: { bg: 'rgba(255,103,0,0.25)',    color: '#FF6700',               label: 'Confirmée'  },
   cancelled: { bg: 'rgba(255,255,255,0.08)', color: 'rgba(255,255,255,0.4)', label: 'Annulée'    },
   completed: { bg: 'rgba(255,255,255,0.06)', color: 'rgba(255,255,255,0.3)', label: 'Terminée'   },
 }
@@ -134,7 +134,7 @@ export default function ClientsPage() {
                       style={{
                         borderBottom: i < profiles.length - 1 ? '0.5px solid rgba(255,255,255,0.06)' : 'none',
                         cursor: 'pointer',
-                        background: selected?.id === p.id ? 'rgba(0,176,80,0.06)' : 'transparent',
+                        background: selected?.id === p.id ? 'rgba(255,103,0,0.06)' : 'transparent',
                         transition: 'background 0.1s',
                       }}
                       onMouseEnter={e => { if (selected?.id !== p.id) e.currentTarget.style.background = 'rgba(255,255,255,0.02)' }}
@@ -144,7 +144,7 @@ export default function ClientsPage() {
                         <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
                           <div style={{
                             width: 32, height: 32, borderRadius: '50%',
-                            background: 'rgba(0,176,80,0.15)', color: '#00B050',
+                            background: 'rgba(255,103,0,0.15)', color: '#FF6700',
                             display: 'flex', alignItems: 'center', justifyContent: 'center',
                             ...sf, fontSize: 11, fontWeight: 500, flexShrink: 0,
                           }}>
@@ -162,8 +162,8 @@ export default function ClientsPage() {
                           ...sf,
                           display: 'inline-flex', alignItems: 'center', gap: 4,
                           padding: '4px 10px', borderRadius: 6, fontSize: 11, fontWeight: 500,
-                          background: (p.res_count || 0) > 0 ? 'rgba(0,176,80,0.15)' : 'rgba(255,255,255,0.06)',
-                          color: (p.res_count || 0) > 0 ? '#00B050' : 'rgba(255,255,255,0.3)',
+                          background: (p.res_count || 0) > 0 ? 'rgba(255,103,0,0.15)' : 'rgba(255,255,255,0.06)',
+                          color: (p.res_count || 0) > 0 ? '#FF6700' : 'rgba(255,255,255,0.3)',
                         }}>
                           <Calendar size={10} strokeWidth={2} />
                           {p.res_count || 0}
@@ -198,9 +198,9 @@ export default function ClientsPage() {
             <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
               <div style={{
                 width: 36, height: 36, borderRadius: '50%',
-                background: 'rgba(0,176,80,0.15)',
+                background: 'rgba(255,103,0,0.15)',
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
-                color: '#00B050', ...sf, fontSize: 12, fontWeight: 500,
+                color: '#FF6700', ...sf, fontSize: 12, fontWeight: 500,
               }}>
                 {initials(selected.full_name, selected.email)}
               </div>

@@ -4,12 +4,11 @@ import { ArrowRight, MessageCircle } from 'lucide-react'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import HeroSection from '@/components/HeroSection'
-import AboutSection from '@/components/AboutSection'
 import FeaturedScooters from '@/components/FeaturedScooters'
 import TarifsSection from '@/components/TarifsSection'
 import HowItWorksSection from '@/components/HowItWorksSection'
-import TestimonialsSection from '@/components/TestimonialsSection'
 import FAQSection from '@/components/FAQSection'
+import MapSection from '@/components/MapSection'
 
 export const metadata: Metadata = {
   title: 'Almone — Location de scooters électriques à Marrakech | Yallah, Almone !',
@@ -67,15 +66,13 @@ export default function HomePage() {
 
       <FeaturedScooters />
 
-      <AboutSection />
-
-      <TarifsSection />
+<TarifsSection />
 
       <HowItWorksSection />
 
-      <TestimonialsSection />
+<FAQSection />
 
-      <FAQSection />
+      <MapSection />
 
       {/* ─── CTA final ─── */}
       <section id="contact" style={{ padding: '0 24px 0' }}>

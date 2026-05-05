@@ -328,7 +328,7 @@ function ReserverContent() {
               {selectedScooter && (
                 <div style={{
                   padding: '16px', borderRadius: 10,
-                  border: '0.5px solid rgba(0,176,80,0.4)', background: 'rgba(0,176,80,0.04)',
+                  border: '0.5px solid rgba(255,103,0,0.4)', background: 'rgba(255,103,0,0.04)',
                   display: 'flex', gap: 16, alignItems: 'center',
                 }}>
                   {selectedScooter.image_url && (
@@ -469,7 +469,7 @@ function ReserverContent() {
                       {totalPrice.toFixed(0)} <span style={{ fontSize: 14, fontWeight: 400, color: '#757575' }}>MAD</span>
                     </p>
                   </div>
-                  <div style={{ padding: '6px 12px', borderRadius: 6, background: 'rgba(0,176,80,0.1)', fontSize: 12, color: 'var(--accent)' }}>
+                  <div style={{ padding: '6px 12px', borderRadius: 6, background: 'rgba(255,103,0,0.1)', fontSize: 12, color: 'var(--accent)' }}>
                     {rentalType === 'hourly' ? 'Tarif heure' : rentalType === 'daily' ? 'Tarif jour' : 'Tarif semaine'}
                   </div>
                 </div>

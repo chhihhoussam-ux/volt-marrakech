@@ -61,7 +61,7 @@ export default function HeroSection() {
             }}
           >
             <span style={{ color: '#ffffff' }}>Yallah, </span>
-            <span style={{ color: '#00B050' }}>Almone !</span>
+            <span style={{ color: '#FF6700' }}>Almone !</span>
           </h1>
 
           {/* Subtitle */}
@@ -83,7 +83,7 @@ export default function HeroSection() {
             <Link href="/reserver" style={{ textDecoration: 'none' }}>
               <button style={{
                 display: 'inline-flex', alignItems: 'center', gap: 8,
-                padding: '14px 28px', background: '#00B050', border: 'none',
+                padding: '14px 28px', background: '#FF6700', border: 'none',
                 borderRadius: 8, fontSize: 15, fontWeight: 500, color: '#ffffff', cursor: 'pointer',
                 fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
               }}>

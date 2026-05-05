@@ -1,33 +1,35 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { Plus, Pencil, Trash2, X, AlertCircle, Battery } from 'lucide-react'
+import { Plus, Pencil, Trash2, X, AlertCircle, MapPin } from 'lucide-react'
 import { supabase } from '@/lib/supabase'
-import type { Scooter, ScooterStatus } from '@/lib/types'
-import ImageUpload from '@/components/admin/ImageUpload'
 
-const STATUS_CFG: Record<ScooterStatus, { label: string; bg: string; color: string }> = {
-  available: { label: 'Disponible', bg: 'rgba(255,103,0,0.15)',   color: '#FF6700' },
-  rented:    { label: 'Loué',       bg: 'rgba(255,255,255,0.08)', color: 'rgba(255,255,255,0.4)' },
+interface Location {
+  id: string
+  name: string
+  address: string
+  lat: number
+  lng: number
+  description: string
+  is_active: boolean
+  created_at: string
 }
 
-type FormData = Omit<Scooter, 'id' | 'created_at'>
+type FormData = Omit<Location, 'id' | 'created_at'>
 
 const EMPTY: FormData = {
-  name: '', model: '', description: '',
-  price_per_hour: 0, price_per_day: 0, price_per_week: 0,
-  autonomy_km: 0, image_url: '', status: 'available',
+  name: '', address: '', lat: 0, lng: 0, description: '', is_active: true,
 }
 
 const sf: React.CSSProperties = {
   fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
 }
 
-export default function ScootersPage() {
-  const [scooters, setScooters] = useState<Scooter[]>([])
+export default function LocationsPage() {
+  const [locations, setLocations] = useState<Location[]>([])
   const [loading, setLoading] = useState(true)
   const [modal, setModal] = useState<'add' | 'edit' | null>(null)
-  const [editing, setEditing] = useState<Scooter | null>(null)
+  const [editing, setEditing] = useState<Location | null>(null)
   const [form, setForm] = useState<FormData>(EMPTY)
   const [saving, setSaving] = useState(false)
   const [formError, setFormError] = useState('')
@@ -39,8 +41,8 @@ export default function ScootersPage() {
 
   async function load() {
     setLoading(true)
-    const { data } = await supabase.from('scooters').select('*').order('created_at')
-    setScooters(data || [])
+    const { data } = await supabase.from('locations').select('*').order('created_at')
+    setLocations(data || [])
     setLoading(false)
   }
 
@@ -51,28 +53,26 @@ export default function ScootersPage() {
     setModal('add')
   }
 
-  function openEdit(s: Scooter) {
-    setEditing(s)
+  function openEdit(loc: Location) {
+    setEditing(loc)
     setForm({
-      name: s.name, model: s.model, description: s.description || '',
-      price_per_hour: s.price_per_hour, price_per_day: s.price_per_day,
-      price_per_week: s.price_per_week, autonomy_km: s.autonomy_km,
-      image_url: s.image_url || '', status: s.status,
+      name: loc.name, address: loc.address, lat: loc.lat, lng: loc.lng,
+      description: loc.description || '', is_active: loc.is_active,
     })
     setFormError('')
     setModal('edit')
   }
 
   async function handleSave() {
-    if (!form.name || !form.model) { setFormError('Nom et modèle requis.'); return }
+    if (!form.name || !form.address) { setFormError('Nom et adresse requis.'); return }
     setSaving(true)
     setFormError('')
     try {
       if (modal === 'add') {
-        const result = await supabase.from('scooters').insert([form]).select().single()
+        const result = await supabase.from('locations').insert([form]).select().single()
         if (result.error) throw result.error
       } else if (editing) {
-        const result = await supabase.from('scooters').update(form).eq('id', editing.id).select()
+        const result = await supabase.from('locations').update(form).eq('id', editing.id).select()
         if (result.error) throw result.error
       }
       setModal(null)
@@ -87,21 +87,21 @@ export default function ScootersPage() {
   async function handleDelete() {
     if (!deleteId) return
     setDeleting(true)
-    await supabase.from('scooters').delete().eq('id', deleteId)
+    await supabase.from('locations').delete().eq('id', deleteId)
     setDeleteId(null)
     setDeleting(false)
     await load()
   }
 
-  async function toggleAvailability(s: Scooter) {
-    setToggling(s.id)
-    const next: ScooterStatus = s.status === 'available' ? 'rented' : 'available'
-    const result = await supabase.from('scooters').update({ status: next }).eq('id', s.id).select()
+  async function toggleActive(loc: Location) {
+    setToggling(loc.id)
+    const next = !loc.is_active
+    const result = await supabase.from('locations').update({ is_active: next }).eq('id', loc.id).select()
     setToggling(null)
-    if (!result.error) setScooters(prev => prev.map(x => x.id === s.id ? { ...x, status: next } : x))
+    if (!result.error) setLocations(prev => prev.map(x => x.id === loc.id ? { ...x, is_active: next } : x))
   }
 
-  function setF(key: keyof FormData, value: string | number) {
+  function setF(key: keyof FormData, value: string | number | boolean) {
     setForm(f => ({ ...f, [key]: value }))
   }
 
@@ -114,10 +114,10 @@ export default function ScootersPage() {
             fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
             fontSize: 24, fontWeight: 700, letterSpacing: '-0.02em', marginBottom: 6, color: '#ffffff',
           }}>
-            Scooters
+            Points de retrait
           </h1>
           <p style={{ ...sf, fontSize: 13, color: 'rgba(255,255,255,0.4)' }}>
-            {scooters.length} scooter{scooters.length !== 1 ? 's' : ''} dans la flotte
+            {locations.length} point{locations.length !== 1 ? 's' : ''} configuré{locations.length !== 1 ? 's' : ''}
           </p>
         </div>
         <button
@@ -130,7 +130,7 @@ export default function ScootersPage() {
           }}
         >
           <Plus size={16} strokeWidth={1.5} />
-          Ajouter un scooter
+          Ajouter un point
         </button>
       </div>
 
@@ -140,16 +140,16 @@ export default function ScootersPage() {
           <div style={{ padding: 24, display: 'flex', flexDirection: 'column', gap: 12 }}>
             {[1,2,3,4].map(i => <div key={i} style={{ height: 56, background: 'rgba(255,255,255,0.06)', borderRadius: 8 }} />)}
           </div>
-        ) : scooters.length === 0 ? (
+        ) : locations.length === 0 ? (
           <div style={{ ...sf, padding: '48px 24px', textAlign: 'center', color: 'rgba(255,255,255,0.3)', fontSize: 14 }}>
-            Aucun scooter. Ajoutez-en un pour commencer.
+            Aucun point de retrait. Ajoutez-en un pour commencer.
           </div>
         ) : (
           <div style={{ overflowX: 'auto' }}>
             <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 13 }}>
               <thead>
                 <tr style={{ background: 'rgba(255,255,255,0.04)' }}>
-                  {['Scooter', 'Autonomie', 'Prix/jour', 'Statut', 'Dispo', 'Actions'].map(h => (
+                  {['Nom', 'Adresse', 'Lat / Lng', 'Statut', 'Actif', 'Actions'].map(h => (
                     <th key={h} style={{
                       ...sf, padding: '11px 20px', textAlign: 'left', fontWeight: 500,
                       color: 'rgba(255,255,255,0.4)', whiteSpace: 'nowrap',
@@ -161,58 +161,52 @@ export default function ScootersPage() {
                 </tr>
               </thead>
               <tbody>
-                {scooters.map((s, i) => {
-                  const st = STATUS_CFG[s.status]
-                  const isAvail = s.status === 'available'
+                {locations.map((loc, i) => {
+                  const isActive = loc.is_active
                   return (
                     <tr
-                      key={s.id}
-                      style={{ borderBottom: i < scooters.length - 1 ? '0.5px solid rgba(255,255,255,0.06)' : 'none' }}
+                      key={loc.id}
+                      style={{ borderBottom: i < locations.length - 1 ? '0.5px solid rgba(255,255,255,0.06)' : 'none' }}
                       onMouseEnter={e => (e.currentTarget.style.background = 'rgba(255,255,255,0.02)')}
                       onMouseLeave={e => (e.currentTarget.style.background = 'transparent')}
                     >
                       <td style={{ padding: '14px 20px' }}>
                         <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                          {s.image_url && (
-                            <img src={s.image_url} alt={s.name}
-                              style={{ width: 44, height: 34, objectFit: 'cover', borderRadius: 6, flexShrink: 0 }} />
-                          )}
-                          <div>
-                            <div style={{ ...sf, fontWeight: 500, color: '#ffffff', fontSize: 13 }}>{s.name}</div>
-                            <div style={{ ...sf, fontSize: 11, color: 'rgba(255,255,255,0.35)' }}>{s.model}</div>
-                          </div>
+                          <MapPin size={15} strokeWidth={1.5} style={{ color: '#FF6700', flexShrink: 0 }} />
+                          <div style={{ ...sf, fontWeight: 500, color: '#ffffff', fontSize: 13 }}>{loc.name}</div>
                         </div>
                       </td>
-                      <td style={{ ...sf, padding: '14px 20px', color: 'rgba(255,255,255,0.4)', whiteSpace: 'nowrap', fontSize: 13 }}>
-                        <Battery size={13} strokeWidth={1.5} style={{ display: 'inline', verticalAlign: 'middle', marginRight: 4 }} />
-                        {s.autonomy_km} km
+                      <td style={{ ...sf, padding: '14px 20px', color: 'rgba(255,255,255,0.4)', fontSize: 13 }}>
+                        {loc.address}
                       </td>
-                      <td style={{ ...sf, padding: '14px 20px', fontWeight: 500, whiteSpace: 'nowrap', color: '#ffffff', fontSize: 13 }}>
-                        {s.price_per_day.toFixed(0)} MAD
+                      <td style={{ ...sf, padding: '14px 20px', color: 'rgba(255,255,255,0.4)', whiteSpace: 'nowrap', fontSize: 12, fontFamily: 'monospace' }}>
+                        {loc.lat.toFixed(5)}, {loc.lng.toFixed(5)}
                       </td>
                       <td style={{ padding: '14px 20px' }}>
                         <span style={{
                           ...sf,
                           display: 'inline-block', padding: '4px 10px', borderRadius: 6,
-                          background: st.bg, color: st.color, fontSize: 11, fontWeight: 500,
+                          background: isActive ? 'rgba(255,103,0,0.15)' : 'rgba(255,255,255,0.08)',
+                          color: isActive ? '#FF6700' : 'rgba(255,255,255,0.4)',
+                          fontSize: 11, fontWeight: 500,
                         }}>
-                          {st.label}
+                          {isActive ? 'Actif' : 'Inactif'}
                         </span>
                       </td>
                       <td style={{ padding: '14px 20px' }}>
                         <button
-                          onClick={() => toggleAvailability(s)}
-                          disabled={toggling === s.id}
-                          title={isAvail ? 'Marquer comme loué' : 'Marquer comme disponible'}
+                          onClick={() => toggleActive(loc)}
+                          disabled={toggling === loc.id}
+                          title={isActive ? 'Désactiver' : 'Activer'}
                           style={{
                             width: 36, height: 20, borderRadius: 10, border: 'none', cursor: 'pointer',
-                            background: isAvail ? '#FF6700' : 'rgba(255,255,255,0.15)',
+                            background: isActive ? '#FF6700' : 'rgba(255,255,255,0.15)',
                             position: 'relative', transition: 'background 0.2s',
-                            opacity: toggling === s.id ? 0.5 : 1, flexShrink: 0,
+                            opacity: toggling === loc.id ? 0.5 : 1, flexShrink: 0,
                           }}
                         >
                           <span style={{
-                            position: 'absolute', top: 3, left: isAvail ? 18 : 3,
+                            position: 'absolute', top: 3, left: isActive ? 18 : 3,
                             width: 14, height: 14, borderRadius: '50%', background: '#ffffff',
                             transition: 'left 0.2s',
                           }} />
@@ -221,7 +215,7 @@ export default function ScootersPage() {
                       <td style={{ padding: '14px 20px' }}>
                         <div style={{ display: 'flex', gap: 6 }}>
                           <button
-                            onClick={() => openEdit(s)}
+                            onClick={() => openEdit(loc)}
                             style={{
                               ...sf,
                               display: 'flex', alignItems: 'center', gap: 5, padding: '6px 10px',
@@ -232,7 +226,7 @@ export default function ScootersPage() {
                             <Pencil size={13} strokeWidth={1.5} />Modifier
                           </button>
                           <button
-                            onClick={() => setDeleteId(s.id)}
+                            onClick={() => setDeleteId(loc.id)}
                             style={{
                               ...sf,
                               display: 'flex', alignItems: 'center', gap: 5, padding: '6px 10px',
@@ -255,14 +249,22 @@ export default function ScootersPage() {
 
       {/* Add/Edit modal */}
       {modal && (
-        <Modal title={modal === 'add' ? 'Ajouter un scooter' : 'Modifier le scooter'} onClose={() => setModal(null)}>
+        <Modal title={modal === 'add' ? 'Ajouter un point' : 'Modifier le point'} onClose={() => setModal(null)}>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
+            <MField label="Nom du point *">
+              <MI value={form.name} onChange={v => setF('name', v)} placeholder="Gare de Marrakech" />
+            </MField>
+
+            <MField label="Adresse *">
+              <MI value={form.address} onChange={v => setF('address', v)} placeholder="Avenue Hassan II, Marrakech" />
+            </MField>
+
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
-              <MField label="Nom *">
-                <MI value={form.name} onChange={v => setF('name', v)} placeholder="Yadea C1S" />
+              <MField label="Latitude">
+                <MI type="number" value={String(form.lat)} onChange={v => setF('lat', parseFloat(v) || 0)} placeholder="31.63000" />
               </MField>
-              <MField label="Modèle *">
-                <MI value={form.model} onChange={v => setF('model', v)} placeholder="Yadea C1S Pro" />
+              <MField label="Longitude">
+                <MI type="number" value={String(form.lng)} onChange={v => setF('lng', parseFloat(v) || 0)} placeholder="-8.00000" />
               </MField>
             </div>
 
@@ -272,46 +274,31 @@ export default function ScootersPage() {
                 onChange={e => setF('description', e.target.value)}
                 rows={3}
                 style={inputStyle}
-                placeholder="Description du scooter…"
+                placeholder="Description du point de retrait..."
               />
             </MField>
 
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 12 }}>
-              <MField label="Prix / heure (MAD)">
-                <MI type="number" value={String(form.price_per_hour)} onChange={v => setF('price_per_hour', parseFloat(v) || 0)} placeholder="35" />
-              </MField>
-              <MField label="Prix / jour (MAD)">
-                <MI type="number" value={String(form.price_per_day)} onChange={v => setF('price_per_day', parseFloat(v) || 0)} placeholder="200" />
-              </MField>
-              <MField label="Prix / semaine (MAD)">
-                <MI type="number" value={String(form.price_per_week)} onChange={v => setF('price_per_week', parseFloat(v) || 0)} placeholder="1100" />
-              </MField>
-            </div>
-
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
-              <MField label="Autonomie (km)">
-                <MI type="number" value={String(form.autonomy_km)} onChange={v => setF('autonomy_km', parseInt(v) || 0)} placeholder="80" />
-              </MField>
-              <MField label="Statut">
-                <select
-                  value={form.status}
-                  onChange={e => setF('status', e.target.value)}
-                  style={{ ...inputStyle, cursor: 'pointer' }}
+            <MField label="Statut">
+              <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                <button
+                  type="button"
+                  onClick={() => setF('is_active', !form.is_active)}
+                  style={{
+                    width: 36, height: 20, borderRadius: 10, border: 'none', cursor: 'pointer',
+                    background: form.is_active ? '#FF6700' : 'rgba(255,255,255,0.15)',
+                    position: 'relative', transition: 'background 0.2s',
+                  }}
                 >
-                  <option value="available">Disponible</option>
-                  <option value="rented">Loué</option>
-                </select>
-              </MField>
-            </div>
-
-            <MField label="Photo du scooter">
-              <ImageUpload
-                value={form.image_url || ''}
-                onChange={v => setF('image_url', v)}
-                accept="image/jpeg,image/png,image/webp"
-                fit="cover"
-                height={140}
-              />
+                  <span style={{
+                    position: 'absolute', top: 3, left: form.is_active ? 18 : 3,
+                    width: 14, height: 14, borderRadius: '50%', background: '#ffffff',
+                    transition: 'left 0.2s',
+                  }} />
+                </button>
+                <span style={{ ...sf, fontSize: 13, color: form.is_active ? '#FF6700' : 'rgba(255,255,255,0.4)' }}>
+                  {form.is_active ? 'Actif' : 'Inactif'}
+                </span>
+              </div>
             </MField>
 
             {formError && (
@@ -338,7 +325,7 @@ export default function ScootersPage() {
                 background: '#FF6700', color: '#ffffff', fontSize: 13, fontWeight: 500,
                 cursor: saving ? 'not-allowed' : 'pointer', opacity: saving ? 0.7 : 1,
               }}>
-                {saving ? 'Enregistrement…' : modal === 'add' ? 'Ajouter' : 'Enregistrer'}
+                {saving ? 'Enregistrement...' : modal === 'add' ? 'Ajouter' : 'Enregistrer'}
               </button>
             </div>
           </div>
@@ -349,7 +336,7 @@ export default function ScootersPage() {
       {deleteId && (
         <Modal title="Confirmer la suppression" onClose={() => setDeleteId(null)} small>
           <p style={{ ...sf, fontSize: 14, color: 'rgba(255,255,255,0.5)', marginBottom: 24 }}>
-            Cette action est irréversible. Le scooter sera définitivement supprimé.
+            Cette action est irreversible. Le point de retrait sera definitivement supprime.
           </p>
           <div style={{ display: 'flex', gap: 10, justifyContent: 'flex-end' }}>
             <button onClick={() => setDeleteId(null)} style={{
@@ -365,7 +352,7 @@ export default function ScootersPage() {
               background: 'rgba(220,0,0,0.9)', color: '#ffffff', fontSize: 13, fontWeight: 500,
               cursor: 'pointer', opacity: deleting ? 0.7 : 1,
             }}>
-              {deleting ? 'Suppression…' : 'Supprimer'}
+              {deleting ? 'Suppression...' : 'Supprimer'}
             </button>
           </div>
         </Modal>

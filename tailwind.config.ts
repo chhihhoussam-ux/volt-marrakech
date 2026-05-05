@@ -9,8 +9,8 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        accent: '#00B050',
-        'accent-hover': '#009040',
+        accent: '#FF6700',
+        'accent-hover': '#E55A00',
         ink: '#0a0a0a',
       },
       fontFamily: {

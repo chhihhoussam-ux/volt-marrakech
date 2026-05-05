@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { Battery, ArrowRight, Zap } from 'lucide-react'
 import { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion } from 'framer-motion'
 import type { Scooter } from '@/lib/types'
 
 interface ScooterCardProps {
@@ -51,7 +51,7 @@ export default function ScooterCard({ scooter, showReserveButton = true }: Scoot
           <span style={{
             display: 'inline-flex', alignItems: 'center', gap: 4,
             padding: '4px 10px', borderRadius: 6, fontSize: 11, fontWeight: 500,
-            background: isAvailable ? 'rgba(0,176,80,0.15)' : 'rgba(220,0,0,0.1)',
+            background: isAvailable ? 'rgba(255,103,0,0.15)' : 'rgba(220,0,0,0.1)',
             color: isAvailable ? '#004d20' : '#8a0000',
             backdropFilter: 'blur(4px)',
             fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
@@ -65,35 +65,6 @@ export default function ScooterCard({ scooter, showReserveButton = true }: Scoot
           </span>
         </div>
 
-        {/* Hover reserve button — slides up */}
-        <AnimatePresence>
-          {hovered && showReserveButton && isAvailable && (
-            <motion.div
-              initial={{ y: '100%', opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              exit={{ y: '100%', opacity: 0 }}
-              transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-              style={{
-                position: 'absolute', bottom: 0, left: 0, right: 0,
-                padding: '12px',
-              }}
-            >
-              <Link href={`/reserver?scooter=${scooter.id}`} style={{ textDecoration: 'none', display: 'block' }}>
-                <button style={{
-                  width: '100%', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 6,
-                  padding: '12px', borderRadius: 8, border: 'none',
-                  fontSize: 13, fontWeight: 500,
-                  cursor: 'pointer',
-                  background: 'var(--accent)',
-                  color: '#ffffff',
-                  fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
-                }}>
-                  Réserver <ArrowRight size={14} strokeWidth={1.5} />
-                </button>
-              </Link>
-            </motion.div>
-          )}
-        </AnimatePresence>
       </div>
 
       {/* Content */}

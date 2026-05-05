@@ -65,6 +65,15 @@ export interface SiteSettings {
   price3_duration: string
   price3_price: string
   price3_features: string
+  // Visuals
+  marker_icon_url: string
+  formule1_image_url: string
+  formule2_image_url: string
+  formule3_image_url: string
+  etape1_image_url: string
+  etape2_image_url: string
+  etape3_image_url: string
+  faq_image_url: string
 }
 
 export interface Database {

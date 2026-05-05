@@ -36,7 +36,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       }}>
         <span style={{
           fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
-          fontSize: 22, fontWeight: 700, color: '#00B050', letterSpacing: '-0.03em',
+          fontSize: 22, fontWeight: 700, color: '#FF6700', letterSpacing: '-0.03em',
         }}>
           almone.
         </span>

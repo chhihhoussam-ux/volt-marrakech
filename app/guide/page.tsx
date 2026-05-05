@@ -187,7 +187,7 @@ export default function GuidePage() {
             <div style={{
               display: 'inline-flex', alignItems: 'center', gap: 6,
               padding: '4px 12px', borderRadius: 20,
-              background: 'rgba(0,176,80,0.12)', border: '0.5px solid rgba(0,176,80,0.3)',
+              background: 'rgba(255,103,0,0.12)', border: '0.5px solid rgba(255,103,0,0.3)',
               marginBottom: 24,
             }}>
               <MapPin size={12} strokeWidth={2} color="var(--accent)" />
@@ -282,8 +282,8 @@ export default function GuidePage() {
                   <div style={{
                     padding: '12px 14px',
                     borderRadius: 8,
-                    background: 'rgba(0,176,80,0.06)',
-                    border: '0.5px solid rgba(0,176,80,0.2)',
+                    background: 'rgba(255,103,0,0.06)',
+                    border: '0.5px solid rgba(255,103,0,0.2)',
                     display: 'flex',
                     gap: 8,
                   }}>

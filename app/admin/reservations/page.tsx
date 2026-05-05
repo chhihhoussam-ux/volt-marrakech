@@ -37,8 +37,8 @@ function rentalSummary(r: Row): string {
 }
 
 const ST: Record<Status, { label: string; bg: string; color: string }> = {
-  pending:   { label: 'En attente',  bg: 'rgba(0,176,80,0.15)',    color: '#00B050' },
-  confirmed: { label: 'Confirmée',   bg: 'rgba(0,176,80,0.25)',    color: '#00B050' },
+  pending:   { label: 'En attente',  bg: 'rgba(255,103,0,0.15)',    color: '#FF6700' },
+  confirmed: { label: 'Confirmée',   bg: 'rgba(255,103,0,0.25)',    color: '#FF6700' },
   cancelled: { label: 'Annulée',     bg: 'rgba(255,255,255,0.08)', color: 'rgba(255,255,255,0.4)' },
   completed: { label: 'Terminée',    bg: 'rgba(255,255,255,0.06)', color: 'rgba(255,255,255,0.3)' },
 }
@@ -148,9 +148,9 @@ export default function ReservationsPage() {
               display: 'inline-flex', alignItems: 'center', gap: 6,
               padding: '7px 14px', borderRadius: 8,
               border: '0.5px solid',
-              borderColor: filter === f.value ? '#00B050' : 'rgba(255,255,255,0.1)',
-              background: filter === f.value ? 'rgba(0,176,80,0.12)' : 'transparent',
-              color: filter === f.value ? '#00B050' : 'rgba(255,255,255,0.4)',
+              borderColor: filter === f.value ? '#FF6700' : 'rgba(255,255,255,0.1)',
+              background: filter === f.value ? 'rgba(255,103,0,0.12)' : 'transparent',
+              color: filter === f.value ? '#FF6700' : 'rgba(255,255,255,0.4)',
               fontSize: 12, fontWeight: filter === f.value ? 500 : 400,
               cursor: 'pointer', transition: 'all 0.12s',
             }}
@@ -160,8 +160,8 @@ export default function ReservationsPage() {
               <span style={{
                 ...sf,
                 minWidth: 18, height: 18, borderRadius: 9,
-                background: filter === f.value ? 'rgba(0,176,80,0.2)' : 'rgba(255,255,255,0.08)',
-                color: filter === f.value ? '#00B050' : 'rgba(255,255,255,0.4)',
+                background: filter === f.value ? 'rgba(255,103,0,0.2)' : 'rgba(255,255,255,0.08)',
+                color: filter === f.value ? '#FF6700' : 'rgba(255,255,255,0.4)',
                 fontSize: 10, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '0 4px',
               }}>
                 {counts[f.value]}
@@ -261,7 +261,7 @@ export default function ReservationsPage() {
                                     cursor: updating === r.id ? 'not-allowed' : 'pointer',
                                     opacity: updating === r.id ? 0.5 : 1,
                                     border: isConfirm ? 'none' : '0.5px solid rgba(220,0,0,0.3)',
-                                    background: isConfirm ? '#00B050' : isCancel ? 'rgba(220,0,0,0.1)' : 'transparent',
+                                    background: isConfirm ? '#FF6700' : isCancel ? 'rgba(220,0,0,0.1)' : 'transparent',
                                     color: isConfirm ? '#ffffff' : isCancel ? '#ff6b6b' : 'rgba(255,255,255,0.6)',
                                   }}
                                 >

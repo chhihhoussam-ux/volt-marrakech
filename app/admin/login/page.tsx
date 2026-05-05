@@ -166,7 +166,7 @@ export default function AdminLoginPage() {
             padding: '13px',
             borderRadius: 8,
             border: 'none',
-            background: '#00B050',
+            background: '#FF6700',
             color: '#ffffff',
             fontSize: 14,
             fontWeight: 500,

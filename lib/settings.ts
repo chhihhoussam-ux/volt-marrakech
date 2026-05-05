@@ -3,7 +3,7 @@ import type { SiteSettings } from './types'
 
 export const SETTINGS_DEFAULTS: SiteSettings = {
   site_name: 'Almone',
-  accent_color: '#00B050',
+  accent_color: '#FF6700',
   logo_url: '',
   favicon_url: '',
   hero_image_url: 'https://images.unsplash.com/photo-1539650116574-75c0c6d73d0e?w=1600&q=80',
@@ -28,6 +28,15 @@ export const SETTINGS_DEFAULTS: SiteSettings = {
   price3_duration: '1 Semaine',
   price3_price: '950',
   price3_features: 'Équipements complets|Assistance prioritaire|Extension possible',
+  // Visuals
+  marker_icon_url: '',
+  formule1_image_url: '',
+  formule2_image_url: '',
+  formule3_image_url: '',
+  etape1_image_url: '',
+  etape2_image_url: '',
+  etape3_image_url: '',
+  faq_image_url: '',
 }
 
 export async function getSettings(): Promise<SiteSettings> {
@@ -67,6 +76,14 @@ export async function getSettings(): Promise<SiteSettings> {
       price3_duration: map.price3_duration ?? SETTINGS_DEFAULTS.price3_duration,
       price3_price:    map.price3_price    ?? SETTINGS_DEFAULTS.price3_price,
       price3_features: map.price3_features ?? SETTINGS_DEFAULTS.price3_features,
+      marker_icon_url: map.marker_icon_url ?? SETTINGS_DEFAULTS.marker_icon_url,
+      formule1_image_url: map.formule1_image_url ?? SETTINGS_DEFAULTS.formule1_image_url,
+      formule2_image_url: map.formule2_image_url ?? SETTINGS_DEFAULTS.formule2_image_url,
+      formule3_image_url: map.formule3_image_url ?? SETTINGS_DEFAULTS.formule3_image_url,
+      etape1_image_url: map.etape1_image_url ?? SETTINGS_DEFAULTS.etape1_image_url,
+      etape2_image_url: map.etape2_image_url ?? SETTINGS_DEFAULTS.etape2_image_url,
+      etape3_image_url: map.etape3_image_url ?? SETTINGS_DEFAULTS.etape3_image_url,
+      faq_image_url: map.faq_image_url ?? SETTINGS_DEFAULTS.faq_image_url,
     }
   } catch {
     return SETTINGS_DEFAULTS

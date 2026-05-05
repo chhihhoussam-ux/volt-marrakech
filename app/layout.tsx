@@ -3,6 +3,7 @@ import { DM_Sans } from 'next/font/google'
 import './globals.css'
 import { getSettings } from '@/lib/settings'
 import { SettingsProvider } from '@/lib/settings-context'
+import DynamicFavicon from '@/components/DynamicFavicon'
 
 const dmSans = DM_Sans({
   subsets: ['latin'],
@@ -15,7 +16,7 @@ export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
   maximumScale: 1,
-  themeColor: '#00B050',
+  themeColor: '#FF6700',
 }
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -61,10 +62,6 @@ export async function generateMetadata(): Promise<Metadata> {
       description,
       images: [settings.hero_image_url || 'https://images.unsplash.com/photo-1539650116574-75c0c6d73d0e?w=1200&q=80'],
     },
-    icons: {
-      icon: settings.favicon_url || '/icon-192.png',
-      apple: '/icon-192.png',
-    },
     robots: {
       index: true,
       follow: true,
@@ -81,14 +78,16 @@ export default function RootLayout({
   return (
     <html lang="fr" className={dmSans.variable}>
       <head>
-        <link rel="apple-touch-icon" href="/icon-512.svg" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         <meta name="apple-mobile-web-app-title" content="Almone" />
         <meta name="mobile-web-app-capable" content="yes" />
       </head>
       <body>
-        <SettingsProvider>{children}</SettingsProvider>
+        <SettingsProvider>
+          <DynamicFavicon />
+          {children}
+        </SettingsProvider>
       </body>
     </html>
   )

@@ -29,7 +29,7 @@ const statusConfig: Record<string, {
     label: 'Confirmée',
     message: 'Réservation confirmée — à bientôt !',
     icon: <CheckCircle size={13} strokeWidth={1.5} />,
-    color: 'var(--accent)', bg: 'rgba(0,176,80,0.12)',
+    color: 'var(--accent)', bg: 'rgba(255,103,0,0.12)',
   },
   cancelled: {
     label: 'Annulée',
@@ -275,7 +275,7 @@ function CompteContent() {
                     <div style={{
                       display: 'flex', alignItems: 'center', gap: 8,
                       padding: '11px 14px', borderRadius: 8,
-                      background: 'rgba(0,176,80,0.08)', border: '0.5px solid rgba(0,176,80,0.3)',
+                      background: 'rgba(255,103,0,0.08)', border: '0.5px solid rgba(255,103,0,0.3)',
                     }}>
                       <CheckCircle size={15} strokeWidth={1.5} color="#5a9000" />
                       <span style={{ fontSize: 13, color: 'var(--accent)' }}>{authSuccess}</span>

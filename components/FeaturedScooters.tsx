@@ -32,7 +32,7 @@ export default function FeaturedScooters() {
         }}>
           <div>
             <p style={{
-              fontSize: 11, fontWeight: 500, color: '#00B050', textTransform: 'uppercase',
+              fontSize: 11, fontWeight: 500, color: '#FF6700', textTransform: 'uppercase',
               letterSpacing: '0.15em', marginBottom: 12,
               fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
             }}>

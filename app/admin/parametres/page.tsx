@@ -52,6 +52,14 @@ export default function ParametresPage() {
           price3_duration: map.price3_duration ?? DEFAULTS.price3_duration,
           price3_price:    map.price3_price    ?? DEFAULTS.price3_price,
           price3_features: map.price3_features ?? DEFAULTS.price3_features,
+          marker_icon_url: map.marker_icon_url ?? DEFAULTS.marker_icon_url,
+          formule1_image_url: map.formule1_image_url ?? DEFAULTS.formule1_image_url,
+          formule2_image_url: map.formule2_image_url ?? DEFAULTS.formule2_image_url,
+          formule3_image_url: map.formule3_image_url ?? DEFAULTS.formule3_image_url,
+          etape1_image_url: map.etape1_image_url ?? DEFAULTS.etape1_image_url,
+          etape2_image_url: map.etape2_image_url ?? DEFAULTS.etape2_image_url,
+          etape3_image_url: map.etape3_image_url ?? DEFAULTS.etape3_image_url,
+          faq_image_url: map.faq_image_url ?? DEFAULTS.faq_image_url,
         })
       }
       setLoading(false)
@@ -117,8 +125,8 @@ export default function ParametresPage() {
             display: 'inline-flex', alignItems: 'center', gap: 7,
             padding: '10px 20px', borderRadius: 8,
             border: 'none',
-            background: saved ? 'rgba(0,176,80,0.2)' : '#00B050',
-            color: saved ? '#00B050' : '#ffffff',
+            background: saved ? 'rgba(255,103,0,0.2)' : '#FF6700',
+            color: saved ? '#FF6700' : '#ffffff',
             fontSize: 13, fontWeight: 500, cursor: saving ? 'not-allowed' : 'pointer',
             opacity: saving ? 0.7 : 1, whiteSpace: 'nowrap',
             fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
@@ -151,15 +159,15 @@ export default function ParametresPage() {
           <Row label="Nom du site" hint="Affiché dans les balises meta et onglets">
             <Input value={settings.site_name} onChange={v => set('site_name', v)} placeholder="Almone" />
           </Row>
-          <Row label="Couleur accent" hint="Format hexadécimal (ex : #00B050)">
+          <Row label="Couleur accent" hint="Format hexadécimal (ex : #FF6700)">
             <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
               <input
                 type="color"
-                value={settings.accent_color || '#00B050'}
+                value={settings.accent_color || '#FF6700'}
                 onChange={e => set('accent_color', e.target.value)}
                 style={{ width: 44, height: 36, borderRadius: 6, border: '0.5px solid rgba(255,255,255,0.15)', cursor: 'pointer', padding: 2, background: 'none' }}
               />
-              <Input value={settings.accent_color} onChange={v => set('accent_color', v)} placeholder="#00B050" />
+              <Input value={settings.accent_color} onChange={v => set('accent_color', v)} placeholder="#FF6700" />
             </div>
           </Row>
           <Row label="Numéro WhatsApp" hint="Sans + ni espaces (ex : 212600000000)">
@@ -189,18 +197,9 @@ export default function ParametresPage() {
           </Row>
         </Section>
 
-        {/* Page d'accueil */}
-        <Section title="Page d'accueil">
-          <Row label="Image hero" hint="Recommandé : 1600 × 900px minimum, format paysage">
-            <ImageUpload
-              value={settings.hero_image_url}
-              onChange={v => set('hero_image_url', v)}
-              accept="image/jpeg,image/png,image/webp"
-              fit="cover"
-              height={160}
-            />
-          </Row>
-          <Row label="Texte À propos" hint="Affiché dans la section 'Notre histoire' de l'accueil">
+        {/* Contenu */}
+        <Section title="Contenu">
+          <Row label="Texte À propos" hint="Affiché dans les pages qui utilisent cette description">
             <textarea
               value={settings.about_text}
               onChange={e => set('about_text', e.target.value)}
@@ -279,6 +278,108 @@ export default function ParametresPage() {
           ))}
         </Section>
 
+        {/* Carte & Marqueurs */}
+        <Section title="Carte & Marqueurs">
+          <Row label="Icône marqueur SVG" hint="Upload un SVG personnalisé pour les marqueurs de la carte. Vide = cercle orange par défaut.">
+            <ImageUpload
+              value={settings.marker_icon_url}
+              onChange={v => set('marker_icon_url', v)}
+              accept="image/svg+xml"
+              fit="contain"
+              height={80}
+            />
+          </Row>
+          {settings.marker_icon_url && (
+            <Row label="Aperçu marqueur">
+              <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                <div style={{
+                  width: 40, height: 40, borderRadius: '50%', background: '#FF6700',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                }}>
+                  <img src={settings.marker_icon_url} alt="Marker" style={{ width: 20, height: 20 }} />
+                </div>
+                <span style={{ fontSize: 12, color: 'rgba(255,255,255,0.4)' }}>Prévisualisation du marqueur avec couleur accent</span>
+              </div>
+            </Row>
+          )}
+        </Section>
+
+        {/* Visuels de la home page */}
+        <Section title="Visuels de la home page">
+          <Row label="Image Hero" hint="Image de fond de la section hero">
+            <ImageUpload
+              value={settings.hero_image_url}
+              onChange={v => set('hero_image_url', v)}
+              accept="image/jpeg,image/png,image/webp"
+              fit="cover"
+              height={140}
+            />
+          </Row>
+          <Row label="Visuel Formule 1" hint="Image affichée sur la première carte tarif">
+            <ImageUpload
+              value={settings.formule1_image_url}
+              onChange={v => set('formule1_image_url', v)}
+              accept="image/jpeg,image/png,image/webp"
+              fit="cover"
+              height={120}
+            />
+          </Row>
+          <Row label="Visuel Formule 2" hint="Image affichée sur la deuxième carte tarif">
+            <ImageUpload
+              value={settings.formule2_image_url}
+              onChange={v => set('formule2_image_url', v)}
+              accept="image/jpeg,image/png,image/webp"
+              fit="cover"
+              height={120}
+            />
+          </Row>
+          <Row label="Visuel Formule 3" hint="Image affichée sur la troisième carte tarif">
+            <ImageUpload
+              value={settings.formule3_image_url}
+              onChange={v => set('formule3_image_url', v)}
+              accept="image/jpeg,image/png,image/webp"
+              fit="cover"
+              height={120}
+            />
+          </Row>
+          <Row label="Visuel Étape 1" hint="Image carrée 200×200 pour l'étape 'Choisissez votre scooter'">
+            <ImageUpload
+              value={settings.etape1_image_url}
+              onChange={v => set('etape1_image_url', v)}
+              accept="image/jpeg,image/png,image/webp"
+              fit="cover"
+              height={120}
+            />
+          </Row>
+          <Row label="Visuel Étape 2" hint="Image carrée 200×200 pour l'étape 'Réservez en ligne'">
+            <ImageUpload
+              value={settings.etape2_image_url}
+              onChange={v => set('etape2_image_url', v)}
+              accept="image/jpeg,image/png,image/webp"
+              fit="cover"
+              height={120}
+            />
+          </Row>
+          <Row label="Visuel Étape 3" hint="Image carrée 200×200 pour l'étape 'Yallah, on roule !'">
+            <ImageUpload
+              value={settings.etape3_image_url}
+              onChange={v => set('etape3_image_url', v)}
+              accept="image/jpeg,image/png,image/webp"
+              fit="cover"
+              height={120}
+            />
+          </Row>
+          <Row label="Visuel FAQ" hint="Image affichée à gauche de l'accordion FAQ">
+            <ImageUpload
+              value={settings.faq_image_url}
+              onChange={v => set('faq_image_url', v)}
+              accept="image/jpeg,image/png,image/webp"
+              fit="cover"
+              height={140}
+            />
+          </Row>
+        </Section>
+
       </div>
     </div>
   )
@@ -335,7 +436,7 @@ function Input({ value, onChange, placeholder }: { value: string; onChange: (v: 
         fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
         transition: 'border-color 0.15s',
       }}
-      onFocus={e => (e.target.style.borderColor = '#00B050')}
+      onFocus={e => (e.target.style.borderColor = '#FF6700')}
       onBlur={e => (e.target.style.borderColor = 'rgba(255,255,255,0.15)')}
     />
   )

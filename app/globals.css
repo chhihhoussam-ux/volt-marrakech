@@ -3,8 +3,8 @@
 @tailwind utilities;
 
 :root {
-  --accent: #00B050;
-  --accent-hover: #009040;
+  --accent: #FF6700;
+  --accent-hover: #E55A00;
   --ink: #0a0a0a;
   --white: #ffffff;
   --gray-50: #F5F5F5;
@@ -146,8 +146,8 @@ h4, h5, h6 {
   }
 
   .badge-available {
-    background-color: rgba(0, 176, 80, 0.15);
-    color: #006030;
+    background-color: rgba(255, 103, 0, 0.15);
+    color: #994000;
   }
 
   .badge-rented {
@@ -310,6 +310,12 @@ html, body {
 
   .guide-grid {
     grid-template-columns: 1fr !important;
+  }
+  .faq-layout {
+    grid-template-columns: 1fr !important;
+  }
+  .faq-image {
+    min-height: 240px !important;
   }
   .guide-why-grid {
     grid-template-columns: 1fr 1fr !important;

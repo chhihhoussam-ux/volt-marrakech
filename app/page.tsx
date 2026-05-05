@@ -8,7 +8,11 @@ import FeaturedScooters from '@/components/FeaturedScooters'
 import TarifsSection from '@/components/TarifsSection'
 import HowItWorksSection from '@/components/HowItWorksSection'
 import FAQSection from '@/components/FAQSection'
-import MapSection from '@/components/MapSection'
+import dynamic from 'next/dynamic'
+const MapSection = dynamic(() => import('@/components/MapSection'), {
+  ssr: false,
+  loading: () => <div style={{ height: 480, background: '#F5F5F5' }} />,
+})
 
 export const metadata: Metadata = {
   title: 'Almone — Location de scooters électriques à Marrakech | Yallah, Almone !',

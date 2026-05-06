@@ -244,11 +244,13 @@ html, body {
   max-width: 100%;
 }
 
-/* Footer grid → 3 columns from md */
+/* Footer grid → 3 columns side by side from md */
 @media (min-width: 768px) {
   .footer-grid {
-    grid-template-columns: repeat(3, 1fr) !important;
+    flex-direction: row !important;
+    gap: 48px !important;
   }
+  .footer-grid > div { flex: 1; }
 }
 
 /* Nav link light mode (transparent navbar on homepage) */
@@ -272,6 +274,7 @@ html, body {
   section { padding-top: 60px !important; padding-bottom: 60px !important; }
 
   /* ── Navbar mobile ── */
+  .nav-inner { padding: 0 20px !important; }
   .nav-logo-img { max-width: 120px !important; height: auto !important; }
 
   /* ── Hero ── */
@@ -354,21 +357,7 @@ html, body {
 
   /* ── Footer ── */
   .footer-grid {
-    grid-template-columns: 1fr !important;
     gap: 32px !important;
-    text-align: center !important;
-  }
-  .footer-link {
-    font-size: 15px !important;
-    line-height: 2 !important;
-    min-height: 44px !important;
-    display: inline-flex !important;
-    align-items: center !important;
-  }
-  .footer-bottom {
-    flex-direction: column-reverse !important;
-    align-items: center !important;
-    text-align: center !important;
   }
 
   /* ── Forms ── */

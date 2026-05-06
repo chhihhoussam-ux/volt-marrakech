@@ -62,7 +62,7 @@ export default function Navbar() {
           transition: 'background 0.3s, border-color 0.3s',
         }}
       >
-        <div style={{
+        <div className="nav-inner" style={{
           maxWidth: 1200,
           margin: '0 auto',
           padding: '0 24px',

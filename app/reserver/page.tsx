@@ -171,7 +171,14 @@ function ReserverContent() {
       fetch('/api/emails', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ type: 'confirmation', reservationId: inserted.id }),
+        body: JSON.stringify({
+          type: 'confirmation',
+          reservationId: inserted.id,
+          clientEmail: user.email,
+          clientName: user.user_metadata?.full_name || user.email,
+          scooterName: selectedScooter.name,
+          phone: phone.trim(),
+        }),
       }).catch(() => {})
     } catch (e: unknown) {
       setError(e instanceof Error ? e.message : 'Une erreur est survenue.')

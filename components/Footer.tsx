@@ -97,7 +97,7 @@ export default function Footer() {
                 WhatsApp
               </a>
               <a
-                href="mailto:contact@almone.ma"
+                href="mailto:contact@almone-scooter.com"
                 style={{
                   display: 'flex', alignItems: 'center', gap: 10, textDecoration: 'none',
                   color: 'rgba(255,255,255,0.6)', fontSize: 14,
@@ -105,7 +105,7 @@ export default function Footer() {
                 }}
               >
                 <Mail size={16} strokeWidth={1.5} color="var(--accent)" />
-                contact@almone.ma
+                contact@almone-scooter.com
               </a>
               <div style={{
                 display: 'flex', alignItems: 'flex-start', gap: 10,

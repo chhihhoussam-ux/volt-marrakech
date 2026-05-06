@@ -2,7 +2,7 @@
   "name": "Almone",
   "short_name": "Almone",
   "description": "Location de scooters électriques à Marrakech. Yallah, Almone !",
-  "start_url": "/",
+  "start_url": "https://www.almone-scooter.com",
   "display": "standalone",
   "background_color": "#0a0a0a",
   "theme_color": "#FF6700",

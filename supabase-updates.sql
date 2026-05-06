@@ -47,7 +47,7 @@ ON CONFLICT (key) DO NOTHING;
 
 -- 6. Email settings
 INSERT INTO settings (key, value) VALUES
-  ('admin_email', 'admin@almone.ma')
+  ('admin_email', 'admin@almone-scooter.com')
 ON CONFLICT (key) DO NOTHING;
 
 -- ══════════════════════════════════════════════════════

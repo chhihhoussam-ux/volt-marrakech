@@ -27,7 +27,7 @@ export async function generateMetadata(): Promise<Metadata> {
     'Louez un scooter électrique à Marrakech avec Almone. 20 ans d\'expérience dans la mobilité, flotte premium, réservation en ligne. Explorez la médina, Guéliz et les jardins à votre rythme. Dès 60 MAD.'
 
   return {
-    metadataBase: new URL('https://almone.ma'),
+    metadataBase: new URL('https://www.almone-scooter.com'),
     title: {
       template: `%s | Almone — Location scooter électrique Marrakech`,
       default: `Almone — Location de scooters électriques à Marrakech | Yallah, Almone !`,

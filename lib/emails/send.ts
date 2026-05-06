@@ -8,9 +8,18 @@ import {
 } from './templates'
 
 const resend = new Resend(process.env.RESEND_API_KEY)
-const FROM = 'Almone <onboarding@resend.dev>'
+const FROM = 'Almone <noreply@almone-scooter.com>'
 const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL || 'https://volt-marrakech.vercel.app'
+  process.env.NEXT_PUBLIC_SITE_URL || 'https://www.almone-scooter.com'
+const IS_DEV = process.env.NODE_ENV === 'development'
+
+function resolveRecipient(email: string): string {
+  if (IS_DEV && process.env.TEST_EMAIL) {
+    console.log(`[DEV] Redirecting email from ${email} → ${process.env.TEST_EMAIL}`)
+    return process.env.TEST_EMAIL
+  }
+  return email
+}
 
 async function getSettingsMap(): Promise<Record<string, string>> {
   const { data } = await supabase.from('settings').select('key, value')
@@ -68,17 +77,22 @@ export async function sendConfirmationReservation(
     console.log('Resend API Key exists:', !!process.env.RESEND_API_KEY)
     const settings = await getSettingsMap()
     const whatsappNumber = settings.whatsapp_number || ''
-    const adminEmail = settings.admin_email || 'admin@almone.ma'
+    const adminEmail = settings.admin_email || 'admin@almone-scooter.com'
 
     const rentalType = rentalTypeLabel(reservation.rental_type)
     const duration = formatDuration(reservation.duration_value, reservation.rental_type)
     const startDate = formatDate(reservation.start_date)
     const endDate = formatDate(reservation.end_date)
 
-    console.log('Sending email to:', clientEmail)
+    console.log('Sending to client:', clientEmail)
+    if (!clientEmail) {
+      console.error('No client email provided, skipping client email')
+      return { success: false, error: 'No client email' }
+    }
+    const toClient = resolveRecipient(clientEmail)
     const clientResult = await resend.emails.send({
       from: FROM,
-      to: clientEmail,
+      to: toClient,
       subject: 'Votre demande de réservation Almone est bien reçue',
       html: confirmationReservationHtml({
         clientName,
@@ -95,10 +109,11 @@ export async function sendConfirmationReservation(
     })
     console.log('Email sent:', clientResult)
 
-    console.log('Sending email to:', adminEmail)
+    const toAdmin = resolveRecipient(adminEmail)
+    console.log('Sending to admin:', toAdmin)
     const adminResult = await resend.emails.send({
       from: FROM,
-      to: adminEmail,
+      to: toAdmin,
       subject: `🔔 Nouvelle réservation #${reservation.id.slice(0, 8).toUpperCase()}`,
       html: nouvelleReservationAdminHtml({
         clientName,
@@ -134,10 +149,12 @@ export async function sendReservationConfirmee(
     const settings = await getSettingsMap()
     const whatsappNumber = settings.whatsapp_number || ''
 
-    console.log('Sending email to:', clientEmail)
+    console.log('Sending to client:', clientEmail)
+    if (!clientEmail) return { success: false, error: 'No client email' }
+    const toClient = resolveRecipient(clientEmail)
     const result = await resend.emails.send({
       from: FROM,
-      to: clientEmail,
+      to: toClient,
       subject: 'Votre réservation Almone est confirmée 🛵',
       html: reservationConfirmeeHtml({
         clientName,
@@ -170,10 +187,12 @@ export async function sendReservationAnnulee(
     const settings = await getSettingsMap()
     const whatsappNumber = settings.whatsapp_number || ''
 
-    console.log('Sending email to:', clientEmail)
+    console.log('Sending to client:', clientEmail)
+    if (!clientEmail) return { success: false, error: 'No client email' }
+    const toClient = resolveRecipient(clientEmail)
     const result = await resend.emails.send({
       from: FROM,
-      to: clientEmail,
+      to: toClient,
       subject: 'Votre réservation Almone a été annulée',
       html: reservationAnnuleeHtml({
         clientName,

@@ -20,7 +20,7 @@ export default function ForgotPasswordPage() {
     setSuccess(false)
     try {
       const { error } = await supabase.auth.resetPasswordForEmail(email, {
-        redirectTo: 'https://volt-marrakech.vercel.app/reset-password',
+        redirectTo: 'https://www.almone-scooter.com/reset-password',
       })
       if (error) throw error
       setSuccess(true)

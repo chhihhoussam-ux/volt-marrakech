@@ -177,7 +177,12 @@ function CompteContent() {
       fetch('/api/emails', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ type: 'annulee', reservationId: id }),
+        body: JSON.stringify({
+          type: 'annulee',
+          reservationId: id,
+          clientEmail: user?.email,
+          clientName: user?.user_metadata?.full_name || user?.email,
+        }),
       }).catch(() => {})
     }
     setCancellingId(null)

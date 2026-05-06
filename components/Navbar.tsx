@@ -54,7 +54,7 @@ export default function Navbar() {
           {/* Logo */}
           <Link href="/" style={{ textDecoration: 'none', flexShrink: 0 }}>
             {logoUrl ? (
-              <img src={logoUrl} alt="Almone" style={{ height: 30, width: 'auto', objectFit: 'contain' }} />
+              <img src={logoUrl} alt="Almone" className="nav-logo-img" style={{ height: 30, width: 'auto', maxWidth: 160, objectFit: 'contain' }} />
             ) : (
               <span style={{
                 fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
@@ -108,7 +108,7 @@ export default function Navbar() {
               width: 44, height: 44, borderRadius: 8, flexShrink: 0,
             }}
           >
-            {menuOpen ? <X size={22} strokeWidth={1.5} /> : <Menu size={22} strokeWidth={1.5} />}
+            {menuOpen ? <X size={24} strokeWidth={1.5} /> : <Menu size={24} strokeWidth={1.5} />}
           </button>
         </div>
       </nav>

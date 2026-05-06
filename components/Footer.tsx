@@ -62,7 +62,7 @@ export default function Footer() {
                 { href: '/compte', label: 'Mon compte' },
                 { href: '/mentions-legales', label: 'Mentions légales' },
               ].map((link) => (
-                <Link key={link.href} href={link.href} style={{
+                <Link key={link.href} href={link.href} className="footer-link" style={{
                   fontSize: 14,
                   color: 'rgba(255,255,255,0.6)',
                   textDecoration: 'none',

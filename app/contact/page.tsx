@@ -144,6 +144,7 @@ export default function ContactPage() {
       {/* Coordonnées Section */}
       <section style={{ background: '#ffffff', padding: '80px 24px', fontFamily }}>
         <div
+          className="contact-grid"
           style={{
             maxWidth: 1200,
             margin: '0 auto',
@@ -426,6 +427,7 @@ export default function ContactPage() {
               <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
                 {/* Name + Email */}
                 <div
+                  className="contact-form-grid"
                   style={{
                     display: 'grid',
                     gridTemplateColumns: '1fr 1fr',
@@ -466,6 +468,7 @@ export default function ContactPage() {
 
                 {/* Phone + Subject */}
                 <div
+                  className="contact-form-grid"
                   style={{
                     display: 'grid',
                     gridTemplateColumns: '1fr 1fr',

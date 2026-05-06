@@ -365,7 +365,7 @@ function ReserverContent() {
               {/* ── Rental type ── */}
               <div>
                 <label style={{ display: 'block', fontSize: 13, fontWeight: 500, marginBottom: 10 }}>Type de location</label>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 8 }}>
+                <div className="rental-type-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 8 }}>
                   {([
                     { value: 'hourly', label: 'À l\'heure', sub: selectedScooter ? `${selectedScooter.price_per_hour} MAD/h` : 'par heure' },
                     { value: 'daily',  label: 'À la journée', sub: selectedScooter ? `${selectedScooter.price_per_day} MAD/j` : 'par jour' },

@@ -335,7 +335,7 @@ function CompteContent() {
         <div style={{ maxWidth: 720, margin: '0 auto', padding: '56px 24px 80px' }}>
 
           {/* Header */}
-          <div className="dashboard-header" style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: 48, flexWrap: 'wrap', gap: 16 }}>
+          <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: 48, flexWrap: 'wrap', gap: 16 }}>
             <div>
               <h1 style={{ ...sf, fontSize: 32, fontWeight: 700, letterSpacing: '-0.03em', marginBottom: 8 }}>
                 Bonjour, {firstName} 👋
@@ -344,8 +344,8 @@ function CompteContent() {
                 Gérez vos réservations et informations personnelles
               </p>
             </div>
-            <button className="dashboard-logout" onClick={handleLogout} style={{
-              ...sf, display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 6,
+            <button onClick={handleLogout} style={{
+              ...sf, display: 'inline-flex', alignItems: 'center', gap: 6,
               padding: '10px 16px', borderRadius: 8,
               border: '0.5px solid rgba(0,0,0,0.1)', background: 'transparent',
               fontSize: 13, color: '#757575', cursor: 'pointer',
@@ -398,7 +398,7 @@ function CompteContent() {
                       overflow: 'hidden',
                     }}>
                       {/* Card header */}
-                      <div className="dashboard-card" style={{ padding: '24px 24px 20px', display: 'flex', flexDirection: 'column', gap: 16 }}>
+                      <div style={{ padding: '24px 24px 20px', display: 'flex', flexDirection: 'column', gap: 16 }}>
                         {/* Top row: badge + ref */}
                         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 8 }}>
                           <span style={{
@@ -474,7 +474,7 @@ function CompteContent() {
                               </button>
                             </div>
                           ) : (
-                            <button className="dashboard-cancel-btn" onClick={() => setConfirmCancelId(res.id)} style={{
+                            <button onClick={() => setConfirmCancelId(res.id)} style={{
                               ...sf, padding: '6px 14px', borderRadius: 6,
                               border: '0.5px solid rgba(220,0,0,0.3)', background: 'rgba(220,0,0,0.06)',
                               fontSize: 12, color: '#cc0000', cursor: 'pointer',
@@ -522,7 +522,7 @@ function CompteContent() {
                 <input type="tel" value={profilePhone} onChange={e => setProfilePhone(e.target.value)}
                   placeholder="+212 6XX XXX XXX" style={INPUT_STYLE} />
               </div>
-              <button className="profile-save-btn" onClick={handleSaveProfile} disabled={profileSaving} style={{
+              <button onClick={handleSaveProfile} disabled={profileSaving} style={{
                 ...sf, display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 7,
                 padding: '12px 20px', borderRadius: 8, border: 'none',
                 background: profileSaved ? 'rgba(0,176,80,0.1)' : 'var(--accent)',

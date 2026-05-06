@@ -17,7 +17,7 @@ export default function HeroSection() {
   ]
 
   return (
-    <section style={{ position: 'relative', height: 'calc(100vh - 56px)', overflow: 'hidden', minHeight: 544 }}>
+    <section style={{ position: 'relative', height: '100vh', overflow: 'hidden', minHeight: 600 }}>
       {/* Background */}
       <div style={{
         position: 'absolute', inset: 0,
@@ -65,7 +65,7 @@ export default function HeroSection() {
           </h1>
 
           {/* Subtitle */}
-          <p className="hero-subtitle" style={{
+          <p style={{
             fontSize: 18,
             color: '#ffffff',
             opacity: 0.75,
@@ -95,7 +95,7 @@ export default function HeroSection() {
               <button style={{
                 display: 'inline-flex', alignItems: 'center', gap: 8,
                 padding: '14px 28px', background: 'transparent',
-                border: '1px solid rgba(255,255,255,0.3)',
+                border: '0.5px solid rgba(255,255,255,0.35)',
                 borderRadius: 8, fontSize: 15, fontWeight: 400, color: '#ffffff', cursor: 'pointer',
                 fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
               }}>
@@ -120,14 +120,14 @@ export default function HeroSection() {
               padding: '22px 28px',
               borderRight: i < stats.length - 1 ? '0.5px solid rgba(255,255,255,0.08)' : 'none',
             }}>
-              <div className="stat-value" style={{
+              <div style={{
                 fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
                 fontSize: 22, fontWeight: 700, letterSpacing: '-0.03em', color: '#ffffff', marginBottom: 4,
               }}>
                 {stat.value}
               </div>
-              <div className="stat-label" style={{
-                fontSize: 11, color: 'rgba(255,255,255,0.45)', textTransform: 'uppercase', letterSpacing: '0.05em',
+              <div style={{
+                fontSize: 11, color: 'rgba(255,255,255,0.45)', textTransform: 'uppercase', letterSpacing: '0.06em',
                 fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
               }}>
                 {stat.label}

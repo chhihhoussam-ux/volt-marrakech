@@ -1,27 +1,25 @@
 import Link from 'next/link'
 import { MessageCircle, MapPin, Mail } from 'lucide-react'
 
-const sf = 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif'
-
 export default function Footer() {
   return (
     <footer style={{
       background: '#0a0a0a',
       color: '#ffffff',
-      padding: '64px 20px 40px',
+      padding: '64px 24px 40px',
     }}>
       <div style={{ maxWidth: 1200, margin: '0 auto' }}>
         <div className="footer-grid" style={{
-          display: 'flex',
-          flexDirection: 'column',
-          gap: 40,
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(min(200px, 100%), 1fr))',
+          gap: 48,
           marginBottom: 56,
         }}>
           {/* Brand */}
           <div>
             <Link href="/" style={{ textDecoration: 'none', display: 'inline-block', marginBottom: 16 }}>
               <span style={{
-                fontFamily: sf,
+                fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
                 fontSize: 22,
                 fontWeight: 700,
                 color: '#ffffff',
@@ -32,13 +30,14 @@ export default function Footer() {
             </Link>
             <p style={{
               fontSize: 12, fontWeight: 500, color: 'var(--accent)', marginBottom: 10,
-              fontFamily: sf, letterSpacing: '0.04em',
+              fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
+              letterSpacing: '0.04em',
             }}>
               Yallah, Almone !
             </p>
             <p style={{
-              fontSize: 13, color: '#757575', lineHeight: 1.7, maxWidth: 280,
-              fontFamily: sf,
+              fontSize: 13, color: '#757575', lineHeight: 1.7, maxWidth: 220,
+              fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
             }}>
               Explorez la ville rouge à votre rythme avec nos scooters électriques. Réservation en ligne, livraison à domicile, assistance 7j/7.
             </p>
@@ -48,12 +47,12 @@ export default function Footer() {
           <div>
             <p style={{
               fontSize: 11, fontWeight: 500, color: '#757575', textTransform: 'uppercase',
-              letterSpacing: '0.12em', marginBottom: 16,
-              fontFamily: sf,
+              letterSpacing: '0.12em', marginBottom: 20,
+              fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
             }}>
               Navigation
             </p>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
               {[
                 { href: '/', label: 'Accueil' },
                 { href: '/scooters', label: 'Catalogue' },
@@ -64,11 +63,11 @@ export default function Footer() {
                 { href: '/mentions-legales', label: 'Mentions légales' },
               ].map((link) => (
                 <Link key={link.href} href={link.href} style={{
-                  fontSize: 15,
-                  lineHeight: 2,
+                  fontSize: 14,
                   color: 'rgba(255,255,255,0.6)',
                   textDecoration: 'none',
-                  fontFamily: sf,
+                  transition: 'color 0.15s',
+                  fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
                 }}>
                   {link.label}
                 </Link>
@@ -80,8 +79,8 @@ export default function Footer() {
           <div>
             <p style={{
               fontSize: 11, fontWeight: 500, color: '#757575', textTransform: 'uppercase',
-              letterSpacing: '0.12em', marginBottom: 16,
-              fontFamily: sf,
+              letterSpacing: '0.12em', marginBottom: 20,
+              fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
             }}>
               Contact
             </p>
@@ -92,29 +91,30 @@ export default function Footer() {
                 rel="noopener noreferrer"
                 style={{
                   display: 'flex', alignItems: 'center', gap: 10, textDecoration: 'none',
-                  color: 'rgba(255,255,255,0.6)', fontSize: 15, fontFamily: sf,
+                  color: 'rgba(255,255,255,0.6)', fontSize: 14,
+                  fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
                 }}
               >
-                <MessageCircle size={16} strokeWidth={1.5} color="var(--accent)" style={{ flexShrink: 0 }} />
+                <MessageCircle size={16} strokeWidth={1.5} color="var(--accent)" />
                 WhatsApp
               </a>
               <a
                 href="mailto:contact@almone-scooter.com"
                 style={{
                   display: 'flex', alignItems: 'center', gap: 10, textDecoration: 'none',
-                  color: 'rgba(255,255,255,0.6)', fontSize: 15, fontFamily: sf,
-                  wordBreak: 'break-word', overflowWrap: 'break-word',
+                  color: 'rgba(255,255,255,0.6)', fontSize: 14,
+                  fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
                 }}
               >
-                <Mail size={16} strokeWidth={1.5} color="var(--accent)" style={{ flexShrink: 0 }} />
-                <span>contact@almone-scooter.com</span>
+                <Mail size={16} strokeWidth={1.5} color="var(--accent)" />
+                contact@almone-scooter.com
               </a>
               <div style={{
                 display: 'flex', alignItems: 'flex-start', gap: 10,
-                color: 'rgba(255,255,255,0.6)', fontSize: 15, fontFamily: sf,
-                wordBreak: 'break-word', overflowWrap: 'break-word',
+                color: 'rgba(255,255,255,0.6)', fontSize: 14,
+                fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
               }}>
-                <MapPin size={16} strokeWidth={1.5} color="var(--accent)" style={{ flexShrink: 0, marginTop: 2 }} />
+                <MapPin size={16} strokeWidth={1.5} color="var(--accent)" style={{ flexShrink: 0, marginTop: 1 }} />
                 <span>Avenue Mohammed V,<br />Marrakech 40000</span>
               </div>
             </div>
@@ -122,16 +122,26 @@ export default function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div style={{
+        <div className="footer-bottom" style={{
           paddingTop: 28,
           borderTop: '0.5px solid rgba(255,255,255,0.08)',
-          textAlign: 'center',
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          flexWrap: 'wrap',
+          gap: 8,
         }}>
-          <p style={{ fontSize: 12, color: '#757575', fontFamily: sf, marginBottom: 4 }}>
+          <p style={{
+            fontSize: 12, color: '#757575',
+            fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
+          }}>
             © 2025 Almone. Tous droits réservés.
           </p>
-          <p style={{ fontSize: 12, color: '#757575', fontFamily: sf }}>
-            Fait à Marrakech
+          <p style={{
+            fontSize: 12, color: '#757575',
+            fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
+          }}>
+            Fait à Marrakech 🇲🇦
           </p>
         </div>
       </div>

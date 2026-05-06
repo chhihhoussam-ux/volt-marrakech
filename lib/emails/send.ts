@@ -65,6 +65,14 @@ interface ReservationData {
   rental_type: string
   duration_value: number
   phone?: string
+  pickup_type?: string
+  pickup_address?: string
+  pickup_location_id?: string
+  dropoff_type?: string
+  dropoff_address?: string
+  dropoff_location_id?: string
+  delivery_fee?: number
+  pickup_fee?: number
 }
 
 export async function sendConfirmationReservation(
@@ -84,6 +92,14 @@ export async function sendConfirmationReservation(
     const duration = formatDuration(reservation.duration_value, reservation.rental_type)
     const startDate = formatDate(reservation.start_date)
     const endDate = formatDate(reservation.end_date)
+
+    const pickupInfo = reservation.pickup_type === 'delivery'
+      ? `Livraison à ${reservation.pickup_address || 'votre adresse'} (+${reservation.delivery_fee || 0} MAD)`
+      : 'En agence'
+    const dropoffInfo = reservation.dropoff_type === 'delivery'
+      ? `Récupération à ${reservation.dropoff_address || 'votre adresse'} (+${reservation.pickup_fee || 0} MAD)`
+      : 'En agence'
+    const basePrice = reservation.total_price - (reservation.delivery_fee || 0) - (reservation.pickup_fee || 0)
 
     console.log('Sending to client:', clientEmail)
     if (!clientEmail) {
@@ -106,6 +122,11 @@ export async function sendConfirmationReservation(
         phone: clientPhone,
         reservationId: reservation.id,
         whatsappUrl: waUrl(whatsappNumber),
+        pickupInfo,
+        dropoffInfo,
+        deliveryFee: reservation.delivery_fee || 0,
+        pickupFee: reservation.pickup_fee || 0,
+        basePrice,
       }),
     })
     console.log('Email sent:', clientResult)
@@ -128,6 +149,10 @@ export async function sendConfirmationReservation(
         totalPrice: reservation.total_price,
         reservationId: reservation.id,
         adminUrl: `${SITE_URL}/admin/reservations`,
+        pickupInfo,
+        dropoffInfo,
+        deliveryFee: reservation.delivery_fee || 0,
+        pickupFee: reservation.pickup_fee || 0,
       }),
     })
     console.log('Email sent:', adminResult)
@@ -166,6 +191,12 @@ export async function sendReservationConfirmee(
         reservationId: reservation.id,
         whatsappUrl: waUrl(whatsappNumber),
         siteUrl: SITE_URL,
+        pickupInfo: reservation.pickup_type === 'delivery'
+          ? `Livraison à ${reservation.pickup_address || 'votre adresse'} (+${reservation.delivery_fee || 0} MAD)`
+          : 'En agence',
+        dropoffInfo: reservation.dropoff_type === 'delivery'
+          ? `Récupération à ${reservation.dropoff_address || 'votre adresse'} (+${reservation.pickup_fee || 0} MAD)`
+          : 'En agence',
       }),
     })
     console.log('Email sent:', result)

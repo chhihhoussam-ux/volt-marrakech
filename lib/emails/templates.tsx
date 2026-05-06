@@ -73,6 +73,11 @@ interface ConfirmationReservationProps {
   phone: string;
   reservationId: string;
   whatsappUrl: string;
+  pickupInfo?: string;
+  dropoffInfo?: string;
+  deliveryFee?: number;
+  pickupFee?: number;
+  basePrice?: number;
 }
 
 export function confirmationReservationHtml(props: ConfirmationReservationProps): string {
@@ -87,6 +92,11 @@ export function confirmationReservationHtml(props: ConfirmationReservationProps)
     phone,
     reservationId,
     whatsappUrl,
+    pickupInfo,
+    dropoffInfo,
+    deliveryFee,
+    pickupFee,
+    basePrice,
   } = props;
 
   const body = `
@@ -99,6 +109,13 @@ export function confirmationReservationHtml(props: ConfirmationReservationProps)
         { label: "Scooter", value: scooterName },
         { label: "Type", value: `${rentalType} &mdash; ${duration}` },
         { label: "Dates", value: `${startDate} &rarr; ${endDate}` },
+        ...(pickupInfo ? [{ label: "R&eacute;cup&eacute;ration", value: pickupInfo }] : []),
+        ...(dropoffInfo ? [{ label: "Retour", value: dropoffInfo }] : []),
+        ...(basePrice && (deliveryFee || pickupFee) ? [
+          { label: "Location", value: `${basePrice} MAD` },
+          ...(deliveryFee ? [{ label: "Livraison", value: `+${deliveryFee} MAD` }] : []),
+          ...(pickupFee ? [{ label: "R&eacute;cup&eacute;ration", value: `+${pickupFee} MAD` }] : []),
+        ] : []),
         { label: "Total", value: `${totalPrice} MAD` },
       ])}
       <div style="text-align:center;margin:32px 0;">
@@ -121,6 +138,8 @@ interface ReservationConfirmeeProps {
   reservationId: string;
   whatsappUrl: string;
   siteUrl: string;
+  pickupInfo?: string;
+  dropoffInfo?: string;
 }
 
 export function reservationConfirmeeHtml(props: ReservationConfirmeeProps): string {
@@ -133,6 +152,8 @@ export function reservationConfirmeeHtml(props: ReservationConfirmeeProps): stri
     reservationId,
     whatsappUrl,
     siteUrl,
+    pickupInfo,
+    dropoffInfo,
   } = props;
 
   const body = `
@@ -143,6 +164,8 @@ export function reservationConfirmeeHtml(props: ReservationConfirmeeProps): stri
         { label: "Num&eacute;ro", value: `#${reservationId.slice(0, 8).toUpperCase()}` },
         { label: "Scooter", value: scooterName },
         { label: "Dates", value: `${startDate} &rarr; ${endDate}` },
+        ...(pickupInfo ? [{ label: "R&eacute;cup&eacute;ration", value: pickupInfo }] : []),
+        ...(dropoffInfo ? [{ label: "Retour", value: dropoffInfo }] : []),
         { label: "Total", value: `${totalPrice} MAD` },
       ])}
       <h2 style="font-size:18px;font-weight:600;margin:32px 0 12px 0;">Le jour J</h2>
@@ -202,6 +225,10 @@ interface NouvelleReservationAdminProps {
   totalPrice: number;
   reservationId: string;
   adminUrl: string;
+  pickupInfo?: string;
+  dropoffInfo?: string;
+  deliveryFee?: number;
+  pickupFee?: number;
 }
 
 export function nouvelleReservationAdminHtml(props: NouvelleReservationAdminProps): string {
@@ -217,6 +244,10 @@ export function nouvelleReservationAdminHtml(props: NouvelleReservationAdminProp
     totalPrice,
     reservationId,
     adminUrl,
+    pickupInfo,
+    dropoffInfo,
+    deliveryFee,
+    pickupFee,
   } = props;
 
   const body = `
@@ -233,6 +264,10 @@ export function nouvelleReservationAdminHtml(props: NouvelleReservationAdminProp
         { label: "Scooter", value: scooterName },
         { label: "Type", value: `${rentalType} &mdash; ${duration}` },
         { label: "Dates", value: `${startDate} &rarr; ${endDate}` },
+        ...(pickupInfo ? [{ label: "R&eacute;cup&eacute;ration", value: pickupInfo }] : []),
+        ...(dropoffInfo ? [{ label: "Retour", value: dropoffInfo }] : []),
+        ...(deliveryFee ? [{ label: "Livraison", value: `+${deliveryFee} MAD` }] : []),
+        ...(pickupFee ? [{ label: "R&eacute;cup&eacute;ration frais", value: `+${pickupFee} MAD` }] : []),
         { label: "Total", value: `${totalPrice} MAD` },
       ])}
       <div style="text-align:center;margin:32px 0;">

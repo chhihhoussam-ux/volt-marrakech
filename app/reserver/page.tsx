@@ -3,7 +3,7 @@
 import { Suspense } from 'react'
 import { useState, useEffect } from 'react'
 import { useSearchParams } from 'next/navigation'
-import { Calendar, ChevronDown, ArrowRight, AlertCircle, Lock, Zap, Clock, Phone, MessageCircle } from 'lucide-react'
+import { Calendar, ChevronDown, ArrowRight, AlertCircle, Lock, Zap, Clock, Phone, MessageCircle, MapPin, Truck } from 'lucide-react'
 import Link from 'next/link'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
@@ -101,6 +101,15 @@ function ReserverContent() {
   const [endDate, setEndDate] = useState('')
   const [weeks, setWeeks] = useState(1)
   const [phone, setPhone] = useState('')
+  const [locations, setLocations] = useState<{id:string;name:string;address:string|null}[]>([])
+  const [pickupType, setPickupType] = useState<'agency'|'delivery'>('agency')
+  const [pickupLocationId, setPickupLocationId] = useState('')
+  const [pickupAddress, setPickupAddress] = useState('')
+  const [dropoffType, setDropoffType] = useState<'agency'|'delivery'>('agency')
+  const [dropoffLocationId, setDropoffLocationId] = useState('')
+  const [dropoffAddress, setDropoffAddress] = useState('')
+  const [deliveryFee, setDeliveryFee] = useState(40)
+  const [pickupFee, setPickupFee] = useState(40)
 
   const selectedScooter = scooters.find(s => s.id === selectedId) || null
 
@@ -112,23 +121,43 @@ function ReserverContent() {
     ? addDays(startDate, weeks * 7)
     : endDate
 
-  const totalPrice = selectedScooter ? calcTotal(selectedScooter, rentalType, durationValue) : 0
+  const basePrice = selectedScooter ? calcTotal(selectedScooter, rentalType, durationValue) : 0
+  const extraDelivery = pickupType === 'delivery' ? deliveryFee : 0
+  const extraPickup = dropoffType === 'delivery' ? pickupFee : 0
+  const totalPrice = basePrice + extraDelivery + extraPickup
 
   const canContinue = !!selectedId && !!selectedScooter && !!phone.trim() && durationValue > 0 &&
     (rentalType === 'hourly' ? !!startDate
       : rentalType === 'daily' ? !!startDate && !!endDate && durationValue > 0
       : !!startDate)
+    && (pickupType === 'delivery' ? !!pickupAddress.trim() : !!pickupLocationId)
+    && (dropoffType === 'delivery' ? !!dropoffAddress.trim() : !!dropoffLocationId)
 
   useEffect(() => {
     async function init() {
-      const [{ data: { user } }, { data: scoots }, { data: settings }] = await Promise.all([
+      const [{ data: { user } }, { data: scoots }, { data: locs }, { data: settings }] = await Promise.all([
         supabase.auth.getUser(),
         supabase.from('scooters').select('*').eq('status', 'available'),
-        supabase.from('settings').select('key, value').eq('key', 'whatsapp_number'),
+        supabase.from('locations').select('id, name, address').eq('is_active', true),
+        supabase.from('settings').select('key, value').in('key', ['whatsapp_number', 'delivery_fee', 'pickup_fee']),
       ])
       setUser(user)
       setScooters(scoots || [])
-      if (settings?.[0]?.value) setWhatsappNumber(settings[0].value)
+      if (locs) {
+        setLocations(locs)
+        if (locs.length > 0) {
+          setPickupLocationId(locs[0].id)
+          setDropoffLocationId(locs[0].id)
+        }
+      }
+      if (settings) {
+        const wa = settings.find(s => s.key === 'whatsapp_number')
+        if (wa?.value) setWhatsappNumber(wa.value)
+        const df = settings.find(s => s.key === 'delivery_fee')
+        if (df?.value) setDeliveryFee(Number(df.value))
+        const pf = settings.find(s => s.key === 'pickup_fee')
+        if (pf?.value) setPickupFee(Number(pf.value))
+      }
       setLoading(false)
     }
     init()
@@ -167,6 +196,14 @@ function ReserverContent() {
         duration_value: durationValue,
         phone: phone.trim(),
         client_email: clientEmail,
+        pickup_type: pickupType,
+        pickup_location_id: pickupType === 'agency' ? pickupLocationId || null : null,
+        pickup_address: pickupType === 'delivery' ? pickupAddress : null,
+        dropoff_type: dropoffType,
+        dropoff_location_id: dropoffType === 'agency' ? dropoffLocationId || null : null,
+        dropoff_address: dropoffType === 'delivery' ? dropoffAddress : null,
+        delivery_fee: extraDelivery,
+        pickup_fee: extraPickup,
       }).select().single()
       if (err) throw err
       console.log('Reservation created, client_email saved:', inserted.client_email)
@@ -182,6 +219,14 @@ function ReserverContent() {
           clientName: user.user_metadata?.full_name || user.email,
           scooterName: selectedScooter.name,
           phone: phone.trim(),
+          pickupType,
+          pickupAddress: pickupType === 'delivery' ? pickupAddress : null,
+          pickupLocationName: pickupType === 'agency' ? (locations.find(l => l.id === pickupLocationId)?.name || 'Agence') : null,
+          dropoffType,
+          dropoffAddress: dropoffType === 'delivery' ? dropoffAddress : null,
+          dropoffLocationName: dropoffType === 'agency' ? (locations.find(l => l.id === dropoffLocationId)?.name || 'Agence') : null,
+          deliveryFee: extraDelivery,
+          pickupFee: extraPickup,
         }),
       }).catch(() => {})
     } catch (e: unknown) {
@@ -474,20 +519,144 @@ function ReserverContent() {
                 </p>
               </div>
 
+              {/* ── Pickup location ── */}
+              <div>
+                <label style={{ display: 'block', fontSize: 13, fontWeight: 500, marginBottom: 10 }}>Où récupérez-vous le scooter ?</label>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginBottom: 12 }}>
+                  <div
+                    onClick={() => setPickupType('agency')}
+                    style={{
+                      padding: 16, borderRadius: 10, cursor: 'pointer',
+                      border: pickupType === 'agency' ? '2px solid #FF6700' : '0.5px solid #E0E0E0',
+                      background: pickupType === 'agency' ? 'rgba(255,103,0,0.04)' : 'transparent',
+                      display: 'flex', alignItems: 'center', gap: 10,
+                    }}
+                  >
+                    <MapPin size={18} strokeWidth={1.5} color={pickupType === 'agency' ? '#FF6700' : '#757575'} />
+                    <div>
+                      <div style={{ fontSize: 13, fontWeight: 500, color: pickupType === 'agency' ? '#0a0a0a' : '#0a0a0a' }}>En agence</div>
+                      <div style={{ fontSize: 11, color: pickupType === 'agency' ? '#FF6700' : '#757575' }}>Gratuit</div>
+                    </div>
+                  </div>
+                  <div
+                    onClick={() => setPickupType('delivery')}
+                    style={{
+                      padding: 16, borderRadius: 10, cursor: 'pointer',
+                      border: pickupType === 'delivery' ? '2px solid #FF6700' : '0.5px solid #E0E0E0',
+                      background: pickupType === 'delivery' ? 'rgba(255,103,0,0.04)' : 'transparent',
+                      display: 'flex', alignItems: 'center', gap: 10,
+                    }}
+                  >
+                    <Truck size={18} strokeWidth={1.5} color={pickupType === 'delivery' ? '#FF6700' : '#757575'} />
+                    <div>
+                      <div style={{ fontSize: 13, fontWeight: 500, color: '#0a0a0a' }}>Livraison</div>
+                      <div style={{ fontSize: 11, color: pickupType === 'delivery' ? '#FF6700' : '#757575' }}>+{deliveryFee} MAD</div>
+                    </div>
+                  </div>
+                </div>
+                {pickupType === 'agency' ? (
+                  <div style={{ position: 'relative' }}>
+                    <select value={pickupLocationId} onChange={e => setPickupLocationId(e.target.value)} style={SELECT_STYLE}>
+                      <option value="">Sélectionner une agence</option>
+                      {locations.map(l => (
+                        <option key={l.id} value={l.id}>{l.name}{l.address ? ` — ${l.address}` : ''}</option>
+                      ))}
+                    </select>
+                    <ChevronDown size={16} strokeWidth={1.5} color="#757575" style={{ position: 'absolute', right: 14, top: '50%', transform: 'translateY(-50%)', pointerEvents: 'none' }} />
+                  </div>
+                ) : (
+                  <input
+                    type="text"
+                    placeholder="Ex: Hôtel La Mamounia, Avenue Bab Jdid"
+                    value={pickupAddress}
+                    onChange={e => setPickupAddress(e.target.value)}
+                    style={{ ...INPUT_STYLE, paddingLeft: 16 }}
+                  />
+                )}
+              </div>
+
+              {/* ── Dropoff location ── */}
+              <div>
+                <label style={{ display: 'block', fontSize: 13, fontWeight: 500, marginBottom: 10 }}>Où rendez-vous le scooter ?</label>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12, marginBottom: 12 }}>
+                  <div
+                    onClick={() => setDropoffType('agency')}
+                    style={{
+                      padding: 16, borderRadius: 10, cursor: 'pointer',
+                      border: dropoffType === 'agency' ? '2px solid #FF6700' : '0.5px solid #E0E0E0',
+                      background: dropoffType === 'agency' ? 'rgba(255,103,0,0.04)' : 'transparent',
+                      display: 'flex', alignItems: 'center', gap: 10,
+                    }}
+                  >
+                    <MapPin size={18} strokeWidth={1.5} color={dropoffType === 'agency' ? '#FF6700' : '#757575'} />
+                    <div>
+                      <div style={{ fontSize: 13, fontWeight: 500, color: '#0a0a0a' }}>En agence</div>
+                      <div style={{ fontSize: 11, color: dropoffType === 'agency' ? '#FF6700' : '#757575' }}>Gratuit</div>
+                    </div>
+                  </div>
+                  <div
+                    onClick={() => setDropoffType('delivery')}
+                    style={{
+                      padding: 16, borderRadius: 10, cursor: 'pointer',
+                      border: dropoffType === 'delivery' ? '2px solid #FF6700' : '0.5px solid #E0E0E0',
+                      background: dropoffType === 'delivery' ? 'rgba(255,103,0,0.04)' : 'transparent',
+                      display: 'flex', alignItems: 'center', gap: 10,
+                    }}
+                  >
+                    <Truck size={18} strokeWidth={1.5} color={dropoffType === 'delivery' ? '#FF6700' : '#757575'} />
+                    <div>
+                      <div style={{ fontSize: 13, fontWeight: 500, color: '#0a0a0a' }}>Récupération</div>
+                      <div style={{ fontSize: 11, color: dropoffType === 'delivery' ? '#FF6700' : '#757575' }}>+{pickupFee} MAD</div>
+                    </div>
+                  </div>
+                </div>
+                {dropoffType === 'agency' ? (
+                  <div style={{ position: 'relative' }}>
+                    <select value={dropoffLocationId} onChange={e => setDropoffLocationId(e.target.value)} style={SELECT_STYLE}>
+                      <option value="">Sélectionner une agence</option>
+                      {locations.map(l => (
+                        <option key={l.id} value={l.id}>{l.name}{l.address ? ` — ${l.address}` : ''}</option>
+                      ))}
+                    </select>
+                    <ChevronDown size={16} strokeWidth={1.5} color="#757575" style={{ position: 'absolute', right: 14, top: '50%', transform: 'translateY(-50%)', pointerEvents: 'none' }} />
+                  </div>
+                ) : (
+                  <input
+                    type="text"
+                    placeholder="Ex: Hôtel La Mamounia, Avenue Bab Jdid"
+                    value={dropoffAddress}
+                    onChange={e => setDropoffAddress(e.target.value)}
+                    style={{ ...INPUT_STYLE, paddingLeft: 16 }}
+                  />
+                )}
+              </div>
+
               {/* ── Price summary ── */}
               {selectedScooter && durationValue > 0 &&
                 (rentalType === 'hourly' ? startDate : rentalType === 'daily' ? (startDate && endDate) : startDate) && (
-                <div style={{ padding: '20px 24px', borderRadius: 10, background: '#0a0a0a', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <div>
-                    <p style={{ fontSize: 12, color: '#757575', marginBottom: 4 }}>
-                      {priceLabel(selectedScooter, rentalType, durationValue)} =
-                    </p>
-                    <p style={{ fontSize: 22, fontWeight: 500, color: '#ffffff', letterSpacing: '-0.03em' }}>
-                      {totalPrice.toFixed(0)} <span style={{ fontSize: 14, fontWeight: 400, color: '#757575' }}>MAD</span>
-                    </p>
-                  </div>
-                  <div style={{ padding: '6px 12px', borderRadius: 6, background: 'rgba(255,103,0,0.1)', fontSize: 12, color: 'var(--accent)' }}>
-                    {rentalType === 'hourly' ? 'Tarif heure' : rentalType === 'daily' ? 'Tarif jour' : 'Tarif semaine'}
+                <div style={{ padding: '20px 24px', borderRadius: 10, background: '#0a0a0a' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <div>
+                      <p style={{ fontSize: 12, color: '#757575', marginBottom: 4 }}>
+                        {priceLabel(selectedScooter, rentalType, durationValue)}
+                      </p>
+                      {extraDelivery > 0 && (
+                        <p style={{ fontSize: 12, color: '#757575', marginBottom: 4 }}>
+                          + Livraison : +{deliveryFee} MAD
+                        </p>
+                      )}
+                      {extraPickup > 0 && (
+                        <p style={{ fontSize: 12, color: '#757575', marginBottom: 4 }}>
+                          + Récupération : +{pickupFee} MAD
+                        </p>
+                      )}
+                      <p style={{ fontSize: 22, fontWeight: 500, color: '#ffffff', letterSpacing: '-0.03em' }}>
+                        Total: {totalPrice.toFixed(0)} <span style={{ fontSize: 14, fontWeight: 400, color: '#757575' }}>MAD</span>
+                      </p>
+                    </div>
+                    <div style={{ padding: '6px 12px', borderRadius: 6, background: 'rgba(255,103,0,0.1)', fontSize: 12, color: 'var(--accent)' }}>
+                      {rentalType === 'hourly' ? 'Tarif heure' : rentalType === 'daily' ? 'Tarif jour' : 'Tarif semaine'}
+                    </div>
                   </div>
                 </div>
               )}
@@ -527,7 +696,11 @@ function ReserverContent() {
                       ...(rentalType !== 'hourly' ? [{ label: 'Fin', value: fmtDate(effectiveEndDate || startDate) }] : []),
                       { label: 'Durée', value: rentalType === 'hourly' ? `${durationValue} heure${durationValue > 1 ? 's' : ''}` : rentalType === 'daily' ? `${durationValue} jour${durationValue > 1 ? 's' : ''}` : `${durationValue} semaine${durationValue > 1 ? 's' : ''}` },
                       { label: 'Téléphone', value: phone },
-                      { label: 'Calcul', value: selectedScooter ? `${priceLabel(selectedScooter, rentalType, durationValue)} = ${totalPrice.toFixed(0)} MAD` : '' },
+                      { label: 'Récupération', value: pickupType === 'agency' ? (locations.find(l => l.id === pickupLocationId)?.name || 'Agence') : pickupAddress },
+                      { label: 'Retour', value: dropoffType === 'agency' ? (locations.find(l => l.id === dropoffLocationId)?.name || 'Agence') : dropoffAddress },
+                      { label: 'Calcul', value: selectedScooter ? priceLabel(selectedScooter, rentalType, durationValue) : '' },
+                      ...(extraDelivery > 0 ? [{ label: 'Livraison', value: `+${deliveryFee} MAD` }] : []),
+                      ...(extraPickup > 0 ? [{ label: 'Récupération scooter', value: `+${pickupFee} MAD` }] : []),
                     ].map((row, i) => (
                       <div key={i} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 16 }}>
                         <span style={{ fontSize: 13, color: '#757575', flexShrink: 0 }}>{row.label}</span>

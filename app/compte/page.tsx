@@ -442,6 +442,28 @@ function CompteContent() {
                             {rentalLabel(res.rental_type, res.duration_value)}
                           </p>
                         )}
+
+                        {/* Pickup / Dropoff info */}
+                        {(res.pickup_type || res.dropoff_type) && (
+                          <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
+                            {res.pickup_type === 'delivery' ? (
+                              <p style={{ ...sf, fontSize: 12, color: '#757575' }}>
+                                Livraison : {res.pickup_address}
+                                {(res.delivery_fee ?? 0) > 0 && <span style={{ color: '#FF6700', fontWeight: 500 }}> +{res.delivery_fee} MAD</span>}
+                              </p>
+                            ) : res.pickup_type === 'agency' && (
+                              <p style={{ ...sf, fontSize: 12, color: '#757575' }}>Récupération : en agence</p>
+                            )}
+                            {res.dropoff_type === 'delivery' ? (
+                              <p style={{ ...sf, fontSize: 12, color: '#757575' }}>
+                                Retour : {res.dropoff_address}
+                                {(res.pickup_fee ?? 0) > 0 && <span style={{ color: '#FF6700', fontWeight: 500 }}> +{res.pickup_fee} MAD</span>}
+                              </p>
+                            ) : res.dropoff_type === 'agency' && (
+                              <p style={{ ...sf, fontSize: 12, color: '#757575' }}>Retour : en agence</p>
+                            )}
+                          </div>
+                        )}
                       </div>
 
                       {/* Status bar */}

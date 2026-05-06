@@ -118,3 +118,19 @@ ON CONFLICT (key) DO NOTHING;
 </body>
 </html>
 */
+
+-- 8. Delivery/pickup columns on reservations
+ALTER TABLE reservations ADD COLUMN IF NOT EXISTS pickup_type text default 'agency';
+ALTER TABLE reservations ADD COLUMN IF NOT EXISTS pickup_location_id uuid references locations(id);
+ALTER TABLE reservations ADD COLUMN IF NOT EXISTS pickup_address text;
+ALTER TABLE reservations ADD COLUMN IF NOT EXISTS dropoff_type text default 'agency';
+ALTER TABLE reservations ADD COLUMN IF NOT EXISTS dropoff_location_id uuid references locations(id);
+ALTER TABLE reservations ADD COLUMN IF NOT EXISTS dropoff_address text;
+ALTER TABLE reservations ADD COLUMN IF NOT EXISTS delivery_fee integer default 0;
+ALTER TABLE reservations ADD COLUMN IF NOT EXISTS pickup_fee integer default 0;
+
+-- 9. Delivery fee settings
+INSERT INTO settings (key, value) VALUES
+  ('delivery_fee', '40'),
+  ('pickup_fee', '40')
+ON CONFLICT (key) DO NOTHING;

@@ -20,6 +20,12 @@ interface Row {
   duration_value: number | null
   phone: string | null
   client_email: string | null
+  pickup_type: string | null
+  pickup_address: string | null
+  dropoff_type: string | null
+  dropoff_address: string | null
+  delivery_fee: number | null
+  pickup_fee: number | null
   created_at: string
   client_name: string
   scooter_name: string
@@ -215,7 +221,7 @@ export default function ReservationsPage() {
             <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 13 }}>
               <thead>
                 <tr style={{ background: 'rgba(255,255,255,0.04)' }}>
-                  {['Client', 'Téléphone', 'Scooter', 'Durée', 'Période', 'Prix', 'Statut', 'Actions'].map(h => (
+                  {['Client', 'Téléphone', 'Scooter', 'Durée', 'Période', 'Prix', 'Statut', 'Livraison', 'Actions'].map(h => (
                     <th key={h} style={{
                       ...sf, padding: '11px 20px', textAlign: 'left', fontWeight: 500,
                       color: 'rgba(255,255,255,0.4)', whiteSpace: 'nowrap',
@@ -271,6 +277,22 @@ export default function ReservationsPage() {
                         }}>
                           {st.label}
                         </span>
+                      </td>
+                      <td style={{ ...sf, padding: '14px 20px', fontSize: 11, color: 'rgba(255,255,255,0.5)', whiteSpace: 'nowrap' }}>
+                        {r.pickup_type === 'delivery' && (
+                          <div>Livraison: {r.pickup_address}</div>
+                        )}
+                        {r.dropoff_type === 'delivery' && (
+                          <div>Récup: {r.dropoff_address}</div>
+                        )}
+                        {r.pickup_type !== 'delivery' && r.dropoff_type !== 'delivery' && (
+                          <span style={{ color: 'rgba(255,255,255,0.25)' }}>En agence</span>
+                        )}
+                        {((r.delivery_fee ?? 0) + (r.pickup_fee ?? 0)) > 0 && (
+                          <div style={{ marginTop: 2, color: '#FF6700', fontWeight: 500 }}>
+                            +{(r.delivery_fee ?? 0) + (r.pickup_fee ?? 0)} MAD
+                          </div>
+                        )}
                       </td>
                       <td style={{ padding: '14px 20px' }}>
                         {actions.length > 0 ? (

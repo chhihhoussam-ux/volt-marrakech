@@ -7,11 +7,13 @@ import { SETTINGS_DEFAULTS } from '@/lib/settings'
 import type { SiteSettings } from '@/lib/types'
 import ImageUpload from '@/components/admin/ImageUpload'
 
-type ExtSettings = SiteSettings & { whatsapp_number: string }
+type ExtSettings = SiteSettings & { whatsapp_number: string; delivery_fee: string; pickup_fee: string }
 
 const DEFAULTS: ExtSettings = {
   ...SETTINGS_DEFAULTS,
   whatsapp_number: '212600000000',
+  delivery_fee: '40',
+  pickup_fee: '40',
 }
 
 export default function ParametresPage() {
@@ -60,6 +62,8 @@ export default function ParametresPage() {
           etape2_image_url: map.etape2_image_url ?? DEFAULTS.etape2_image_url,
           etape3_image_url: map.etape3_image_url ?? DEFAULTS.etape3_image_url,
           faq_image_url: map.faq_image_url ?? DEFAULTS.faq_image_url,
+          delivery_fee: map.delivery_fee ?? DEFAULTS.delivery_fee,
+          pickup_fee: map.pickup_fee ?? DEFAULTS.pickup_fee,
         })
       }
       setLoading(false)
@@ -276,6 +280,16 @@ export default function ParametresPage() {
               </Row>
             </div>
           ))}
+        </Section>
+
+        {/* Tarifs livraison */}
+        <Section title="Tarifs livraison">
+          <Row label="Frais de livraison (MAD)" hint="Montant facturé quand le client choisit la livraison/récupération à domicile">
+            <Input value={settings.delivery_fee} onChange={v => set('delivery_fee', v)} placeholder="40" />
+          </Row>
+          <Row label="Frais de récupération (MAD)" hint="Montant facturé quand le client choisit la livraison/récupération à domicile">
+            <Input value={settings.pickup_fee} onChange={v => set('pickup_fee', v)} placeholder="40" />
+          </Row>
         </Section>
 
         {/* Carte & Marqueurs */}

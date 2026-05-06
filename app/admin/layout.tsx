@@ -47,10 +47,10 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   if (!authed) return null
 
   return (
-    <div style={{ display: 'flex', minHeight: '100vh', background: '#0a0a0a' }}>
+    <div style={{ display: 'flex', height: '100vh', overflow: 'hidden', background: '#0a0a0a' }}>
       <Sidebar mobileOpen={mobileOpen} onClose={() => setMobileOpen(false)} />
 
-      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', minWidth: 0, overflow: 'hidden' }}>
+      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', minWidth: 0, height: '100vh', overflow: 'hidden' }}>
         {/* Mobile top bar */}
         <div
           className="md:hidden"

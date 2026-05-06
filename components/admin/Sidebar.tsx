@@ -144,7 +144,7 @@ export default function Sidebar({ mobileOpen, onClose }: SidebarProps) {
   return (
     <>
       {/* Desktop sidebar */}
-      <div className="hidden md:flex" style={{ height: '100vh', position: 'sticky', top: 0, flexShrink: 0 }}>
+      <div className="hidden md:flex" style={{ width: 240, height: '100vh', flexShrink: 0 }}>
         {sidebar}
       </div>
 

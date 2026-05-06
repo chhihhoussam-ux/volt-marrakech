@@ -5,6 +5,7 @@ import {
   reservationConfirmeeHtml,
   reservationAnnuleeHtml,
   nouvelleReservationAdminHtml,
+  contactMessageHtml,
 } from './templates'
 
 const resend = new Resend(process.env.RESEND_API_KEY)
@@ -208,6 +209,35 @@ export async function sendReservationAnnulee(
     return { success: true }
   } catch (error: unknown) {
     console.error('Email error:', error)
+    return { success: false, error: error instanceof Error ? error.message : String(error) }
+  }
+}
+
+export async function sendContactMessage(
+  name: string,
+  email: string,
+  phone: string,
+  subject: string,
+  message: string,
+): Promise<{ success: boolean; error?: string }> {
+  try {
+    const settings = await getSettingsMap()
+    const adminEmail = settings.admin_email || 'admin@almone-scooter.com'
+    const toAdmin = resolveRecipient(adminEmail)
+
+    console.log('Sending contact message to admin:', toAdmin)
+    const result = await resend.emails.send({
+      from: FROM,
+      to: toAdmin,
+      replyTo: email,
+      subject: `Nouveau message de contact — ${subject}`,
+      html: contactMessageHtml({ name, email, phone, subject, message }),
+    })
+    console.log('Contact email sent:', result)
+
+    return { success: true }
+  } catch (error: unknown) {
+    console.error('Contact email error:', error)
     return { success: false, error: error instanceof Error ? error.message : String(error) }
   }
 }

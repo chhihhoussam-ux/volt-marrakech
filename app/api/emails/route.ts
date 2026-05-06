@@ -4,6 +4,7 @@ import {
   sendConfirmationReservation,
   sendReservationConfirmee,
   sendReservationAnnulee,
+  sendContactMessage,
 } from '@/lib/emails/send'
 
 export async function POST(request: Request) {
@@ -25,8 +26,30 @@ export async function POST(request: Request) {
   console.log('ReservationId:', reservationId)
   console.log('ClientEmail from body:', body.clientEmail || '(empty)')
 
-  if (!type || !reservationId) {
-    return NextResponse.json({ error: 'type and reservationId are required' }, { status: 400 })
+  if (!type) {
+    return NextResponse.json({ error: 'type is required' }, { status: 400 })
+  }
+
+  // Handle contact form (no reservationId needed)
+  if (type === 'contact') {
+    const { contactName, contactEmail, contactPhone, contactSubject, contactMessage } = body as any
+    if (!contactName || !contactEmail || !contactMessage) {
+      return NextResponse.json({ error: 'contactName, contactEmail, and contactMessage are required' }, { status: 400 })
+    }
+    try {
+      const result = await sendContactMessage(contactName, contactEmail, contactPhone || '', contactSubject || 'Autre', contactMessage)
+      if (!result.success) {
+        return NextResponse.json({ error: result.error }, { status: 500 })
+      }
+      return NextResponse.json({ success: true })
+    } catch (error: any) {
+      console.error('=== CONTACT EMAIL ERROR ===', error?.message)
+      return NextResponse.json({ error: error?.message || 'Unknown error' }, { status: 500 })
+    }
+  }
+
+  if (!reservationId) {
+    return NextResponse.json({ error: 'reservationId is required' }, { status: 400 })
   }
 
   try {

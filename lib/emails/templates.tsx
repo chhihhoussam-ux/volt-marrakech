@@ -293,3 +293,37 @@ export function resetMotDePasseHtml(props: ResetMotDePasseProps): string {
 
   return wrap(body);
 }
+
+// ---- 7. Message de contact (admin) ------------------------------------------
+
+interface ContactMessageProps {
+  name: string;
+  email: string;
+  phone: string;
+  subject: string;
+  message: string;
+}
+
+export function contactMessageHtml(props: ContactMessageProps): string {
+  const { name, email, phone, subject, message } = props;
+
+  const body = `
+    <div style="padding:40px;font-size:15px;line-height:1.6;color:#0a0a0a;">
+      <h1 style="font-size:28px;font-weight:700;margin:0 0 24px 0;">Nouveau message de contact</h1>
+      ${recapBlock([
+        { label: 'Nom', value: name },
+        { label: 'Email', value: email },
+        { label: 'Téléphone', value: phone || 'Non renseigné' },
+        { label: 'Sujet', value: subject },
+      ])}
+      <div style="background:#F5F5F5;border-radius:12px;padding:24px;margin:24px 0;">
+        <div style="font-size:13px;color:#757575;margin-bottom:8px;">Message</div>
+        <div style="font-size:15px;color:#0a0a0a;white-space:pre-wrap;">${message}</div>
+      </div>
+      <div style="text-align:center;margin-top:32px;">
+        <a href="mailto:${email}" style="display:inline-block;background:#FF6700;color:#ffffff;border-radius:8px;padding:14px 28px;font-weight:600;text-decoration:none;font-size:15px;">Répondre à ${name}</a>
+      </div>
+    </div>`;
+
+  return wrap(body);
+}

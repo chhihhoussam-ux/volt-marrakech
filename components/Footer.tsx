@@ -58,7 +58,9 @@ export default function Footer() {
                 { href: '/scooters', label: 'Catalogue' },
                 { href: '/guide', label: 'Guide Marrakech' },
                 { href: '/reserver', label: 'Réserver' },
+                { href: '/contact', label: 'Contact' },
                 { href: '/compte', label: 'Mon compte' },
+                { href: '/mentions-legales', label: 'Mentions légales' },
               ].map((link) => (
                 <Link key={link.href} href={link.href} style={{
                   fontSize: 14,

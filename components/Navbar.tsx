@@ -22,7 +22,7 @@ export default function Navbar() {
     { href: '/scooters', label: 'Scooters' },
     { href: '/guide', label: 'Guide' },
     { href: '/#tarifs', label: 'Tarifs' },
-    { href: '/#contact', label: 'Contact' },
+    { href: '/contact', label: 'Contact' },
     { href: '/compte', label: 'Mon compte' },
   ]
 

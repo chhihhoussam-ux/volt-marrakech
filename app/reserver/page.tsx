@@ -154,7 +154,7 @@ function ReserverContent() {
     setSubmitting(true)
     setError('')
     try {
-      const { error: err } = await supabase.from('reservations').insert({
+      const { data: inserted, error: err } = await supabase.from('reservations').insert({
         user_id: user.id,
         scooter_id: selectedScooter.id,
         start_date: startDate,
@@ -164,9 +164,15 @@ function ReserverContent() {
         rental_type: rentalType,
         duration_value: durationValue,
         phone: phone.trim(),
-      })
+      }).select().single()
       if (err) throw err
       setSubmitted(true)
+      // Send confirmation email (fire & forget)
+      fetch('/api/emails', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ type: 'confirmation', reservationId: inserted.id }),
+      }).catch(() => {})
     } catch (e: unknown) {
       setError(e instanceof Error ? e.message : 'Une erreur est survenue.')
     } finally {

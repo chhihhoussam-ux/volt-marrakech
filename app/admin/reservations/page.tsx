@@ -101,7 +101,18 @@ export default function ReservationsPage() {
   async function changeStatus(id: string, status: Status) {
     setUpdating(id)
     const { error } = await supabase.from('reservations').update({ status }).eq('id', id)
-    if (!error) setRows(prev => prev.map(r => r.id === id ? { ...r, status } : r))
+    if (!error) {
+      setRows(prev => prev.map(r => r.id === id ? { ...r, status } : r))
+      // Send email notification (fire & forget)
+      const emailType = status === 'confirmed' ? 'confirmee' : status === 'cancelled' ? 'annulee' : null
+      if (emailType) {
+        fetch('/api/emails', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ type: emailType, reservationId: id }),
+        }).catch(() => {})
+      }
+    }
     setUpdating(null)
   }
 

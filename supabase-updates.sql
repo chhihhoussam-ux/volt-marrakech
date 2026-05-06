@@ -44,3 +44,67 @@ ON CONFLICT (key) DO NOTHING;
 INSERT INTO settings (key, value) VALUES
   ('hero_image_url', '')
 ON CONFLICT (key) DO NOTHING;
+
+-- 6. Email settings
+INSERT INTO settings (key, value) VALUES
+  ('admin_email', 'admin@almone.ma')
+ON CONFLICT (key) DO NOTHING;
+
+-- ══════════════════════════════════════════════════════
+-- SUPABASE EMAIL TEMPLATES (HTML à coller dans Supabase
+-- → Authentication → Email Templates)
+-- ══════════════════════════════════════════════════════
+
+-- Template "Confirm signup"
+-- Sujet : Confirmez votre email — Almone
+/*
+<!DOCTYPE html>
+<html>
+<body style="margin:0;padding:0;background:#ffffff;font-family:'DM Sans',Arial,sans-serif;">
+<div style="max-width:600px;margin:0 auto;">
+  <div style="background:#0a0a0a;padding:32px;text-align:center;">
+    <span style="font-size:24px;font-weight:700;color:#ffffff;letter-spacing:-0.03em;">almone.</span>
+  </div>
+  <div style="padding:40px;font-size:15px;line-height:1.6;color:#0a0a0a;">
+    <h1 style="font-size:28px;font-weight:700;margin:0 0 16px;">Bienvenue chez Almone !</h1>
+    <p>Votre compte Almone est créé. Confirmez votre email pour commencer à réserver des scooters électriques à Marrakech.</p>
+    <div style="margin:32px 0;text-align:center;">
+      <a href="{{ .ConfirmationURL }}" style="display:inline-block;background:#FF6700;color:#ffffff;border-radius:8px;padding:14px 28px;font-weight:600;font-size:15px;text-decoration:none;">Confirmer mon email</a>
+    </div>
+    <p style="color:#757575;font-size:13px;">Si vous n'avez pas créé de compte, ignorez cet email.</p>
+  </div>
+  <div style="background:#F5F5F5;padding:28px 40px;text-align:center;font-size:12px;color:#757575;">
+    <p style="margin:0 0 4px;">© 2025 Almone Scooter Rental — Marrakech, Maroc</p>
+    <p style="margin:0;">En cas de problème contactez-nous sur WhatsApp</p>
+  </div>
+</div>
+</body>
+</html>
+*/
+
+-- Template "Reset password"
+-- Sujet : Réinitialisation mot de passe — Almone
+/*
+<!DOCTYPE html>
+<html>
+<body style="margin:0;padding:0;background:#ffffff;font-family:'DM Sans',Arial,sans-serif;">
+<div style="max-width:600px;margin:0 auto;">
+  <div style="background:#0a0a0a;padding:32px;text-align:center;">
+    <span style="font-size:24px;font-weight:700;color:#ffffff;letter-spacing:-0.03em;">almone.</span>
+  </div>
+  <div style="padding:40px;font-size:15px;line-height:1.6;color:#0a0a0a;">
+    <h1 style="font-size:28px;font-weight:700;margin:0 0 16px;">Réinitialisation du mot de passe</h1>
+    <p>Vous avez demandé à réinitialiser votre mot de passe. Cliquez sur le bouton ci-dessous pour en choisir un nouveau.</p>
+    <div style="margin:32px 0;text-align:center;">
+      <a href="{{ .ConfirmationURL }}" style="display:inline-block;background:#FF6700;color:#ffffff;border-radius:8px;padding:14px 28px;font-weight:600;font-size:15px;text-decoration:none;">Réinitialiser mon mot de passe</a>
+    </div>
+    <p style="color:#757575;font-size:13px;">Ce lien expire dans 24h. Si vous n'avez pas fait cette demande, ignorez cet email.</p>
+  </div>
+  <div style="background:#F5F5F5;padding:28px 40px;text-align:center;font-size:12px;color:#757575;">
+    <p style="margin:0 0 4px;">© 2025 Almone Scooter Rental — Marrakech, Maroc</p>
+    <p style="margin:0;">En cas de problème contactez-nous sur WhatsApp</p>
+  </div>
+</div>
+</body>
+</html>
+*/

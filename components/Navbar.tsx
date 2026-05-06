@@ -10,15 +10,16 @@ import { useSettings } from '@/lib/settings-context'
 export default function Navbar() {
   const pathname = usePathname()
   const [menuOpen, setMenuOpen] = useState(false)
-  const [scrolled, setScrolled] = useState(false)
+  const [scrolled, setScrolled] = useState(true) // start true to avoid flash of transparent navbar
   const { logo_url: logoUrl } = useSettings()
 
   const isHome = pathname === '/'
+  // Transparent navbar ONLY on homepage when not scrolled and menu closed
   const isTransparent = isHome && !scrolled && !menuOpen
 
   useEffect(() => {
     function onScroll() { setScrolled(window.scrollY > 40) }
-    onScroll()
+    onScroll() // immediately check real scroll position after mount
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])

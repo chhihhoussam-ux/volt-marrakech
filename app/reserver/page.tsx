@@ -154,6 +154,8 @@ function ReserverContent() {
     setSubmitting(true)
     setError('')
     try {
+      const clientEmail = user.email || ''
+      console.log('Creating reservation with client_email:', clientEmail)
       const { data: inserted, error: err } = await supabase.from('reservations').insert({
         user_id: user.id,
         scooter_id: selectedScooter.id,
@@ -164,8 +166,10 @@ function ReserverContent() {
         rental_type: rentalType,
         duration_value: durationValue,
         phone: phone.trim(),
+        client_email: clientEmail,
       }).select().single()
       if (err) throw err
+      console.log('Reservation created, client_email saved:', inserted.client_email)
       setSubmitted(true)
       // Send confirmation email (fire & forget)
       fetch('/api/emails', {

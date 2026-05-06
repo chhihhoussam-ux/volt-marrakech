@@ -7,11 +7,20 @@ import {
 } from '@/lib/emails/send'
 
 export async function POST(request: Request) {
-  try {
-    const body = await request.json()
-    console.log('API emails body:', JSON.stringify(body))
+  let body: Record<string, unknown> = {}
 
-    const { type, reservationId, clientEmail, clientName, scooterName, phone } = body
+  try {
+    body = await request.json()
+    console.log('[/api/emails] body:', JSON.stringify(body))
+  } catch {
+    return NextResponse.json(
+      { success: false, error: 'Invalid JSON body' },
+      { status: 400 },
+    )
+  }
+
+  try {
+    const { type, reservationId } = body as { type?: string; reservationId?: string }
 
     if (!type || !reservationId) {
       return NextResponse.json(
@@ -20,13 +29,7 @@ export async function POST(request: Request) {
       )
     }
 
-    // If client data was passed directly, use it; otherwise fetch from DB
-    let email = clientEmail || ''
-    let name = clientName || ''
-    let scooter = scooterName || ''
-    let clientPhone = phone || ''
-
-    // Fetch reservation
+    // ── Fetch reservation ──
     const { data: reservation, error: fetchError } = await supabase
       .from('reservations')
       .select('*')
@@ -34,14 +37,57 @@ export async function POST(request: Request) {
       .single()
 
     if (fetchError || !reservation) {
-      console.error('Reservation fetch error:', fetchError)
+      console.error('[/api/emails] Reservation fetch error:', fetchError)
       return NextResponse.json(
-        { success: false, error: fetchError?.message || 'Reservation not found' },
+        { success: false, error: `Reservation not found: ${fetchError?.message || reservationId}` },
         { status: 404 },
       )
     }
 
-    // Fetch scooter name if not provided
+    // ── Resolve client email ──
+    // Priority: body param > reservation.client_email column > profiles table
+    let email = (body.clientEmail as string) || ''
+    console.log('[/api/emails] Step 1 — body.clientEmail:', email || '(empty)')
+
+    if (!email && reservation.client_email) {
+      email = reservation.client_email
+      console.log('[/api/emails] Step 2 — reservation.client_email:', email)
+    }
+
+    if (!email && reservation.user_id) {
+      const { data: profile, error: profileErr } = await supabase
+        .from('profiles')
+        .select('email, full_name')
+        .eq('id', reservation.user_id)
+        .single()
+      console.log('[/api/emails] Step 3 — profiles query for user_id:', reservation.user_id, '→', profile?.email || '(empty)', profileErr ? `error: ${profileErr.message}` : '')
+      email = profile?.email || ''
+    }
+
+    console.log('[/api/emails] Final clientEmail:', email || '(EMPTY)')
+
+    if (!email) {
+      console.error('[/api/emails] No client email found. reservation.client_email:', reservation.client_email, 'user_id:', reservation.user_id)
+      return NextResponse.json(
+        { success: false, error: `No client email found for reservation ${reservationId}. Ensure client_email column exists and is populated.` },
+        { status: 400 },
+      )
+    }
+
+    // ── Resolve other fields ──
+    let name = (body.clientName as string) || ''
+    let scooter = (body.scooterName as string) || ''
+    const clientPhone = (body.phone as string) || reservation.phone || ''
+
+    if (!name && reservation.user_id) {
+      const { data: profile } = await supabase
+        .from('profiles')
+        .select('full_name')
+        .eq('id', reservation.user_id)
+        .single()
+      name = profile?.full_name || 'Client'
+    }
+
     if (!scooter && reservation.scooter_id) {
       const { data: scooterData } = await supabase
         .from('scooters')
@@ -51,38 +97,20 @@ export async function POST(request: Request) {
       scooter = scooterData?.name || 'Scooter'
     }
 
-    // Fetch client info if not provided
-    if (!email && reservation.user_id) {
-      const { data: profile } = await supabase
-        .from('profiles')
-        .select('email, full_name')
-        .eq('id', reservation.user_id)
-        .single()
-      email = profile?.email || ''
-      name = name || profile?.full_name || 'Client'
-    }
+    console.log('[/api/emails] Sending', type, '→ email:', email, 'name:', name, 'scooter:', scooter)
 
-    clientPhone = clientPhone || reservation.phone || ''
-
-    console.log('Resolved — email:', email, 'name:', name, 'scooter:', scooter)
-
+    // ── Send email ──
     let result: { success: boolean; error?: string }
 
     switch (type) {
       case 'confirmation':
-        result = await sendConfirmationReservation(
-          reservation, scooter, email, name, clientPhone,
-        )
+        result = await sendConfirmationReservation(reservation, scooter, email, name, clientPhone)
         break
       case 'confirmee':
-        result = await sendReservationConfirmee(
-          reservation, scooter, email, name,
-        )
+        result = await sendReservationConfirmee(reservation, scooter, email, name)
         break
       case 'annulee':
-        result = await sendReservationAnnulee(
-          reservation, scooter, email, name,
-        )
+        result = await sendReservationAnnulee(reservation, scooter, email, name)
         break
       default:
         return NextResponse.json(
@@ -92,14 +120,23 @@ export async function POST(request: Request) {
     }
 
     if (!result.success) {
-      return NextResponse.json({ success: false, error: result.error }, { status: 500 })
+      console.error('[/api/emails] Send failed:', result.error)
+      return NextResponse.json(
+        { success: false, error: `Email send failed: ${result.error}` },
+        { status: 500 },
+      )
     }
 
+    console.log('[/api/emails] Success for type:', type)
     return NextResponse.json({ success: true })
   } catch (err: unknown) {
-    console.error('[POST /api/emails]', err)
+    const message = err instanceof Error ? err.message : String(err)
+    const stack = err instanceof Error ? err.stack : ''
+    console.error('[/api/emails] Unhandled error:', message)
+    console.error('[/api/emails] Stack:', stack)
+    console.error('[/api/emails] Body was:', JSON.stringify(body))
     return NextResponse.json(
-      { success: false, error: err instanceof Error ? err.message : 'Internal server error' },
+      { success: false, error: `Server error: ${message}` },
       { status: 500 },
     )
   }

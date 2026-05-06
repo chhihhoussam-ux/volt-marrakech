@@ -34,6 +34,8 @@ export interface Reservation {
   status: 'pending' | 'confirmed' | 'cancelled' | 'completed'
   rental_type: RentalType
   duration_value: number
+  phone?: string
+  client_email?: string
   created_at: string
   scooter?: Scooter
   profile?: Profile

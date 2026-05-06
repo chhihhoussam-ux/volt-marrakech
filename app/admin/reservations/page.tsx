@@ -19,6 +19,7 @@ interface Row {
   rental_type: RentalType | null
   duration_value: number | null
   phone: string | null
+  client_email: string | null
   created_at: string
   client_name: string
   scooter_name: string
@@ -82,13 +83,17 @@ export default function ReservationsPage() {
     ] = await Promise.all([
       supabase.from('reservations').select('*').order('created_at', { ascending: false }),
       supabase.from('scooters').select('id, name, model'),
-      supabase.from('profiles').select('id, full_name'),
+      supabase.from('profiles').select('id, full_name, email'),
     ])
-    const merged = (reservationsData || []).map(r => ({
-      ...r,
-      scooter_name: scootersData?.find(s => s.id === r.scooter_id)?.name ?? 'Scooter inconnu',
-      client_name: profilesData?.find(p => p.id === r.user_id)?.full_name ?? r.phone ?? `Client #${r.user_id.slice(0, 6)}`,
-    }))
+    const merged = (reservationsData || []).map(r => {
+      const profile = profilesData?.find(p => p.id === r.user_id)
+      return {
+        ...r,
+        scooter_name: scootersData?.find(s => s.id === r.scooter_id)?.name ?? 'Scooter inconnu',
+        client_name: profile?.full_name ?? r.phone ?? `Client #${r.user_id.slice(0, 6)}`,
+        client_email: r.client_email || profile?.email || null,
+      }
+    })
     const sorted = merged.slice().sort((a, b) => {
       if (a.status === 'pending' && b.status !== 'pending') return -1
       if (a.status !== 'pending' && b.status === 'pending') return 1
@@ -106,11 +111,24 @@ export default function ReservationsPage() {
       // Send email notification (fire & forget)
       const emailType = status === 'confirmed' ? 'confirmee' : status === 'cancelled' ? 'annulee' : null
       if (emailType) {
+        const row = rows.find(r => r.id === id)
+        const emailPayload = {
+          type: emailType,
+          reservationId: id,
+          clientEmail: row?.client_email || '',
+          clientName: row?.client_name || 'Client',
+          scooterName: row?.scooter_name || 'Scooter',
+          phone: row?.phone || '',
+        }
+        console.log('Sending email with:', emailPayload)
         fetch('/api/emails', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ type: emailType, reservationId: id }),
-        }).catch(() => {})
+          body: JSON.stringify(emailPayload),
+        })
+          .then(r => r.json())
+          .then(r => console.log('Email API response:', r))
+          .catch(e => console.error('Email API error:', e))
       }
     }
     setUpdating(null)

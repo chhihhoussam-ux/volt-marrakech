@@ -45,7 +45,17 @@ INSERT INTO settings (key, value) VALUES
   ('hero_image_url', '')
 ON CONFLICT (key) DO NOTHING;
 
--- 6. Email settings
+-- 6. Add client_email column to reservations
+ALTER TABLE reservations ADD COLUMN IF NOT EXISTS client_email text;
+
+-- 6b. Backfill client_email for existing reservations
+UPDATE reservations r
+SET client_email = (
+  SELECT email FROM auth.users WHERE id = r.user_id
+)
+WHERE r.client_email IS NULL;
+
+-- 7. Email settings
 INSERT INTO settings (key, value) VALUES
   ('admin_email', 'admin@almone-scooter.com')
 ON CONFLICT (key) DO NOTHING;

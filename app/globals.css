@@ -253,11 +253,6 @@ html, body {
   .footer-grid > div { flex: 1; }
 }
 
-/* Nav link light mode (transparent navbar on homepage) */
-.nav-link-light { color: rgba(255,255,255,0.7) !important; }
-.nav-link-light.active { color: #ffffff !important; }
-.nav-link-light:hover { color: #ffffff !important; }
-.nav-link-light::after { background: #ffffff !important; }
 
 /* ─────────────────────────────────────────────
    RESPONSIVE — Mobile (< 768px)

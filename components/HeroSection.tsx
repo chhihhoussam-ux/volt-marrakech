@@ -17,7 +17,7 @@ export default function HeroSection() {
   ]
 
   return (
-    <section style={{ position: 'relative', height: '100vh', overflow: 'hidden', minHeight: 600 }}>
+    <section style={{ position: 'relative', height: 'calc(100vh - 56px)', overflow: 'hidden', minHeight: 544 }}>
       {/* Background */}
       <div style={{
         position: 'absolute', inset: 0,

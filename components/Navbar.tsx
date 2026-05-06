@@ -10,19 +10,7 @@ import { useSettings } from '@/lib/settings-context'
 export default function Navbar() {
   const pathname = usePathname()
   const [menuOpen, setMenuOpen] = useState(false)
-  const [scrolled, setScrolled] = useState(true) // start true to avoid flash of transparent navbar
   const { logo_url: logoUrl } = useSettings()
-
-  const isHome = pathname === '/'
-  // Transparent navbar ONLY on homepage when not scrolled and menu closed
-  const isTransparent = isHome && !scrolled && !menuOpen
-
-  useEffect(() => {
-    function onScroll() { setScrolled(window.scrollY > 40) }
-    onScroll() // immediately check real scroll position after mount
-    window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
-  }, [])
 
   useEffect(() => {
     document.body.style.overflow = menuOpen ? 'hidden' : ''
@@ -39,12 +27,6 @@ export default function Navbar() {
     { href: '/compte', label: 'Mon compte' },
   ]
 
-  const navBg = isTransparent ? 'transparent' : 'rgba(255,255,255,0.95)'
-  const navBorder = isTransparent ? 'transparent' : '#E0E0E0'
-  const textColor = isTransparent ? '#ffffff' : '#0a0a0a'
-  const linkColor = isTransparent ? 'rgba(255,255,255,0.7)' : '#757575'
-  const linkActiveColor = isTransparent ? '#ffffff' : '#0a0a0a'
-
   return (
     <>
       <nav
@@ -55,11 +37,8 @@ export default function Navbar() {
           right: 0,
           zIndex: 50,
           height: 56,
-          background: navBg,
-          backdropFilter: isTransparent ? 'none' : 'blur(12px)',
-          WebkitBackdropFilter: isTransparent ? 'none' : 'blur(12px)',
-          borderBottom: `0.5px solid ${navBorder}`,
-          transition: 'background 0.3s, border-color 0.3s',
+          background: '#ffffff',
+          borderBottom: '0.5px solid #E0E0E0',
         }}
       >
         <div className="nav-inner" style={{
@@ -75,15 +54,14 @@ export default function Navbar() {
           <Link href="/" style={{ textDecoration: 'none', flexShrink: 0 }}>
             {logoUrl ? (
               <img src={logoUrl} alt="Almone" className="nav-logo-img"
-                style={{ height: 30, width: 'auto', maxWidth: 160, objectFit: 'contain' }} />
+                style={{ height: 30, width: 'auto', maxWidth: 140, objectFit: 'contain' }} />
             ) : (
               <span style={{
                 fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
                 fontSize: 20,
                 fontWeight: 700,
-                color: textColor,
+                color: '#0a0a0a',
                 letterSpacing: '-0.03em',
-                transition: 'color 0.3s',
               }}>
                 almone.
               </span>
@@ -96,15 +74,7 @@ export default function Navbar() {
               <Link
                 key={link.href}
                 href={link.href}
-                style={{
-                  position: 'relative',
-                  fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
-                  fontSize: 14,
-                  textDecoration: 'none',
-                  color: pathname === link.href ? linkActiveColor : linkColor,
-                  transition: 'color 0.2s',
-                }}
-                className={`nav-link-item${pathname === link.href ? ' active' : ''}${isTransparent ? ' nav-link-light' : ''}`}
+                className={`nav-link-item${pathname === link.href ? ' active' : ''}`}
               >
                 {link.label}
               </Link>
@@ -116,9 +86,8 @@ export default function Navbar() {
             <Link href="/compte" style={{ textDecoration: 'none' }}>
               <span style={{
                 fontSize: 14,
-                color: linkColor,
+                color: '#757575',
                 fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
-                transition: 'color 0.3s',
               }}>
                 Mon compte
               </span>
@@ -128,7 +97,7 @@ export default function Navbar() {
             </Link>
           </div>
 
-          {/* Mobile hamburger — animated lines */}
+          {/* Mobile hamburger */}
           <button
             className="md:hidden touch-target"
             onClick={() => setMenuOpen(o => !o)}
@@ -146,7 +115,7 @@ export default function Navbar() {
                 transition={{ duration: 0.25 }}
                 style={{
                   position: 'absolute', top: 0, left: 0, width: '100%', height: 2,
-                  background: menuOpen ? '#0a0a0a' : textColor, borderRadius: 1,
+                  background: '#0a0a0a', borderRadius: 1,
                   display: 'block', transformOrigin: 'center',
                 }}
               />
@@ -155,7 +124,7 @@ export default function Navbar() {
                 transition={{ duration: 0.15 }}
                 style={{
                   position: 'absolute', top: 7, left: 0, width: '100%', height: 2,
-                  background: menuOpen ? '#0a0a0a' : textColor, borderRadius: 1,
+                  background: '#0a0a0a', borderRadius: 1,
                   display: 'block',
                 }}
               />
@@ -164,7 +133,7 @@ export default function Navbar() {
                 transition={{ duration: 0.25 }}
                 style={{
                   position: 'absolute', top: 14, left: 0, width: '100%', height: 2,
-                  background: menuOpen ? '#0a0a0a' : textColor, borderRadius: 1,
+                  background: '#0a0a0a', borderRadius: 1,
                   display: 'block', transformOrigin: 'center',
                 }}
               />
@@ -192,7 +161,7 @@ export default function Navbar() {
               background: '#ffffff',
               display: 'flex',
               flexDirection: 'column',
-              padding: '32px 24px',
+              padding: '32px 20px',
               paddingBottom: 'calc(40px + env(safe-area-inset-bottom, 0px))',
               overflowY: 'auto',
               WebkitOverflowScrolling: 'touch',

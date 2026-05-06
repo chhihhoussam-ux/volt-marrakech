@@ -11,7 +11,7 @@ export default function Footer() {
       <div style={{ maxWidth: 1200, margin: '0 auto' }}>
         <div className="footer-grid" style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(min(200px, 100%), 1fr))',
+          gridTemplateColumns: '1fr',
           gap: 48,
           marginBottom: 56,
         }}>
@@ -102,16 +102,16 @@ export default function Footer() {
                 href="mailto:contact@almone-scooter.com"
                 style={{
                   display: 'flex', alignItems: 'center', gap: 10, textDecoration: 'none',
-                  color: 'rgba(255,255,255,0.6)', fontSize: 14,
+                  color: 'rgba(255,255,255,0.6)', fontSize: 14, wordBreak: 'break-word',
                   fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
                 }}
               >
-                <Mail size={16} strokeWidth={1.5} color="var(--accent)" />
+                <Mail size={16} strokeWidth={1.5} color="var(--accent)" style={{ flexShrink: 0 }} />
                 contact@almone-scooter.com
               </a>
               <div style={{
                 display: 'flex', alignItems: 'flex-start', gap: 10,
-                color: 'rgba(255,255,255,0.6)', fontSize: 14,
+                color: 'rgba(255,255,255,0.6)', fontSize: 14, wordBreak: 'break-word',
                 fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
               }}>
                 <MapPin size={16} strokeWidth={1.5} color="var(--accent)" style={{ flexShrink: 0, marginTop: 1 }} />

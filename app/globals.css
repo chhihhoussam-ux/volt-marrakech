@@ -38,6 +38,7 @@ button {
 html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
@@ -87,8 +88,18 @@ h4, h5, h6 {
 
 /* Focus visible */
 :focus-visible {
-  outline: 1.5px solid var(--accent);
+  outline: 2px solid #FF6700;
   outline-offset: 2px;
+}
+
+/* Tap targets — Apple HIG 44px minimum */
+a, button {
+  min-height: 44px;
+}
+
+/* Smooth scrolling for overflowing elements */
+[style*="overflow"] {
+  -webkit-overflow-scrolling: touch;
 }
 
 /* Selection */
@@ -232,6 +243,19 @@ html, body {
   overflow-x: hidden;
   max-width: 100%;
 }
+
+/* Footer grid → 3 columns from md */
+@media (min-width: 768px) {
+  .footer-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+}
+
+/* Nav link light mode (transparent navbar on homepage) */
+.nav-link-light { color: rgba(255,255,255,0.7) !important; }
+.nav-link-light.active { color: #ffffff !important; }
+.nav-link-light:hover { color: #ffffff !important; }
+.nav-link-light::after { background: #ffffff !important; }
 
 /* ─────────────────────────────────────────────
    RESPONSIVE — Mobile (< 768px)
@@ -422,5 +446,12 @@ html, body {
   }
   input, select, textarea {
     min-height: 52px !important;
+  }
+
+  /* ── Safe area insets (iPhone Dynamic Island / notch) ── */
+  body {
+    padding-left: env(safe-area-inset-left, 0px);
+    padding-right: env(safe-area-inset-right, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
   }
 }

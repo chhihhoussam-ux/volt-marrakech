@@ -367,18 +367,22 @@ export default function ContactPage() {
           </p>
 
           {sent ? (
-            <div style={{ textAlign: 'center', padding: '40px 0' }}>
+            <div style={{
+              display: 'flex', flexDirection: 'column', alignItems: 'center',
+              justifyContent: 'center', textAlign: 'center', gap: 16,
+              padding: '40px 0',
+            }}>
               <CheckCircle
-                size={48}
+                size={64}
+                strokeWidth={1.5}
                 color="#FF6700"
-                style={{ marginBottom: 16 }}
+                style={{ width: 64, height: 64 }}
               />
               <p
                 style={{
                   fontSize: 20,
                   fontWeight: 600,
                   fontFamily,
-                  marginBottom: 8,
                 }}
               >
                 Message envoyé !
@@ -388,7 +392,6 @@ export default function ContactPage() {
                   fontSize: 14,
                   color: '#757575',
                   fontFamily,
-                  marginBottom: 24,
                 }}
               >
                 Nous vous répondrons dans les plus brefs délais.

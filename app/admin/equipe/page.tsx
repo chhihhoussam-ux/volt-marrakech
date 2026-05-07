@@ -204,10 +204,12 @@ function OperatorModal({ operator, onClose, onSaved }: ModalProps) {
   )
 }
 
+type ModalState = null | 'add' | Operator
+
 export default function EquipePage() {
   const [operators, setOperators] = useState<Operator[]>([])
   const [loading, setLoading] = useState(true)
-  const [modal, setModal] = useState<'add' | Operator | null>(null)
+  const [modal, setModal] = useState<ModalState>(null)
   const [deleting, setDeleting] = useState<string | null>(null)
   const [confirmDelete, setConfirmDelete] = useState<Operator | null>(null)
   const [togglingId, setTogglingId] = useState<string | null>(null)
@@ -377,9 +379,9 @@ export default function EquipePage() {
       </div>
 
       {/* Add / Edit modal */}
-      {(modal === 'add' || (modal && modal !== 'add')) && (
+      {modal !== null && (
         <OperatorModal
-          operator={modal === 'add' ? null : modal}
+          operator={modal === 'add' ? null : modal as Operator}
           onClose={() => setModal(null)}
           onSaved={load}
         />

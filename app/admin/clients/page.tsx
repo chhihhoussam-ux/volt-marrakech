@@ -53,16 +53,24 @@ export default function ClientsPage() {
 
   async function loadProfiles() {
     setLoading(true)
-    const { data: profileData } = await supabase
+    const { data: profileData, error: profileError } = await supabase
       .from('profiles')
       .select('*')
       .order('created_at', { ascending: false })
 
-    if (!profileData) { setLoading(false); return }
+    console.log('[clients] profiles:', profileData?.length ?? 0, profileError ?? 'ok')
 
-    const { data: resData } = await supabase
+    if (profileError || !profileData) {
+      console.error('[clients] profiles error:', profileError)
+      setLoading(false)
+      return
+    }
+
+    const { data: resData, error: resError } = await supabase
       .from('reservations')
       .select('user_id')
+
+    if (resError) console.error('[clients] reservations error:', resError)
 
     const countMap: Record<string, number> = {}
     for (const r of (resData || [])) {

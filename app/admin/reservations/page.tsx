@@ -85,18 +85,19 @@ export default function ReservationsPage() {
     const [
       { data: reservationsData },
       { data: scootersData },
-      { data: profilesData },
+      { data: profilesData, error: profilesError },
     ] = await Promise.all([
       supabase.from('reservations').select('*').order('created_at', { ascending: false }),
       supabase.from('scooters').select('id, name, model'),
       supabase.from('profiles').select('id, full_name, email'),
     ])
+    if (profilesError) console.error('[reservations] profiles error:', profilesError)
     const merged = (reservationsData || []).map(r => {
       const profile = profilesData?.find(p => p.id === r.user_id)
       return {
         ...r,
         scooter_name: scootersData?.find(s => s.id === r.scooter_id)?.name ?? 'Scooter inconnu',
-        client_name: profile?.full_name ?? r.phone ?? `Client #${r.user_id.slice(0, 6)}`,
+        client_name: profile?.full_name ?? `Client #${r.user_id?.slice(0, 6) ?? '?'}`,
         client_email: r.client_email || profile?.email || null,
       }
     })

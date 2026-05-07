@@ -240,23 +240,7 @@ export default function Navbar() {
                       onMouseEnter={e => (e.currentTarget.style.background = '#F5F5F5')}
                       onMouseLeave={e => (e.currentTarget.style.background = 'transparent')}
                     >
-                      Mon tableau de bord
-                    </Link>
-                    <Link
-                      href="/compte#reservations"
-                      onClick={() => setDropdownOpen(false)}
-                      style={{
-                        display: 'block',
-                        padding: '12px 16px',
-                        fontSize: 14,
-                        color: '#0a0a0a',
-                        textDecoration: 'none',
-                        fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
-                      }}
-                      onMouseEnter={e => (e.currentTarget.style.background = '#F5F5F5')}
-                      onMouseLeave={e => (e.currentTarget.style.background = 'transparent')}
-                    >
-                      Mes réservations
+                      Mon compte
                     </Link>
                     <div style={{ height: '0.5px', background: '#E0E0E0', margin: '4px 0' }} />
                     <button

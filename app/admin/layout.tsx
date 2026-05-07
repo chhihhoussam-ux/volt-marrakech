@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react'
 import { usePathname, useRouter } from 'next/navigation'
 import { Menu } from 'lucide-react'
-import { isAdminAuthed } from '@/lib/admin-auth'
+import { getAdminSession } from '@/lib/admin-auth'
 import Sidebar from '@/components/admin/Sidebar'
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
@@ -14,26 +14,33 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   const [mobileOpen, setMobileOpen] = useState(false)
 
   const isLoginPage = pathname === '/admin/login'
+  const isOperationsPage = pathname.startsWith('/admin/operations')
 
   useEffect(() => {
-    const auth = isAdminAuthed()
-    setAuthed(auth)
-    if (!auth && !isLoginPage) {
-      router.replace('/admin/login')
+    const session = getAdminSession()
+
+    if (!session) {
+      if (!isLoginPage) router.replace('/admin/login')
+      setChecked(true)
+      return
     }
+
+    // Operator trying to access superadmin-only pages
+    if (!isLoginPage && !isOperationsPage && session.role === 'operator') {
+      router.replace('/admin/operations')
+      setChecked(true)
+      return
+    }
+
+    setAuthed(true)
     setChecked(true)
   }, [pathname])
 
-  if (isLoginPage) {
-    return <>{children}</>
-  }
+  if (isLoginPage) return <>{children}</>
 
   if (!checked) {
     return (
-      <div style={{
-        minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center',
-        background: '#0a0a0a',
-      }}>
+      <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#0a0a0a' }}>
         <span style={{
           fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
           fontSize: 22, fontWeight: 700, color: '#FF6700', letterSpacing: '-0.03em',
@@ -46,6 +53,9 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
   if (!authed) return null
 
+  // Operations page manages its own full layout (simplified sidebar)
+  if (isOperationsPage) return <>{children}</>
+
   return (
     <div style={{ display: 'flex', height: '100vh', overflow: 'hidden', background: '#0a0a0a' }}>
       <Sidebar mobileOpen={mobileOpen} onClose={() => setMobileOpen(false)} />
@@ -55,14 +65,9 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         <div
           className="md:hidden"
           style={{
-            height: 52,
-            background: '#111111',
+            height: 52, background: '#111111',
             borderBottom: '0.5px solid rgba(255,255,255,0.08)',
-            display: 'flex',
-            alignItems: 'center',
-            padding: '0 16px',
-            gap: 12,
-            flexShrink: 0,
+            display: 'flex', alignItems: 'center', padding: '0 16px', gap: 12, flexShrink: 0,
           }}
         >
           <button

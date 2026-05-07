@@ -1,25 +1,29 @@
-export const ADMIN_PASSWORD = 'volt2024admin'
-export const ADMIN_KEY = 'volt_admin'
+export const SESSION_KEY = 'almone_admin_session'
 
-export function isAdminAuthed(): boolean {
-  if (typeof window === 'undefined') return false
+export interface AdminSession {
+  authenticated: boolean
+  role: 'superadmin' | 'operator'
+  name: string
+  email: string
+}
+
+export function getAdminSession(): AdminSession | null {
+  if (typeof window === 'undefined') return null
   try {
-    const raw = localStorage.getItem(ADMIN_KEY)
-    if (!raw) return false
-    return JSON.parse(raw)?.authenticated === true
+    const raw = localStorage.getItem(SESSION_KEY)
+    if (!raw) return null
+    const parsed = JSON.parse(raw)
+    if (parsed?.authenticated !== true) return null
+    return parsed as AdminSession
   } catch {
-    return false
+    return null
   }
 }
 
-export function adminLogin(password: string): boolean {
-  if (password === ADMIN_PASSWORD) {
-    localStorage.setItem(ADMIN_KEY, JSON.stringify({ authenticated: true }))
-    return true
-  }
-  return false
+export function isAdminAuthed(): boolean {
+  return getAdminSession() !== null
 }
 
 export function adminLogout(): void {
-  localStorage.removeItem(ADMIN_KEY)
+  localStorage.removeItem(SESSION_KEY)
 }

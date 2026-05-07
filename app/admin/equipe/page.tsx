@@ -120,7 +120,7 @@ function OperatorModal({ operator, onClose, onSaved }: ModalProps) {
 
           <div>
             <label style={{ ...sf, fontSize: 11, color: 'rgba(255,255,255,0.4)', textTransform: 'uppercase', letterSpacing: '0.08em', display: 'block', marginBottom: 6 }}>
-              {isEdit ? 'Nouveau mot de passe (laisser vide pour ne pas changer)' : 'Mot de passe temporaire'}
+              {isEdit ? 'Nouveau mot de passe (laisser vide pour ne pas changer)' : 'Mot de passe'}
             </label>
             <div style={{ position: 'relative' }}>
               <input

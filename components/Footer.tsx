@@ -33,13 +33,13 @@ export default function Footer() {
               fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
               letterSpacing: '0.04em',
             }}>
-              Yallah, Almone !
+              Marrakech, plus fluide.
             </p>
             <p style={{
               fontSize: 13, color: '#757575', lineHeight: 1.7, maxWidth: 220,
               fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
             }}>
-              Explorez la ville rouge à votre rythme avec nos scooters électriques. Réservation en ligne, livraison à domicile, assistance 7j/7.
+              Des scooters électriques pensés pour se déplacer facilement dans Marrakech. Réservation simple, récupération rapide et assistance disponible.
             </p>
           </div>
 

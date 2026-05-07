@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import {
-  LayoutDashboard, Settings, Zap, Calendar, Users, Globe, LogOut, X, MapPin, UserCog,
+  LayoutDashboard, Settings, Zap, Calendar, Users, Globe, LogOut, X, MapPin, UserCog, HelpCircle,
 } from 'lucide-react'
 import { adminLogout, getAdminSession } from '@/lib/admin-auth'
 
@@ -14,6 +14,7 @@ const ALL_NAV = [
   { href: '/admin/clients',    label: 'Clients',       icon: Users,           exact: false,        superAdminOnly: false },
   { href: '/admin/locations',  label: 'Nos adresses',  icon: MapPin,          exact: false,        superAdminOnly: false },
   { href: '/admin/equipe',     label: 'Équipe',        icon: UserCog,         exact: false,        superAdminOnly: true  },
+  { href: '/admin/faq',        label: 'FAQ',           icon: HelpCircle,      exact: false,        superAdminOnly: false },
   { href: '/admin/parametres', label: 'Paramètres',    icon: Settings,        exact: false,        superAdminOnly: false },
 ]
 

@@ -201,23 +201,6 @@ export default function ParametresPage() {
           </Row>
         </Section>
 
-        {/* Contenu */}
-        <Section title="Contenu">
-          <Row label="Texte À propos" hint="Affiché dans les pages qui utilisent cette description">
-            <textarea
-              value={settings.about_text}
-              onChange={e => set('about_text', e.target.value)}
-              rows={5}
-              style={{
-                width: '100%', padding: '10px 14px', borderRadius: 8,
-                border: '0.5px solid rgba(255,255,255,0.15)', background: '#1a1a1a',
-                fontSize: 13, color: '#ffffff', outline: 'none', resize: 'vertical',
-                lineHeight: 1.6, fontFamily: 'inherit', boxSizing: 'border-box',
-              }}
-            />
-          </Row>
-        </Section>
-
         {/* Chiffres clés */}
         <Section title="Chiffres clés">
           {([

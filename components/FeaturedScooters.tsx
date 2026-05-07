@@ -36,7 +36,7 @@ export default function FeaturedScooters() {
               letterSpacing: '0.15em', marginBottom: 12,
               fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
             }}>
-              Notre flotte
+              Les scooters
             </p>
             <h2 style={{
               fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
@@ -46,7 +46,7 @@ export default function FeaturedScooters() {
               color: '#0a0a0a',
               lineHeight: 1.1,
             }}>
-              Des scooters taillés<br />pour Marrakech.
+              Pensés pour la ville.
             </h2>
           </div>
           <Link href="/scooters" style={{ textDecoration: 'none' }}>
@@ -57,7 +57,7 @@ export default function FeaturedScooters() {
               fontSize: 13, color: '#0a0a0a', cursor: 'pointer',
               fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
             }}>
-              Voir tout <ArrowRight size={14} strokeWidth={1.5} />
+              Voir les modèles <ArrowRight size={14} strokeWidth={1.5} />
             </button>
           </Link>
         </div>
@@ -66,7 +66,7 @@ export default function FeaturedScooters() {
           fontSize: 16, color: '#757575', lineHeight: 1.7, marginBottom: 48, maxWidth: 600,
           fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
         }}>
-          Chaque modèle de notre flotte a été sélectionné pour affronter les ruelles de la médina, les grands axes de Guéliz et les chemins de la Palmeraie. Silencieux, maniables et rechargés chaque nuit.
+          Des scooters électriques simples à conduire, agréables au quotidien et adaptés aux trajets de Marrakech. Du centre-ville aux petites courses du quotidien.
         </p>
 
         {loading ? (

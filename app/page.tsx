@@ -97,13 +97,13 @@ export default function HomePage() {
                 marginBottom: 16,
                 lineHeight: 1.1,
               }}>
-                Prêt à explorer<br />Marrakech autrement ?
+                Prêt à bouger<br />plus librement ?
               </h2>
               <p style={{
                 fontSize: 16, color: 'rgba(0,0,0,0.6)', maxWidth: 400,
                 fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
               }}>
-                Réservez votre scooter en quelques clics. Livraison à votre hôtel, casque inclus, support 7j/7.
+                Réservez simplement votre scooter et profitez de Marrakech sans dépendre des bouchons.
               </p>
             </div>
             <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
@@ -114,7 +114,7 @@ export default function HomePage() {
                   borderRadius: 10, fontSize: 15, fontWeight: 500, color: '#ffffff', cursor: 'pointer',
                   fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
                 }}>
-                  Réserver maintenant <ArrowRight size={16} strokeWidth={1.5} />
+                  Réserver un scooter <ArrowRight size={16} strokeWidth={1.5} />
                 </button>
               </Link>
               <a href="https://wa.me/212600000000" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none' }}>

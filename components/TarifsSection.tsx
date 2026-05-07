@@ -41,7 +41,7 @@ export default function TarifsSection() {
             letterSpacing: '0.15em', marginBottom: 16,
             fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
           }}>
-            Nos formules
+            Location flexible
           </p>
           <h2 style={{
             fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
@@ -50,13 +50,13 @@ export default function TarifsSection() {
             letterSpacing: '-0.02em',
             marginBottom: 20,
           }}>
-            Tarifs simples. Aucune mauvaise surprise.
+            Bougez selon votre rythme.
           </h2>
           <p style={{
             fontSize: 16, color: '#757575', lineHeight: 1.7, maxWidth: 520, margin: '0 auto',
             fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
           }}>
-            Que vous ayez deux heures devant vous ou une semaine entière, Almone s&apos;adapte à votre voyage. Tous nos tarifs incluent casque, antivol et assistance.
+            Quelques heures, une journée ou plus longtemps. Des formules simples pensées pour profiter de Marrakech sans contrainte.
           </p>
         </div>
 
@@ -83,7 +83,7 @@ export default function TarifsSection() {
                   fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
                   zIndex: 1,
                 }}>
-                  Le plus populaire
+                  La plus choisie
                 </div>
               )}
               {/* Formule image — edge to edge */}
@@ -157,7 +157,7 @@ export default function TarifsSection() {
                     fontSize: 14, fontWeight: 500, cursor: 'pointer',
                     fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
                   }}>
-                    Choisir cette formule
+                    Réserver
                   </button>
                 </Link>
               </div>

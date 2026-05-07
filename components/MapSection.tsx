@@ -95,19 +95,19 @@ export default function MapSection() {
             fontSize: 11, fontWeight: 500, color: '#FF6700', textTransform: 'uppercase',
             letterSpacing: '0.15em', marginBottom: 16, fontFamily: sf,
           }}>
-            Où nous trouver
+            Récupération
           </p>
           <h2 style={{
             fontFamily: sf, fontSize: 'clamp(28px, 5vw, 52px)', fontWeight: 700,
             letterSpacing: '-0.02em', color: '#0a0a0a', marginBottom: 20,
           }}>
-            Récupérez votre scooter près de chez vous.
+            Récupérez votre scooter simplement.
           </h2>
           <p style={{
             fontSize: 16, color: '#757575', lineHeight: 1.7, maxWidth: 560,
             margin: '0 auto', fontFamily: sf,
           }}>
-            Nous disposons de plusieurs points de relais à Marrakech. Choisissez le point le plus proche de votre hôtel ou riad.
+            Choisissez un point de récupération proche de votre hôtel, riad ou quartier. On s&apos;adapte à votre séjour et à vos déplacements.
           </p>
         </div>
 

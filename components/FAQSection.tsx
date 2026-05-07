@@ -1,40 +1,33 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Plus, Minus, ImageIcon } from 'lucide-react'
 import { useSettings } from '@/lib/settings-context'
+import { supabase } from '@/lib/supabase'
 
-const faqs = [
-  {
-    q: 'Faut-il un permis pour louer un scooter électrique à Marrakech ?',
-    a: "Pour les scooters de moins de 50cc électriques, le permis B suffit. Pour les modèles plus puissants, un permis A peut être demandé.",
-  },
-  {
-    q: "Quelle est l'autonomie des scooters Almone ?",
-    a: "Entre 60 et 120 km selon le modèle. Pour une journée classique à Marrakech, c'est largement suffisant.",
-  },
-  {
-    q: "Livrez-vous à l'hôtel ou au riad ?",
-    a: "Oui, nous livrons et récupérons le scooter directement à votre adresse dans Marrakech.",
-  },
-  {
-    q: "Que se passe-t-il en cas de panne ?",
-    a: "Notre équipe est joignable 7j/7 par WhatsApp. Nous intervenons ou remplaçons le scooter dans les meilleurs délais.",
-  },
-  {
-    q: "Peut-on louer deux scooters pour un couple ?",
-    a: "Absolument. Vous pouvez réserver plusieurs véhicules simultanément depuis notre site ou via WhatsApp.",
-  },
-  {
-    q: "Almone, c'est quoi exactement ?",
-    a: "Almone, c'est l'invitation à avancer, explorer, bouger. 20 ans d'expérience dans la mobilité au Maroc, reconvertis au service de la balade électrique.",
-  },
-]
+interface FaqItem {
+  id: string
+  question: string
+  answer: string
+  order_index: number
+}
 
 export default function FAQSection() {
   const [open, setOpen] = useState<number | null>(null)
+  const [faqs, setFaqs] = useState<FaqItem[]>([])
   const s = useSettings()
   const faqImage = s.faq_image_url
+
+  useEffect(() => {
+    supabase
+      .from('faq')
+      .select('id, question, answer, order_index')
+      .eq('is_active', true)
+      .order('order_index', { ascending: true })
+      .then(({ data }) => {
+        if (data) setFaqs(data)
+      })
+  }, [])
 
   return (
     <section style={{ padding: '120px 24px', background: '#ffffff' }}>
@@ -76,7 +69,7 @@ export default function FAQSection() {
           {/* Right: accordion */}
           <div style={{ display: 'flex', flexDirection: 'column' }}>
             {faqs.map((faq, i) => (
-              <div key={i} style={{ borderBottom: '0.5px solid rgba(0,0,0,0.08)' }}>
+              <div key={faq.id} style={{ borderBottom: '0.5px solid rgba(0,0,0,0.08)' }}>
                 <button
                   onClick={() => setOpen(open === i ? null : i)}
                   style={{
@@ -89,7 +82,7 @@ export default function FAQSection() {
                     fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
                     fontSize: 16, fontWeight: 500, color: '#0a0a0a', letterSpacing: '-0.01em',
                   }}>
-                    {faq.q}
+                    {faq.question}
                   </span>
                   <div style={{
                     flexShrink: 0, width: 28, height: 28, borderRadius: '50%',
@@ -108,11 +101,19 @@ export default function FAQSection() {
                     fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
                     fontSize: 15, color: '#757575', lineHeight: 1.7, paddingBottom: 22,
                   }}>
-                    {faq.a}
+                    {faq.answer}
                   </p>
                 )}
               </div>
             ))}
+            {faqs.length === 0 && (
+              <p style={{
+                fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
+                fontSize: 14, color: '#757575', padding: '24px 0',
+              }}>
+                Aucune question disponible pour le moment.
+              </p>
+            )}
           </div>
         </div>
       </div>

@@ -6,18 +6,18 @@ import { useSettings } from '@/lib/settings-context'
 const steps = [
   {
     number: '01',
-    title: 'Choisissez votre scooter',
-    desc: 'Parcourez notre flotte en ligne et sélectionnez le modèle qui vous correspond.',
+    title: 'Choisissez un modèle',
+    desc: 'Choisissez le scooter adapté à votre trajet et à votre rythme.',
   },
   {
     number: '02',
-    title: 'Réservez en ligne ou sur WhatsApp',
-    desc: 'Quelques clics suffisent. On vous confirme en moins de 10 minutes.',
+    title: 'Réservez en quelques minutes',
+    desc: 'Simple, rapide et sans procédure compliquée.',
   },
   {
     number: '03',
-    title: 'Yallah, on roule !',
-    desc: 'On vous livre le scooter à votre hôtel ou riad, casque et antivol en main.',
+    title: 'Profitez de Marrakech',
+    desc: 'Récupérez votre scooter et déplacez-vous librement dans la ville.',
   },
 ]
 
@@ -34,7 +34,7 @@ export default function HowItWorksSection() {
             letterSpacing: '0.15em', marginBottom: 16,
             fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
           }}>
-            Simple comme bonjour
+            Comment ça marche
           </p>
           <h2 style={{
             fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
@@ -43,7 +43,7 @@ export default function HowItWorksSection() {
             letterSpacing: '-0.02em',
             color: '#ffffff',
           }}>
-            En route en 3 étapes.
+            Réservez. Roulez. Profitez.
           </h2>
         </div>
 
@@ -77,7 +77,7 @@ export default function HowItWorksSection() {
                   color: '#FF6700', textTransform: 'uppercase', marginBottom: 6,
                   fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
                 }}>
-                  Étape {step.number}
+                  {step.number}
                 </p>
                 <p style={{
                   fontSize: 16, fontWeight: 600, color: '#0a0a0a', marginBottom: 12, letterSpacing: '-0.01em',

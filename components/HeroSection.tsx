@@ -46,7 +46,7 @@ export default function HeroSection() {
             fontWeight: 400,
             fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
           }}>
-            100% électrique · Zéro émission · Marrakech
+            Mobilité électrique · Marrakech
           </p>
 
           {/* H1 */}
@@ -60,8 +60,8 @@ export default function HeroSection() {
               marginBottom: 32,
             }}
           >
-            <span style={{ color: '#ffffff' }}>Yallah, </span>
-            <span style={{ color: '#FF6700' }}>Almone !</span>
+            <span style={{ color: '#ffffff' }}>Marrakech, </span>
+            <span style={{ color: '#FF6700' }}>plus fluide.</span>
           </h1>
 
           {/* Subtitle */}
@@ -75,7 +75,7 @@ export default function HeroSection() {
             fontWeight: 400,
             fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
           }}>
-            La médina à votre rythme. La ville rouge sous un nouvel angle. Louez un scooter électrique et explorez Marrakech librement.
+            Des scooters électriques pensés pour bouger facilement dans Marrakech. Sans bouchons, sans prise de tête.
           </p>
 
           {/* CTAs */}
@@ -87,7 +87,7 @@ export default function HeroSection() {
                 borderRadius: 8, fontSize: 15, fontWeight: 500, color: '#ffffff', cursor: 'pointer',
                 fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
               }}>
-                Réserver maintenant
+                Réserver un scooter
                 <ArrowRight size={16} strokeWidth={1.5} />
               </button>
             </Link>
@@ -99,7 +99,7 @@ export default function HeroSection() {
                 borderRadius: 8, fontSize: 15, fontWeight: 400, color: '#ffffff', cursor: 'pointer',
                 fontFamily: 'var(--font-dm-sans), "DM Sans", -apple-system, sans-serif',
               }}>
-                Voir nos scooters
+                Voir les modèles
               </button>
             </Link>
           </div>

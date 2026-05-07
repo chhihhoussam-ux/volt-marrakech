@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { X, Calendar } from 'lucide-react'
+import { X, Calendar, Trash2, AlertCircle } from 'lucide-react'
 import { supabase } from '@/lib/supabase'
 
 interface Profile {
@@ -48,6 +48,9 @@ export default function ClientsPage() {
   const [selected, setSelected] = useState<Profile | null>(null)
   const [history, setHistory] = useState<Reservation[]>([])
   const [histLoading, setHistLoading] = useState(false)
+  const [confirmDelete, setConfirmDelete] = useState<Profile | null>(null)
+  const [deleting, setDeleting] = useState(false)
+  const [deleteError, setDeleteError] = useState('')
 
   useEffect(() => { loadProfiles() }, [])
 
@@ -93,6 +96,44 @@ export default function ClientsPage() {
     setHistLoading(false)
   }
 
+  async function deleteClient(p: Profile) {
+    setDeleting(true)
+    setDeleteError('')
+
+    // 1. Delete reservations
+    const { error: resErr } = await supabase
+      .from('reservations')
+      .delete()
+      .eq('user_id', p.id)
+    if (resErr) { setDeleteError('Erreur lors de la suppression des réservations.'); setDeleting(false); return }
+
+    // 2. Delete profile
+    const { error: profErr } = await supabase
+      .from('profiles')
+      .delete()
+      .eq('id', p.id)
+    if (profErr) { setDeleteError('Erreur lors de la suppression du profil.'); setDeleting(false); return }
+
+    // 3. Delete auth user via API route
+    const res = await fetch('/api/admin/delete-user', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ userId: p.id }),
+    })
+    if (!res.ok) {
+      const data = await res.json()
+      setDeleteError(data.message || 'Erreur lors de la suppression du compte auth.')
+      setDeleting(false)
+      return
+    }
+
+    // 4. Update local state
+    setProfiles(prev => prev.filter(x => x.id !== p.id))
+    if (selected?.id === p.id) setSelected(null)
+    setConfirmDelete(null)
+    setDeleting(false)
+  }
+
   return (
     <div style={{ padding: '40px 40px 60px', background: '#0a0a0a', minHeight: '100%', display: 'flex', gap: 24, alignItems: 'flex-start' }}>
       {/* Main list */}
@@ -123,8 +164,8 @@ export default function ClientsPage() {
               <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 13 }}>
                 <thead>
                   <tr style={{ background: 'rgba(255,255,255,0.04)' }}>
-                    {['Client', 'Email', 'Inscrit le', 'Réservations'].map(h => (
-                      <th key={h} style={{
+                    {['Client', 'Email', 'Inscrit le', 'Réservations', ''].map((h, idx) => (
+                      <th key={idx} style={{
                         ...sf, padding: '11px 20px', textAlign: 'left', fontWeight: 500,
                         color: 'rgba(255,255,255,0.4)', whiteSpace: 'nowrap',
                         fontSize: 11, textTransform: 'uppercase', letterSpacing: '0.08em',
@@ -177,6 +218,28 @@ export default function ClientsPage() {
                           {p.res_count || 0}
                         </span>
                       </td>
+                      <td style={{ padding: '14px 20px', textAlign: 'right' }}>
+                        <button
+                          onClick={e => { e.stopPropagation(); setConfirmDelete(p); setDeleteError('') }}
+                          title="Supprimer ce client"
+                          style={{
+                            background: 'none', border: 'none', cursor: 'pointer',
+                            color: 'rgba(255,80,80,0.5)', padding: 6, borderRadius: 6,
+                            display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+                            transition: 'color 0.12s, background 0.12s',
+                          }}
+                          onMouseEnter={e => {
+                            e.currentTarget.style.color = '#ff6b6b'
+                            e.currentTarget.style.background = 'rgba(220,0,0,0.08)'
+                          }}
+                          onMouseLeave={e => {
+                            e.currentTarget.style.color = 'rgba(255,80,80,0.5)'
+                            e.currentTarget.style.background = 'none'
+                          }}
+                        >
+                          <Trash2 size={15} strokeWidth={1.5} />
+                        </button>
+                      </td>
                     </tr>
                   ))}
                 </tbody>
@@ -189,24 +252,15 @@ export default function ClientsPage() {
       {/* Side panel */}
       {selected && (
         <div style={{
-          width: 340,
-          flexShrink: 0,
-          borderRadius: 12,
-          border: '0.5px solid rgba(255,255,255,0.08)',
-          background: '#161616',
-          position: 'sticky',
-          top: 24,
-          maxHeight: 'calc(100vh - 80px)',
-          display: 'flex',
-          flexDirection: 'column',
-          overflow: 'hidden',
+          width: 340, flexShrink: 0, borderRadius: 12,
+          border: '0.5px solid rgba(255,255,255,0.08)', background: '#161616',
+          position: 'sticky', top: 24, maxHeight: 'calc(100vh - 80px)',
+          display: 'flex', flexDirection: 'column', overflow: 'hidden',
         }}>
-          {/* Panel header */}
           <div style={{ padding: '16px 20px', borderBottom: '0.5px solid rgba(255,255,255,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexShrink: 0 }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
               <div style={{
-                width: 36, height: 36, borderRadius: '50%',
-                background: 'rgba(255,103,0,0.15)',
+                width: 36, height: 36, borderRadius: '50%', background: 'rgba(255,103,0,0.15)',
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
                 color: '#FF6700', ...sf, fontSize: 12, fontWeight: 500,
               }}>
@@ -222,7 +276,6 @@ export default function ClientsPage() {
             </button>
           </div>
 
-          {/* Meta */}
           <div style={{ padding: '14px 20px', borderBottom: '0.5px solid rgba(255,255,255,0.08)', display: 'flex', gap: 16, flexShrink: 0 }}>
             <div>
               <div style={{ ...sf, fontSize: 10, color: 'rgba(255,255,255,0.3)', textTransform: 'uppercase', letterSpacing: '0.06em', marginBottom: 4 }}>Inscrit le</div>
@@ -240,7 +293,6 @@ export default function ClientsPage() {
             </div>
           </div>
 
-          {/* Reservations history */}
           <div style={{ flex: 1, overflowY: 'auto', padding: '14px 20px' }}>
             <p style={{ ...sf, fontSize: 10, fontWeight: 500, color: 'rgba(255,255,255,0.3)', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 12 }}>
               Historique
@@ -264,11 +316,7 @@ export default function ClientsPage() {
                     }}>
                       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 6 }}>
                         <span style={{ ...sf, fontSize: 12, fontWeight: 500, color: '#ffffff' }}>{r.scooters?.name || '—'}</span>
-                        <span style={{
-                          ...sf,
-                          padding: '2px 7px', borderRadius: 5,
-                          background: st.bg, color: st.color, fontSize: 10, fontWeight: 500,
-                        }}>
+                        <span style={{ ...sf, padding: '2px 7px', borderRadius: 5, background: st.bg, color: st.color, fontSize: 10, fontWeight: 500 }}>
                           {st.label}
                         </span>
                       </div>
@@ -281,6 +329,76 @@ export default function ClientsPage() {
                 })}
               </div>
             )}
+          </div>
+        </div>
+      )}
+
+      {/* Delete confirmation dialog */}
+      {confirmDelete && (
+        <div
+          style={{ position: 'fixed', inset: 0, zIndex: 200, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 24 }}
+          onClick={e => { if (e.target === e.currentTarget && !deleting) setConfirmDelete(null) }}
+        >
+          <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.75)' }} onClick={() => { if (!deleting) setConfirmDelete(null) }} />
+          <div style={{
+            position: 'relative', zIndex: 1, width: '100%', maxWidth: 380,
+            background: '#1a1a1a', borderRadius: 14,
+            border: '0.5px solid rgba(255,255,255,0.1)',
+            padding: '28px', textAlign: 'center',
+            boxShadow: '0 24px 64px rgba(0,0,0,0.5)',
+          }}>
+            <div style={{
+              width: 48, height: 48, borderRadius: '50%',
+              background: 'rgba(220,0,0,0.12)', border: '0.5px solid rgba(220,0,0,0.2)',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              margin: '0 auto 16px',
+            }}>
+              <Trash2 size={22} color="#ff6b6b" strokeWidth={1.5} />
+            </div>
+
+            <h3 style={{ ...sf, fontSize: 16, fontWeight: 700, color: '#ffffff', marginBottom: 10 }}>
+              Supprimer le compte de {confirmDelete.full_name || confirmDelete.email} ?
+            </h3>
+            <p style={{ ...sf, fontSize: 13, color: 'rgba(255,255,255,0.45)', lineHeight: 1.6, marginBottom: 24 }}>
+              Cette action supprimera toutes ses données et est irréversible.
+            </p>
+
+            {deleteError && (
+              <div style={{
+                display: 'flex', alignItems: 'center', gap: 8, marginBottom: 16,
+                padding: '10px 14px', borderRadius: 8, textAlign: 'left',
+                background: 'rgba(220,0,0,0.12)', border: '0.5px solid rgba(220,0,0,0.3)',
+              }}>
+                <AlertCircle size={14} strokeWidth={1.5} color="#ff6b6b" />
+                <span style={{ ...sf, fontSize: 13, color: '#ff6b6b' }}>{deleteError}</span>
+              </div>
+            )}
+
+            <div style={{ display: 'flex', gap: 10 }}>
+              <button
+                onClick={() => { if (!deleting) { setConfirmDelete(null); setDeleteError('') } }}
+                disabled={deleting}
+                style={{
+                  ...sf, flex: 1, padding: '11px', borderRadius: 8,
+                  border: '0.5px solid rgba(255,255,255,0.12)', background: 'transparent',
+                  color: 'rgba(255,255,255,0.5)', fontSize: 14, cursor: deleting ? 'not-allowed' : 'pointer',
+                }}
+              >
+                Annuler
+              </button>
+              <button
+                onClick={() => deleteClient(confirmDelete)}
+                disabled={deleting}
+                style={{
+                  ...sf, flex: 1, padding: '11px', borderRadius: 8,
+                  border: 'none', background: 'rgba(220,0,0,0.85)', color: '#ffffff',
+                  fontSize: 14, fontWeight: 600, cursor: deleting ? 'not-allowed' : 'pointer',
+                  opacity: deleting ? 0.7 : 1,
+                }}
+              >
+                {deleting ? 'Suppression...' : 'Supprimer'}
+              </button>
+            </div>
           </div>
         </div>
       )}
